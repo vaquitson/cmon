@@ -22,9 +22,14 @@ int cmon_log(const char *status, const char *functionName, const char *msg){
   return -2;
 }
 
+
+// print an ERROR
+// log: if true the error is loged else its only print on the defoultPirntFd
 int cmon_print_error(bool log, const char *functionName, const char *msg){
   dprintf(defoultPirntFd, "Cmon ERROR on function %s: %s\n", functionName, msg);
-  cmon_log("ERROR", functionName, msg);
+  if (log){
+    cmon_log("ERROR", functionName, msg);
+  }
   return 0;
 }
 
