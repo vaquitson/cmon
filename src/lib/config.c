@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "cmon_errors.h"
 #include "config.h"
@@ -8,6 +9,10 @@ struct cmon_config {
   size_t pathMaxsize;
 };
 
+
+// functions that returns an array with
+// the cwd
+// the caller is responsible for freeingit
 char *cmon_get_cwd(){
   long pathMax;
   size_t size;
@@ -35,6 +40,36 @@ char *cmon_get_cwd(){
     exit(2);
   }
   return cwd;
+}
+
+
+struct CmonCommand *cmon_parse_argv(int argc, char **argv){
+  if (argc < 2){
+    cmon_print_error(true, "cmon_parse_argv", "there is no exe in the arguments");
+    exit(1);
+  }
+
+  struct CmonCommand *command = malloc(sizeof(struct CmonCommand)); 
+  int commandArgvIndex = 1;
+  int argvIndex = 2;
+
+  if (!command){
+    cmon_print_error(true, "cmon_parse_argv", "memory could not be allocated for CmonCommand");
+    exit(1);
+  }
+
+  command->exe = strdup(argv[1]);
+  command->processName = strdup("Juan Pablo Segundo");
+  command->argv[0] = command->processName;
+
+  if (argc >= 3){
+    for (; argvIndex < argc; argvIndex++, commandArgvIndex++){
+      command->argv[commandArgvIndex] = argv[argvIndex];
+    }
+  }
+
+  command->argv[commandArgvIndex] = NULL;
+  return command;
 }
 
 FILE *cmon_open_config_file(){

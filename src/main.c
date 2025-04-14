@@ -7,6 +7,8 @@
 #include <unistd.h>
 #include <poll.h>
 #include <stdlib.h>
+#include <errno.h>
+#include <string.h>
 
 #include "cmon_errors.h"
 #include "config.h"
@@ -36,11 +38,20 @@ int cmon_watch_dir(int inFd, char *path, unsigned long mask){
 
 
 // starts the child process, wiich is a node server
-int cmon_start_child_process(){
+int cmon_start_child_process(char *exe, char **argv){
+  printf("exe: %s\n", exe);
+
   pid_t pid;
+  int rc;
+   
   pid = fork();
   if (pid == 0){
-    execlp("node", "juanpablosegundo", "/home/narval/programing/learning/inotify/inotify_creating_new_precees/test.js", NULL);
+  rc = execvp(exe, argv);
+    if (rc == -1){
+      int err = errno;
+      cmon_print_errno_error(true, "cmon_start_child_process", err, "exec terminated incorrectly");
+      exit(errno);
+    }
     return 0;
   } else if (pid < 0){
     cmon_print_error(true, "start_child_process", "something went wrong in forking");
@@ -51,15 +62,16 @@ int cmon_start_child_process(){
 }
 
 
-void cmon_procees_events(size_t readSize, char *buff, pid_t *subPPid){
+void cmon_procees_events(size_t readSize, char *buff, pid_t *subPPid, char *exe, char **argv){
   static const struct inotify_event *event;
 
   for (char *ptr = buff; ptr < buff + readSize; ptr += sizeof(struct inotify_event) + event->len){
     event = (const struct inotify_event *) ptr;
     printf("event: %s\n", event->name);
     if (event->mask & IN_MODIFY) {
+      cmon_print_error(true, "cmon_start_child_process", "exec terminated incorrectly");
       kill(*subPPid, SIGKILL);
-      *subPPid = cmon_start_child_process();  
+      *subPPid = cmon_start_child_process(exe, argv);  
     }
   }
 }
@@ -76,10 +88,12 @@ int main(int argc, char **argv){
   const struct inotify_event *event;
   struct pollfd fds[1];
   char *cwd;
+  struct CmonCommand *command;  
+
+  command = cmon_parse_argv(argc, argv);
 
   cwd = cmon_get_cwd();
   printf("%s\n", cwd);
-
 
   inotifyFd = cmon_open_inotify_fd();
 
@@ -88,7 +102,7 @@ int main(int argc, char **argv){
 
   watchFileList[0] = cmon_watch_dir(inotifyFd, "/home/narval/programing/proyects/cmon/build/test.js", mask);
 
-  subPPid = cmon_start_child_process(); 
+  subPPid = cmon_start_child_process(command->exe, command->argv); 
 
   while (1){
     ret = poll(fds, 1, -1);
@@ -99,7 +113,7 @@ int main(int argc, char **argv){
         cmon_print_error(true, "main", "read size < 0 in reading the events");
         printf("Reading error\n");
       }
-      cmon_procees_events(readSize, buff, &subPPid);
+      cmon_procees_events(readSize, buff, &subPPid, command->exe, command->argv);
     } else {
       continue;
     }

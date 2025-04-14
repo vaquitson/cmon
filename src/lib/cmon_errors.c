@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "cmon_errors.h"
 #include <stdbool.h>
+#include <string.h>
 
 
 int cmonAlowLog = true;
@@ -17,7 +18,6 @@ int cmon_log(const char *status, const char *functionName, const char *msg){
       fprintf(cmonLogF, "[%s]: from fucntion %s: %s\n", status, functionName, msg);
       return 0;
     }
-
   }
   return -2;
 }
@@ -27,6 +27,14 @@ int cmon_log(const char *status, const char *functionName, const char *msg){
 // log: if true the error is loged else its only print on the defoultPirntFd
 int cmon_print_error(bool log, const char *functionName, const char *msg){
   dprintf(defoultPirntFd, "Cmon ERROR on function %s: %s\n", functionName, msg);
+  if (log){
+    cmon_log("ERROR", functionName, msg);
+  }
+  return 0;
+}
+
+int cmon_print_errno_error(bool log, const char *functionName, const int err, const char *msg){
+  dprintf(defoultPirntFd, "Cmon ERROR on function %s: %s: errno: %s\n", functionName, msg,  strerror(err));
   if (log){
     cmon_log("ERROR", functionName, msg);
   }
