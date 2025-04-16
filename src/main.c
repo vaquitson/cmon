@@ -12,6 +12,9 @@
 
 #include "cmon_errors.h"
 #include "config.h"
+#include "cmon_print.h"
+
+#define CONFIG_FILE_NAME_LEN 11
 
 // open a inotify instance
 int cmon_open_inotify_fd(){
@@ -39,8 +42,7 @@ int cmon_watch_dir(int inFd, char *path, unsigned long mask){
 
 // starts the child process, wiich is a node server
 int cmon_start_child_process(char *exe, char **argv){
-  printf("exe: %s\n", exe);
-
+  cmon_print_msg_to_user("Starting child process");
   pid_t pid;
   int rc;
    
@@ -89,10 +91,21 @@ int main(int argc, char **argv){
   struct pollfd fds[1];
   char *cwd;
   struct CmonCommand *command;  
+  char *configFilePath;
 
   command = cmon_parse_argv(argc, argv);
-
   cwd = cmon_get_cwd();
+  configFilePath = realloc(cwd, strlen(cwd) + CONFIG_FILE_NAME_LEN + 2);
+  strcat(configFilePath, "/.config.cmon");
+  
+  printf("config path: %s\n", configFilePath);
+  if (!configFilePath){
+    cmon_print_error(true, "main", "something went wrong allocating memory for the config file path");
+    exit(1);
+  }
+
+  FILE *configFile = cmon_open_config_file(configFilePath);
+  
   printf("%s\n", cwd);
 
   inotifyFd = cmon_open_inotify_fd();

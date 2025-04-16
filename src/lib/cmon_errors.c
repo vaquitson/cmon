@@ -33,6 +33,7 @@ int cmon_print_error(bool log, const char *functionName, const char *msg){
   return 0;
 }
 
+
 int cmon_print_errno_error(bool log, const char *functionName, const int err, const char *msg){
   dprintf(defoultPirntFd, "Cmon ERROR on function %s: %s: errno: %s\n", functionName, msg,  strerror(err));
   if (log){
