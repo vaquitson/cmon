@@ -16,6 +16,7 @@
 
 #define CONFIG_FILE_NAME_LEN 11
 
+
 // open a inotify instance
 int cmon_open_inotify_fd(){
   int fd;
@@ -105,9 +106,15 @@ int main(int argc, char **argv){
   }
 
   FILE *configFile = cmon_open_config_file(configFilePath);
-  
-  printf("%s\n", cwd);
+  struct CmonConfig *config = cmon_init_config();
 
+  cmon_parse_config(configFile, config);
+  printf("wtchneame len: %d\n", config->watchExtNamesLen);
+  for (int i = 0; i < config->watchExtNamesLen; i++){
+    printf("hoa\n");
+    printf("extname: %s\n", config->watchExtNames[i]);
+  }
+  
   inotifyFd = cmon_open_inotify_fd();
 
   fds[0].fd = inotifyFd;
@@ -119,7 +126,6 @@ int main(int argc, char **argv){
 
   while (1){
     ret = poll(fds, 1, -1);
-
     if (ret > 0 && fds[0].revents & POLLIN){
       readSize = read(inotifyFd, buff, sizeof(buff));
       if (readSize <= 0){
