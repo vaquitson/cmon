@@ -156,6 +156,7 @@ int _cmon_add_string_to_config_entry(struct CmonConfig *config, int configEntry,
     case WATCH_FILE_EXT_NAMES:
       entry = config->watchExtNames[entryLen];
 
+
       break;
     case IGNORE_FILES:
       break;
@@ -265,6 +266,21 @@ struct TokenList *_cmon_tokenizer(FILE *configFile){
   return tokenList;
 }
 
+// get the token at index i from the token list 
+// if the index is larger than the token list return null
+struct Token *_cmon_get_token(struct TokenList *tokenList, int i){
+  if (i < 0){
+    cmon_print_error(true, "_cmon_get_token", "the index is not valid");
+    return NULL;
+  }
+
+  if (i >= tokenList->length){
+    return NULL; 
+  }
+
+  return &tokenList->tokenList[i];
+}
+
 // parse the config file into the config struct
 int cmon_parse_config(FILE *configFile, struct CmonConfig *config){
   struct Token *curTok; 
@@ -273,15 +289,17 @@ int cmon_parse_config(FILE *configFile, struct CmonConfig *config){
   char **configTarget = NULL; 
 
   for (int i = 0; i < tokenList->length; i++){
-    curTok = &tokenList->tokenList[i]; 
+    curTok = _cmon_get_token(tokenList, i);
+
     switch (curTok->type) {
       case STRING:
-        if (i + 1 < tokenList->length){
-          if (tokenList->tokenList[i+1].type == COLON){
+        nextTok = _cmon_get_token(tokenList, i+1);
+        if (nextTok){
+          if (nextTok->type == COLON){ 
             if (strcmp(curTok->value, "WATCH_FILE_EXT_NAMES") == 0){
-                             
             }
           }
+
         }
     }
   }
