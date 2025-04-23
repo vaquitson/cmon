@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdio.h>
+#include "cmon_string_array.h"
 
 #define MAX_N_OF_INGNORE_FILES 10
 #define MAX_N_OF_INGNORE_EXT_NAMES 10
@@ -36,13 +37,9 @@ struct CmonCommand {
 // [FIXME] this probably should be in a more memory eficient way 
 // and also more flexible
 struct CmonConfig {
-  char *ignoreFiles[MAX_N_OF_INGNORE_FILES];
-  char *ignoreDirs[MAX_N_OF_INGNORE_DIRS];
-  char *watchExtNames[MAX_N_OF_INGNORE_EXT_NAMES];
-                                           
-  unsigned int watchExtNamesLen;
-  unsigned int ignoreFilesLen;
-  unsigned int ignoreDirsLen;
+  CmonStringArray ignoreFiles;
+  CmonStringArray ignoreDirs;
+  CmonStringArray watchExtNames;
 };
 
 
@@ -58,6 +55,7 @@ struct TokenList {
 
 
 enum TokenTypes {
+  CONFIG_ENTRY,
   STRING,
   LIST_MARK,
   COLON,

@@ -109,12 +109,25 @@ int main(int argc, char **argv){
   struct CmonConfig *config = cmon_init_config();
 
   cmon_parse_config(configFile, config);
-  printf("wtchneame len: %d\n", config->watchExtNamesLen);
-  for (int i = 0; i < config->watchExtNamesLen; i++){
-    printf("hoa\n");
-    printf("extname: %s\n", config->watchExtNames[i]);
+  printf("ignore dirs (%d):\n", config->ignoreDirs.len);
+  for (int i = 0; i < config->ignoreDirs.len; i++){
+    printf("%s\n", config->ignoreDirs.arr[i]->string);
   }
-  
+  printf("\n");
+
+  printf("watch extname (%d):\n", config->watchExtNames.len);
+  for (int i = 0; i < config->watchExtNames.len; i++){
+    printf("%s\n", config->watchExtNames.arr[i]->string);
+  }
+  printf("\n");
+
+
+  printf("watch extname (%d):\n", config->ignoreFiles.len);
+  for (int i = 0; i < config->ignoreFiles.len; i++){
+    printf("%s\n", config->ignoreFiles.arr[i]->string);
+  }
+  printf("\n");
+
   inotifyFd = cmon_open_inotify_fd();
 
   fds[0].fd = inotifyFd;

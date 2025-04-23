@@ -47,13 +47,8 @@ struct Token *_cmon_new_token(struct TokenList *tokenList, int type, char *strin
       tokenList->tokenList[tokenList->length].value = strdup(string);
       break;
 
-    case COLON:
-      tokenList->tokenList[tokenList->length].value = (char *)malloc(2);
-      if (!tokenList->tokenList[tokenList->length].value){
-        return NULL;
-      }
-      tokenList->tokenList[tokenList->length].value[0] = string[0];
-      tokenList->tokenList[tokenList->length].value[1] = '\0';
+    case CONFIG_ENTRY:
+      tokenList->tokenList[tokenList->length].value = strdup(string);
       break;
   }
   
@@ -135,35 +130,12 @@ struct CmonConfig *cmon_init_config(){
     cmon_print_error(true, "cmon_init_config", "could not allocate memory for the struct CmonConfig");
     exit(1);
   }
-  config->ignoreDirsLen = 0;
-  config->ignoreFilesLen = 0;
-  config->watchExtNamesLen = 0;
+
+  cmon_str_arr_init(&config->ignoreDirs);
+  cmon_str_arr_init(&config->ignoreFiles);
+  cmon_str_arr_init(&config->watchExtNames);
 
   return config;
-}
-
-
-int _cmon_add_string_to_config_entry(struct CmonConfig *config, int configEntry, char *str){
-  if (!config){
-    cmon_print_error(true, "_cmon_add_string_to_fonfig_entry", "the config was not provided");
-    exit(1);
-  }
-
-  int entryLen;
-  char *entry;
-  
-  switch (configEntry){
-    case WATCH_FILE_EXT_NAMES:
-      entry = config->watchExtNames[entryLen];
-
-
-      break;
-    case IGNORE_FILES:
-      break;
-    case IGNORE_DIRS:
-      break;
-  }
-  return 0; 
 }
 
 
@@ -252,13 +224,11 @@ struct TokenList *_cmon_tokenizer(FILE *configFile){
       }
 
       else if (*buffPtr == ':'){
-        if (lexemPtr > lexem){
-          _cmon_new_token(tokenList, STRING, lexem);
+        if (lexemPtr > lexem){ 
+          *lexemPtr = '\0';
+          _cmon_new_token(tokenList, CONFIG_ENTRY, lexem);
           lexemPtr = lexem;
         }
-
-        *lexemPtr = '\0';
-        _cmon_new_token(tokenList, COLON, buffPtr);
       }
       buffPtr++;
     }
@@ -286,21 +256,57 @@ int cmon_parse_config(FILE *configFile, struct CmonConfig *config){
   struct Token *curTok; 
   struct Token *nextTok; 
   struct TokenList *tokenList = _cmon_tokenizer(configFile);
-  char **configTarget = NULL; 
+
+  CmonStringArray *configTarget = NULL; 
+  bool inBlock = false;
 
   for (int i = 0; i < tokenList->length; i++){
     curTok = _cmon_get_token(tokenList, i);
 
     switch (curTok->type) {
       case STRING:
-        nextTok = _cmon_get_token(tokenList, i+1);
-        if (nextTok){
-          if (nextTok->type == COLON){ 
-            if (strcmp(curTok->value, "WATCH_FILE_EXT_NAMES") == 0){
-            }
-          }
-
+        if (configTarget != NULL && inBlock == true){
+          cmon_str_arr_add_new_str(configTarget, curTok->value);  
         }
+        break;
+
+      case LIST_MARK:
+        if (curTok->value[0] == '{'){
+          if (inBlock == false){
+            inBlock = true;
+          } else {
+            cmon_print_error(true, "cmon_parse_config", "unexpected { in the config file");
+            exit(1);
+          }
+        } 
+        else if (curTok->value[0] == '}'){
+          if (inBlock == true){
+            inBlock = false;
+          }
+        } else {
+          cmon_print_error(true, "cmon_parse_config", "unexpected } in the config file");
+          exit(1);
+        }
+        break;
+
+      case CONFIG_ENTRY:
+        if (strcmp(curTok->value, "WATCH_FILE_EXT_NAMES") == 0){
+          
+          configTarget = &config->watchExtNames;
+        }
+
+        else if (strcmp(curTok->value, "IGNORE_FILES") == 0){
+          configTarget = &config->ignoreFiles;
+        }
+
+        else if (strcmp(curTok->value, "IGNORE_DIRS") == 0){
+          configTarget = &config->ignoreDirs;
+
+        } else {
+          cmon_print_error(true, "cmon_parse_config", "the config entry dont exist");
+          exit(1);
+        }
+        break;
     }
   }
 
