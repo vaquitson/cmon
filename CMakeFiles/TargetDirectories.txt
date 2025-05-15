@@ -1,0 +1,4 @@
+/home/narval/programing/proyects/cmon/CMakeFiles/cmon.dir
+/home/narval/programing/proyects/cmon/CMakeFiles/test.dir
+/home/narval/programing/proyects/cmon/CMakeFiles/edit_cache.dir
+/home/narval/programing/proyects/cmon/CMakeFiles/rebuild_cache.dir

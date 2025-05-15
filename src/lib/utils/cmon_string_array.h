@@ -10,9 +10,15 @@ typedef struct  {
 } CmonStringArray;
 
 
+#define cmon_str_arr_len(strArray) (strArray)->len
+
 // add a new allocated CmonString (from str) to the arr
 // if error or the array is full, NULL is return
-CmonString *cmon_str_arr_add_new_str(CmonStringArray *arr, const char* str);
+CmonString *cmon_str_arr_add_new_char_arr(CmonStringArray *arr, char* str);
+
+// add the provided cmon string to the CmonStringArray. In suscces return
+// a pointer to the provided string, if fail return NULL
+CmonString *cmon_str_arr_add_from_str(CmonStringArray *arr, CmonString *str);
 
 // create a new string array
 CmonStringArray *cmon_str_arr_new();
@@ -26,6 +32,4 @@ CmonStringArray *cmon_str_arr_init(CmonStringArray *arr);
 CmonString *cmon_str_arr_get_str(CmonStringArray *arr, int index);
 
 
-// get the len of the CmonStringArray
-int cmon_str_arr_get_len(CmonStringArray *arr);
-
+CmonString *cmon_str_arr_find(CmonStringArray *arr, CmonString *str);

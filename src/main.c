@@ -1,151 +1,92 @@
 #include <stdio.h>
-#include <unistd.h>
 #include <wait.h>
 #include <stdbool.h>
 #include <sys/inotify.h>
+#include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <poll.h>
 #include <stdlib.h>
-#include <errno.h>
-#include <string.h>
 
 #include "cmon_errors.h"
-#include "config.h"
-#include "cmon_print.h"
+#include "cmon_config.h"
+#include "cmon_inotify.h"
+#include "cmon_int_array.h"
+#include "cmon_ps_tree.h"
 
 #define CONFIG_FILE_NAME_LEN 11
 
-
-// open a inotify instance
-int cmon_open_inotify_fd(){
-  int fd;
-  fd = inotify_init();
-  if (fd < 0){
-    cmon_print_error(true, "open_inotify_fd", "inotify could not be instanciated");
-    return -1;
-  }
-  return fd;
-}
-
-
-// watch the test directory
-int cmon_watch_dir(int inFd, char *path, unsigned long mask){
-  int wd; // watch descriptor
-  wd = inotify_add_watch(inFd, path, mask);
-  if (wd < 0){
-    cmon_print_error(true, "watch_dir", "The path could not be watched");
-    return -1;
-  }
-  return wd;
-}
-
-
-// starts the child process, wiich is a node server
-int cmon_start_child_process(char *exe, char **argv){
-  cmon_print_msg_to_user("Starting child process");
-  pid_t pid;
-  int rc;
-   
-  pid = fork();
-  if (pid == 0){
-  rc = execvp(exe, argv);
-    if (rc == -1){
-      int err = errno;
-      cmon_print_errno_error(true, "cmon_start_child_process", err, "exec terminated incorrectly");
-      exit(errno);
-    }
-    return 0;
-  } else if (pid < 0){
-    cmon_print_error(true, "start_child_process", "something went wrong in forking");
-    return -1;
-  } else {
-    return pid;
+void _siguser2Cb(int sig){
+  if (sig == SIGUSR2){
+    printf("Restarting process ...");
   }
 }
-
-
-void cmon_procees_events(size_t readSize, char *buff, pid_t *subPPid, char *exe, char **argv){
-  static const struct inotify_event *event;
-
-  for (char *ptr = buff; ptr < buff + readSize; ptr += sizeof(struct inotify_event) + event->len){
-    event = (const struct inotify_event *) ptr;
-    printf("event: %s\n", event->name);
-    if (event->mask & IN_MODIFY) {
-      cmon_print_error(true, "cmon_start_child_process", "exec terminated incorrectly");
-      kill(*subPPid, SIGKILL);
-      *subPPid = cmon_start_child_process(exe, argv);  
-    }
-  }
-}
-
 
 int main(int argc, char **argv){
   int inotifyFd;
-  int watchFileList[2] = {0};
-  int ret;
+  CmonIntArray *wdArr = cmon_int_arr_new(100);
+
+  int pollRetV;
   size_t readSize;
-  pid_t subPPid;
-  unsigned long mask = IN_MODIFY;
   char buff[4096];
   const struct inotify_event *event;
   struct pollfd fds[1];
-  char *cwd;
-  struct CmonCommand *command;  
-  char *configFilePath;
 
+  CmonConfig *config;
+
+  CmonString *cwd;
+  CmonString *configFileName;
+  CmonString *configFilePath;
+
+  struct CmonCommand *command;  
+
+  pid_t subPPid;
+  pid_t pgId;
+
+  signal(SIGUSR2, _siguser2Cb);
+
+  config = cmon_config_new();
   command = cmon_parse_argv(argc, argv);
+
   cwd = cmon_get_cwd();
-  configFilePath = realloc(cwd, strlen(cwd) + CONFIG_FILE_NAME_LEN + 2);
-  strcat(configFilePath, "/.config.cmon");
-  
-  printf("config path: %s\n", configFilePath);
-  if (!configFilePath){
-    cmon_print_error(true, "main", "something went wrong allocating memory for the config file path");
-    exit(1);
-  }
+  config->cwd = cwd;
+
+  configFileName = cmon_str_new(".config.cmon"); 
+  configFilePath = cmon_str_new_from_str(cwd, configFileName, NULL);
+  free(configFileName);
 
   FILE *configFile = cmon_open_config_file(configFilePath);
-  struct CmonConfig *config = cmon_init_config();
 
   cmon_parse_config(configFile, config);
-  printf("ignore dirs (%d):\n", config->ignoreDirs.len);
-  for (int i = 0; i < config->ignoreDirs.len; i++){
-    printf("%s\n", config->ignoreDirs.arr[i]->string);
-  }
-  printf("\n");
-
-  printf("watch extname (%d):\n", config->watchExtNames.len);
-  for (int i = 0; i < config->watchExtNames.len; i++){
-    printf("%s\n", config->watchExtNames.arr[i]->string);
-  }
-  printf("\n");
-
-
-  printf("watch extname (%d):\n", config->ignoreFiles.len);
-  for (int i = 0; i < config->ignoreFiles.len; i++){
-    printf("%s\n", config->ignoreFiles.arr[i]->string);
-  }
-  printf("\n");
-
-  inotifyFd = cmon_open_inotify_fd();
+  
+  inotifyFd = cmon_open_ino_fd();
 
   fds[0].fd = inotifyFd;
   fds[0].events = POLLIN;
 
-  watchFileList[0] = cmon_watch_dir(inotifyFd, "/home/narval/programing/proyects/cmon/build/test.js", mask);
+  cmon_ino_recursive_dir_add(config, inotifyFd, cmon_str_copy(config->cwd), wdArr);
+
+  pgId = getpgid(0);
 
   subPPid = cmon_start_child_process(command->exe, command->argv); 
 
+  printf("parentPid %d\n", getpid());
+  printf("childPid %d\n", subPPid);
+  printf("process group %d\n", pgId);
+  
+  // [FIXME] this should be a parameter in config i guess
+  sleep(1);
+  cmon_ps_tree_get_int_arr(subPPid);
+
   while (1){
-    ret = poll(fds, 1, -1);
-    if (ret > 0 && fds[0].revents & POLLIN){
+    pollRetV = poll(fds, 1, -1);
+    if (pollRetV > 0 && fds[0].revents & POLLIN){
       readSize = read(inotifyFd, buff, sizeof(buff));
       if (readSize <= 0){
         cmon_print_error(true, "main", "read size < 0 in reading the events");
         printf("Reading error\n");
       }
-      cmon_procees_events(readSize, buff, &subPPid, command->exe, command->argv);
+      cmon_procees_events(readSize, buff, pgId, command->exe, command->argv);
     } else {
       continue;
     }

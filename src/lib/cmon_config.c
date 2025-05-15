@@ -6,67 +6,42 @@
 
 #include "cmon_errors.h"
 #include "cmon_print.h"
-#include "config.h"
+#include "cmon_config.h"
+#include "cmon_parser.h"
 
 
+// print to std the config structure.
+void cmon_print_config(CmonConfig *config){
+  int i = 0;
+  printf("cwd: %s\n\n", config->cwd->string);
 
-// create a token in an empty position of the token list 
-// in succes return a pointer to the new allocated token in the token list
-// in error return NULL
-struct Token *_cmon_new_token(struct TokenList *tokenList, int type, char *string){
-  struct Token *token;
-
-  if (!string){
-    return NULL;
+  printf("Ignore Dirs\n");
+  for (i = 0; i < config->ignoreDirs.len; i++){
+    printf("\t%s\n", config->ignoreDirs.arr[i]->string); 
   }
 
-  if (string[0] == '\0'){
-    return NULL;
-  }
-  
-  if (!tokenList){
-    return NULL;
+  printf("Ignore Files\n");
+  for (i = 0; i < config->ignoreFiles.len; i++){
+    printf("\t%s\n", config->ignoreFiles.arr[i]->string); 
   }
 
-  token = (struct Token *)malloc(sizeof(struct Token));
-  if (!token){
-    return NULL;
+  printf("Watch ext\n");
+  for (i = 0; i < config->watchExtNames.len; i++){
+    printf("\t%s\n", config->watchExtNames.arr[i]->string); 
   }
-
-  switch (type){
-    case LIST_MARK:
-      tokenList->tokenList[tokenList->length].value = (char *)malloc(2);
-      if (!tokenList->tokenList[tokenList->length].value){
-        return NULL;
-      }
-      tokenList->tokenList[tokenList->length].value[0] = string[0];
-      tokenList->tokenList[tokenList->length].value[1] = '\0';
-      break;
-
-    case STRING:
-      tokenList->tokenList[tokenList->length].value = strdup(string);
-      break;
-
-    case CONFIG_ENTRY:
-      tokenList->tokenList[tokenList->length].value = strdup(string);
-      break;
-  }
-  
-  tokenList->tokenList[tokenList->length].type = type; 
-  tokenList->length++;
-  
-  return &tokenList->tokenList[tokenList->length-1]; 
 }
 
 
-// functions that returns an array with
-// the cwd
-// the caller is responsible for freeingit
-char *cmon_get_cwd(){
+// this funtion returns the cwd as a CmonString, the format is 
+// /home/.../.../ endig with a /
+// if the function fails, return NULL;
+// the caller of the function is risponsible for the memroy
+CmonString *cmon_get_cwd(){
   long pathMax;
   size_t size;
-  char *cwd;
+  char *charCwd;
   char *ptr;
+  CmonString *cwd;
 
   // check the max path length 
   pathMax = pathconf(".", _PC_PATH_MAX); 
@@ -77,17 +52,21 @@ char *cmon_get_cwd(){
   } else {
     size = pathMax; 
   }
+  charCwd = (char *)malloc(pathMax); 
 
-  cwd = (char *)malloc(pathMax); 
-  if (!cwd){
+  if (!charCwd){
     cmon_print_error(true, "cmon_get_cwd", "could not allocate memmory for the cwd");
-    exit(1);
+    return NULL;
   }
-  ptr = getcwd(cwd, size);
+  ptr = getcwd(charCwd, size);
+
   if (!ptr){
     cmon_print_error(true, "cmon_get_cwd", "could not get current worrking directori");
-    exit(2);
+    return NULL;
   }
+  
+  cwd = cmon_str_new_from_char_arrs(charCwd, "/", NULL);
+  free(charCwd);
   return cwd;
 }
 
@@ -124,8 +103,11 @@ struct CmonCommand *cmon_parse_argv(int argc, char **argv){
   return command;
 }
 
-struct CmonConfig *cmon_init_config(){
-  struct CmonConfig *config = (struct CmonConfig *)malloc(sizeof(struct CmonConfig));
+
+// create a heap allocated (malloc) CmonConfig 
+// the caller of the function is responsible for free the memory
+CmonConfig *cmon_config_new(){
+  CmonConfig *config = (CmonConfig *)malloc(sizeof(CmonConfig));
   if (!config){
     cmon_print_error(true, "cmon_init_config", "could not allocate memory for the struct CmonConfig");
     exit(1);
@@ -141,7 +123,9 @@ struct CmonConfig *cmon_init_config(){
 
 // this functions open the default configFile
 // if it not exist it create one with a default config
-FILE *cmon_open_config_file(const char *path){
+FILE *cmon_open_config_file(const CmonString *StrPath){
+  const char *path = StrPath->string;
+
   FILE *configFile;
   int err;
   // the file does not exist
@@ -174,68 +158,6 @@ FILE *cmon_open_config_file(const char *path){
 }
 
 
-// this function takes the config file and make a malloc allocated struct tokenList
-// the caller is responsible to free the memory
-struct TokenList *_cmon_tokenizer(FILE *configFile){
-  int buffSize = 2048;
-  char buff[buffSize];
-  char lexem[MAX_LEXEM_LEN];
-  char *buffPtr;
-  char *lexemPtr;
-  
-  buffPtr = buff;
-  lexemPtr = lexem;
-
-  struct TokenList *tokenList = (struct TokenList *)malloc(sizeof(struct TokenList));
-  tokenList->length = 0;
-
-  while(fgets(buff, buffSize, configFile)){
-    buffPtr = buff;
-    while(*buffPtr != '\0'){
-      
-      if ((*buffPtr >= 'a' && *buffPtr <= 'z') || (*buffPtr >= 'A' && *buffPtr <= 'Z') || (*buffPtr == '_') || (*buffPtr) == '.'){
-        *lexemPtr = *buffPtr;
-        lexemPtr++;
-      } 
-
-      else if (*buffPtr == '{' || *buffPtr == '}'){
-        if (lexemPtr > lexem){
-          _cmon_new_token(tokenList, STRING, lexem);
-          lexemPtr = lexem;
-        }
-        _cmon_new_token(tokenList, LIST_MARK, buffPtr);
-      }
-
-
-      else if (*buffPtr == ' '){
-        if (lexemPtr > lexem){
-          *lexemPtr = '\0';
-          _cmon_new_token(tokenList, STRING, lexem);
-          lexemPtr = lexem;
-        }
-      }
-
-      else if (*buffPtr == ','){
-        if (lexemPtr > lexem){
-          *lexemPtr = '\0';
-          _cmon_new_token(tokenList, STRING, lexem);
-          lexemPtr = lexem;
-        }
-      }
-
-      else if (*buffPtr == ':'){
-        if (lexemPtr > lexem){ 
-          *lexemPtr = '\0';
-          _cmon_new_token(tokenList, CONFIG_ENTRY, lexem);
-          lexemPtr = lexem;
-        }
-      }
-      buffPtr++;
-    }
-  } 
-  return tokenList;
-}
-
 // get the token at index i from the token list 
 // if the index is larger than the token list return null
 struct Token *_cmon_get_token(struct TokenList *tokenList, int i){
@@ -251,13 +173,16 @@ struct Token *_cmon_get_token(struct TokenList *tokenList, int i){
   return &tokenList->tokenList[i];
 }
 
+
 // parse the config file into the config struct
-int cmon_parse_config(FILE *configFile, struct CmonConfig *config){
+int cmon_parse_config(FILE *configFile, CmonConfig *conf){
   struct Token *curTok; 
   struct Token *nextTok; 
-  struct TokenList *tokenList = _cmon_tokenizer(configFile);
+  struct TokenList *tokenList = cmon_tokenizer(configFile);
 
   CmonStringArray *configTarget = NULL; 
+  CmonString *newStr;
+  int confId;
   bool inBlock = false;
 
   for (int i = 0; i < tokenList->length; i++){
@@ -266,7 +191,12 @@ int cmon_parse_config(FILE *configFile, struct CmonConfig *config){
     switch (curTok->type) {
       case STRING:
         if (configTarget != NULL && inBlock == true){
-          cmon_str_arr_add_new_str(configTarget, curTok->value);  
+          if (confId == IGNORE_DIRS || confId == IGNORE_FILES){
+            newStr = cmon_str_new_from_char_arrs(cmon_str_get(conf->cwd), curTok->value, NULL);; 
+            cmon_str_arr_add_from_str(configTarget, newStr);
+          } else {
+            cmon_str_arr_add_new_char_arr(configTarget, curTok->value);
+          }
         }
         break;
 
@@ -278,7 +208,7 @@ int cmon_parse_config(FILE *configFile, struct CmonConfig *config){
             cmon_print_error(true, "cmon_parse_config", "unexpected { in the config file");
             exit(1);
           }
-        } 
+        }
         else if (curTok->value[0] == '}'){
           if (inBlock == true){
             inBlock = false;
@@ -290,17 +220,19 @@ int cmon_parse_config(FILE *configFile, struct CmonConfig *config){
         break;
 
       case CONFIG_ENTRY:
-        if (strcmp(curTok->value, "WATCH_FILE_EXT_NAMES") == 0){
-          
-          configTarget = &config->watchExtNames;
+        if (strcmp(curTok->value, "WATCH_FILE_EXT_NAMES") == 0){          
+          configTarget = &conf->watchExtNames;
+          confId = WATCH_FILE_EXT_NAMES;
         }
 
         else if (strcmp(curTok->value, "IGNORE_FILES") == 0){
-          configTarget = &config->ignoreFiles;
+          configTarget = &conf->ignoreFiles;
+          confId = IGNORE_FILES;
         }
 
         else if (strcmp(curTok->value, "IGNORE_DIRS") == 0){
-          configTarget = &config->ignoreDirs;
+          configTarget = &conf->ignoreDirs;
+          confId = IGNORE_DIRS;
 
         } else {
           cmon_print_error(true, "cmon_parse_config", "the config entry dont exist");
@@ -309,6 +241,5 @@ int cmon_parse_config(FILE *configFile, struct CmonConfig *config){
         break;
     }
   }
-
   return 0;
 }

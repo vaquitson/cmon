@@ -37,7 +37,10 @@ CmonString *cmon_str_arr_get_str(CmonStringArray *arr, int index){
 }
 
 
-CmonString *cmon_str_arr_add_new_str(CmonStringArray *arr, const char*str){
+// this functions add a new char array to the CmonStringArray.
+// this create a new heap allocated CmonString with the content of str
+// on error returnr NULL
+CmonString *cmon_str_arr_add_new_char_arr(CmonStringArray *arr, char* str){
   CmonString *newString; 
   if (!arr || !str){
     cmon_print_error(true, "cmon_add_string", "arr or string not provided");
@@ -49,7 +52,7 @@ CmonString *cmon_str_arr_add_new_str(CmonStringArray *arr, const char*str){
     return NULL;
   }
   
-  newString = cmon_string_new(str);
+  newString = cmon_str_new(str);
   if (!newString){
     cmon_print_error(true, "cmon_add_new_string", "could not make the new string");
     return NULL; 
@@ -64,7 +67,31 @@ CmonString *cmon_str_arr_add_new_str(CmonStringArray *arr, const char*str){
   return newString;
 }
 
+CmonString *cmon_str_arr_add_from_str(CmonStringArray *arr, CmonString *str){
+  if (!arr || !str){
+    cmon_print_error(true, "cmon_str_arr_add_from_strs", "arr or string not provided");
+    return NULL;
+  }
+   if (arr->len + 1 > INITIAL_ARRAY_SIZE){
+      return NULL; 
+   }
 
-int cmon_str_arr_get_len(CmonStringArray *arr){
-  return arr->len;
+   arr->arr[arr->len] = str;
+   arr->len++;
+   return str;
 }
+
+
+// this function finds if a CmonString exists on the CmonStringArray.
+// if the str exists retrun a pointer to the string find in the CmonStringArray.
+// else return NULL
+CmonString *cmon_str_arr_find(CmonStringArray *arr, CmonString *str){
+  for (int i = 0; i < cmon_str_arr_len(arr); i++){
+    if (cmon_str_cmp(str, cmon_str_arr_get_str(arr, i))){
+      return cmon_str_arr_get_str(arr, i);
+    }
+  }
+  return NULL;
+}
+
+

@@ -36,30 +36,13 @@ struct CmonCommand {
 
 // [FIXME] this probably should be in a more memory eficient way 
 // and also more flexible
-struct CmonConfig {
+typedef struct {
   CmonStringArray ignoreFiles;
   CmonStringArray ignoreDirs;
   CmonStringArray watchExtNames;
-};
-
-
-struct Token {
-  unsigned int type;
-  char *value;
-};
-
-struct TokenList {
-  struct Token tokenList[100]; 
-  int length;
-};
-
-
-enum TokenTypes {
-  CONFIG_ENTRY,
-  STRING,
-  LIST_MARK,
-  COLON,
-};
+  
+  CmonString *cwd;
+} CmonConfig;
 
 enum ConfigEntry {
   WATCH_FILE_EXT_NAMES,
@@ -70,14 +53,15 @@ enum ConfigEntry {
 
 // get a char buffer containig the cwd.
 // the caller is responsable for the memory
-char *cmon_get_cwd();
+CmonString *cmon_get_cwd();
 
 // parse the argv parameters to the CmonCommand struct
 struct CmonCommand *cmon_parse_argv(int argc, char **argv);
 
+FILE *cmon_open_config_file(const CmonString *Strpath);
 
-FILE *cmon_open_config_file(const char *path);
+int cmon_parse_config(FILE *configFile, CmonConfig *config);
 
-int cmon_parse_config(FILE *configFile, struct CmonConfig *config);
+CmonConfig *cmon_config_new();
 
-struct CmonConfig *cmon_init_config();
+void cmon_print_config(CmonConfig *config);
