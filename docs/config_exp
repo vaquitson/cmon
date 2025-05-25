@@ -1,0 +1,17 @@
+WATCH_FILE_EXT_NAMES: {
+  "html",
+  "css",
+}
+
+IGNORE_FILES: {
+  ".gitignore",
+  "c000mand1.go"
+}
+
+IGNORE_DIRS: {
+  ".git"
+  "build"
+  "node_modules"
+  "si/super/com"
+}
+

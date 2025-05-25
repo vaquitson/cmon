@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 #include <sys/inotify.h>
-#include "cmon_config.h"
+#include "config.h"
 #include "cmon_int_array.h"
 
 #define MAX_AMOUNT_OF_NESTED_DIRECTORIES 20
@@ -18,9 +18,9 @@ int cmon_open_ino_fd();
 
 int cmon_ino_watch_dir(int inFd, char *path, unsigned long mask);
 
-void cmon_procees_events(size_t readSize, char *buff, pid_t pgId, char *exe, char **argv);
+void cmon_procees_events(size_t readSize, char *buff, pid_t *child_pid, char *exe, char **argv);
 
-int cmon_start_child_process(char *exe, char **argv);
+int process_start_child(char *exe, char **argv);
 
 CmonInoWDirsArr *cmon_ino_w_dirs_arr_new();
 

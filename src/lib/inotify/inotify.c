@@ -5,43 +5,18 @@
 #include <unistd.h>
 #include <errno.h>
 #include <stdio.h>
-#include <signal.h>
 #include <dirent.h>
 
 #include "cmon_errors.h"
-#include "cmon_inotify.h"
-#include "cmon_print.h"
-#include "cmon_config.h"
+#include "inotify.h"
 #include "cmon_int_array.h"
 #include "cmon_string_array.h"
 
+#include "config.h"
+#include "ps_tree.h"
+#include "process.h"
+
 #define INO_MASK IN_MODIFY
-
-
-// starts the child process
-int cmon_start_child_process(char *exe, char **argv){
-  cmon_print_msg_to_user("Starting child process");
-  pid_t pid;
-  int rc;
-   
-  pid = fork();
-  switch (pid){
-    case 0:
-      rc = execvp(exe, argv);
-      if (rc == -1){
-        int err = errno;
-        cmon_print_errno_error(true, "cmon_start_child_process", err, "exec terminated incorrectly");
-        exit(errno);
-      }
-      return 0;
-    case -1:
-      cmon_print_error(true, "start_child_process", "something went wrong in forking");
-      return -1;
-    default:
-      return pid;
-  }
-}
-
 
 // open a inotify instance
 int cmon_open_ino_fd(){
@@ -68,21 +43,23 @@ int cmon_ino_watch_dir(int inFd, char *path, unsigned long mask){
 
 
 // [FIXME] not if theis should retunr the event or waht : (
-void cmon_procees_events(size_t readSize, char *buff, pid_t pgId, char *exe, char **argv){
+void cmon_procees_events(size_t readSize, char *buff, pid_t *child_pid, char *exe, char **argv){
   static const struct inotify_event *event;
-  int rc;
+  int rc = 0;
+  CmonIntArray *pid_arr;
 
   for (char *ptr = buff; ptr < buff + readSize; ptr += sizeof(struct inotify_event) + event->len){
     event = (const struct inotify_event *) ptr;
     printf("event name: %s\n", event->name);
     if (event->mask & IN_MODIFY) {
-      printf("mod\n");
-      //cmon_print_error(true, "cmon_start_child_process", "exec terminated incorrectly");
-      rc = killpg(pgId, SIGUSR2);
+      pid_arr = ps_tree_get_int_arr(*child_pid);
+      cmon_int_array_print(pid_arr);
+      process_kill_subtree(pid_arr);
+      waitpid(*child_pid, NULL, 0);
       if (rc == -1){
         cmon_print_errno_error(true, "cmon_procees_events", errno, "kill faild");
       }
-      //*subPPid = cmon_start_child_process(exe, argv);
+      *child_pid = process_start_child(exe, argv);
     }
   }
 }
@@ -98,20 +75,22 @@ void cmon_ino_recursive_dir_add(CmonConfig *conf, int inoFd, CmonString *path, C
 
   dir = opendir(cmon_str_get(path));
   errno = 0;
-
+  
   while ((dirEntry = readdir(dir)) != NULL){
     entryPath = cmon_str_new_from_char_arrs(cmon_str_get(path), dirEntry->d_name, NULL);
     switch (dirEntry->d_type){
       case DT_DIR:
-        if (strcmp(dirEntry->d_name, "..") == 0 || strcmp(dirEntry->d_name, ".") == 0){
+        if (strcmp(dirEntry->d_name, "..") == 0){
           continue;
         }
-        if (!cmon_str_arr_find(&conf->ignoreDirs, entryPath)){
+        else if (!cmon_str_arr_find(&conf->ignoreDirs, entryPath)){
           wd = cmon_ino_watch_dir(inoFd, cmon_str_get(entryPath), INO_MASK);
           printf("added: %s\n", cmon_str_get(entryPath));
           wdArr = cmon_int_arr_add(wdArr, wd);
           newPath = cmon_str_new_from_char_arrs(cmon_str_get(entryPath), "/", NULL);  
-          cmon_ino_recursive_dir_add(conf, inoFd, newPath, wdArr);
+          if (strcmp(dirEntry->d_name, ".") != 0){
+            cmon_ino_recursive_dir_add(conf, inoFd, newPath, wdArr);
+          }
         };
     }
     free(entryPath);

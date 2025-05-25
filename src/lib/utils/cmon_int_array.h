@@ -16,3 +16,6 @@ CmonIntArray *cmon_int_arr_new(unsigned int initialSize);
 // add a new int to the int CmonIntArray.
 // in success return a pointer to the arr, else return NULL
 CmonIntArray *cmon_int_arr_add(CmonIntArray *arr, int add);
+
+/* print the array to std */
+void cmon_int_array_print(CmonIntArray *arr);

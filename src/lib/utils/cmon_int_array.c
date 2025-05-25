@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "cmon_int_array.h"
 #include "cmon_errors.h"
@@ -14,6 +15,7 @@ CmonIntArray *cmon_int_arr_new(unsigned int initialSize){
     cmon_print_error(true, "cmon_int_arr_new", "could not make a int array of size 0");
     return NULL;
   }
+
   CmonIntArray *intArr = (CmonIntArray *)malloc(sizeof(CmonIntArray) + (sizeof(int) * initialSize));
   if (!intArr){
     cmon_print_error(true, "cmon_int_array", "could not allocate memory for the CmonIntArray");
@@ -58,3 +60,9 @@ CmonIntArray *cmon_int_arr_add(CmonIntArray *arr, int add){
   } 
 }
 
+
+void cmon_int_array_print(CmonIntArray *arr){
+  for (int i = 0; i < arr->len; i++){
+    printf("pid: %d\n", arr->arr[i]);
+  }
+}

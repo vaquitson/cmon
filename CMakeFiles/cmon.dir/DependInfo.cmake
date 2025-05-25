@@ -13,6 +13,8 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/narval/programing/proyects/cmon/src/lib/cmon_inotify.c" "CMakeFiles/cmon.dir/src/lib/cmon_inotify.c.o" "gcc" "CMakeFiles/cmon.dir/src/lib/cmon_inotify.c.o.d"
   "/home/narval/programing/proyects/cmon/src/lib/cmon_print.c" "CMakeFiles/cmon.dir/src/lib/cmon_print.c.o" "gcc" "CMakeFiles/cmon.dir/src/lib/cmon_print.c.o.d"
   "/home/narval/programing/proyects/cmon/src/lib/parser/cmon_parser.c" "CMakeFiles/cmon.dir/src/lib/parser/cmon_parser.c.o" "gcc" "CMakeFiles/cmon.dir/src/lib/parser/cmon_parser.c.o.d"
+  "/home/narval/programing/proyects/cmon/src/lib/parser/parser_pstree.c" "CMakeFiles/cmon.dir/src/lib/parser/parser_pstree.c.o" "gcc" "CMakeFiles/cmon.dir/src/lib/parser/parser_pstree.c.o.d"
+  "/home/narval/programing/proyects/cmon/src/lib/parser/tokenizer.c" "CMakeFiles/cmon.dir/src/lib/parser/tokenizer.c.o" "gcc" "CMakeFiles/cmon.dir/src/lib/parser/tokenizer.c.o.d"
   "/home/narval/programing/proyects/cmon/src/lib/utils/cmon_int_array.c" "CMakeFiles/cmon.dir/src/lib/utils/cmon_int_array.c.o" "gcc" "CMakeFiles/cmon.dir/src/lib/utils/cmon_int_array.c.o.d"
   "/home/narval/programing/proyects/cmon/src/lib/utils/cmon_ps_tree.c" "CMakeFiles/cmon.dir/src/lib/utils/cmon_ps_tree.c.o" "gcc" "CMakeFiles/cmon.dir/src/lib/utils/cmon_ps_tree.c.o.d"
   "/home/narval/programing/proyects/cmon/src/lib/utils/cmon_string.c" "CMakeFiles/cmon.dir/src/lib/utils/cmon_string.c.o" "gcc" "CMakeFiles/cmon.dir/src/lib/utils/cmon_string.c.o.d"

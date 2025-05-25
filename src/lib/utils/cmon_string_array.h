@@ -23,13 +23,18 @@ CmonString *cmon_str_arr_add_from_str(CmonStringArray *arr, CmonString *str);
 // create a new string array
 CmonStringArray *cmon_str_arr_new();
 
-// init a CmonStringArray from the arr pointer
-// if err null is retunr
+/* 
+ * init a CmonStringArray from the arr pointer
+ * if err null is retunr
+ * */ 
 CmonStringArray *cmon_str_arr_init(CmonStringArray *arr);
 
 // get the CmonString at index position in the arr 
 // if something went wrong NULL is retunr
 CmonString *cmon_str_arr_get_str(CmonStringArray *arr, int index);
 
-
+/* find the string provided in side the CmonString */
 CmonString *cmon_str_arr_find(CmonStringArray *arr, CmonString *str);
+
+/* free the internal strings. The CmonStringArray still need to be free */
+int cmon_str_arr_free(CmonStringArray *arr);

@@ -8,13 +8,12 @@
 #pragma once
 
 #include <unistd.h>
-
 #include "cmon_int_array.h"
 
 /*
  * this function gets a new heap allocated CmonIntArray with
  * the PID'S of the child processes tree including the child PID.
 */
-CmonIntArray *cmon_ps_tree_get_int_arr(pid_t childPid);
+CmonIntArray *ps_tree_get_int_arr(pid_t childPid);
 
 

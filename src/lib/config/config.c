@@ -6,12 +6,12 @@
 
 #include "cmon_errors.h"
 #include "cmon_print.h"
-#include "cmon_config.h"
-#include "cmon_parser.h"
+#include "config.h"
+#include "tokenizer.h"
 
 
 // print to std the config structure.
-void cmon_print_config(CmonConfig *config){
+void config_print(CmonConfig *config){
   int i = 0;
   printf("cwd: %s\n\n", config->cwd->string);
 
@@ -36,7 +36,7 @@ void cmon_print_config(CmonConfig *config){
 // /home/.../.../ endig with a /
 // if the function fails, return NULL;
 // the caller of the function is risponsible for the memroy
-CmonString *cmon_get_cwd(){
+CmonString *config_get_cwd(){
   long pathMax;
   size_t size;
   char *charCwd;
@@ -106,7 +106,7 @@ struct CmonCommand *cmon_parse_argv(int argc, char **argv){
 
 // create a heap allocated (malloc) CmonConfig 
 // the caller of the function is responsible for free the memory
-CmonConfig *cmon_config_new(){
+CmonConfig *config_new(){
   CmonConfig *config = (CmonConfig *)malloc(sizeof(CmonConfig));
   if (!config){
     cmon_print_error(true, "cmon_init_config", "could not allocate memory for the struct CmonConfig");
@@ -123,11 +123,13 @@ CmonConfig *cmon_config_new(){
 
 // this functions open the default configFile
 // if it not exist it create one with a default config
-FILE *cmon_open_config_file(const CmonString *StrPath){
-  const char *path = StrPath->string;
-
+FILE *config_open_file(const CmonString *file_path){
+  const char *path;
   FILE *configFile;
   int err;
+
+  path = file_path->string;
+
   // the file does not exist
   if (access(path, R_OK) == -1){
     cmon_print_msg_to_user("[WARNING] the config file does not exist");
@@ -146,7 +148,7 @@ FILE *cmon_open_config_file(const CmonString *StrPath){
       cmon_print_errno_error(true, "cmon_open_config_file", err, "something went wrong");
       exit(1);
     }
-  } else { 
+  } else {
     configFile = fopen(path, "r");
     if (!configFile){
       err = errno;
@@ -160,7 +162,7 @@ FILE *cmon_open_config_file(const CmonString *StrPath){
 
 // get the token at index i from the token list 
 // if the index is larger than the token list return null
-struct Token *_cmon_get_token(struct TokenList *tokenList, int i){
+struct Token *_get_token(struct TokenArr *tokenList, int i){
   if (i < 0){
     cmon_print_error(true, "_cmon_get_token", "the index is not valid");
     return NULL;
@@ -174,11 +176,12 @@ struct Token *_cmon_get_token(struct TokenList *tokenList, int i){
 }
 
 
+// [FIXME]: the parse config should recvie the token arr not the file config
 // parse the config file into the config struct
 int cmon_parse_config(FILE *configFile, CmonConfig *conf){
   struct Token *curTok; 
   struct Token *nextTok; 
-  struct TokenList *tokenList = cmon_tokenizer(configFile);
+  struct TokenArr *tokenList = cmon_tokenizer(configFile);
 
   CmonStringArray *configTarget = NULL; 
   CmonString *newStr;
@@ -186,10 +189,10 @@ int cmon_parse_config(FILE *configFile, CmonConfig *conf){
   bool inBlock = false;
 
   for (int i = 0; i < tokenList->length; i++){
-    curTok = _cmon_get_token(tokenList, i);
+    curTok = _get_token(tokenList, i);
 
     switch (curTok->type) {
-      case STRING:
+      case TEXT:
         if (configTarget != NULL && inBlock == true){
           if (confId == IGNORE_DIRS || confId == IGNORE_FILES){
             newStr = cmon_str_new_from_char_arrs(cmon_str_get(conf->cwd), curTok->value, NULL);; 
@@ -200,7 +203,7 @@ int cmon_parse_config(FILE *configFile, CmonConfig *conf){
         }
         break;
 
-      case LIST_MARK:
+      case CURLY_BARACKETS:
         if (curTok->value[0] == '{'){
           if (inBlock == false){
             inBlock = true;
@@ -219,7 +222,7 @@ int cmon_parse_config(FILE *configFile, CmonConfig *conf){
         }
         break;
 
-      case CONFIG_ENTRY:
+      case DOUBLE_COLON:
         if (strcmp(curTok->value, "WATCH_FILE_EXT_NAMES") == 0){          
           configTarget = &conf->watchExtNames;
           confId = WATCH_FILE_EXT_NAMES;
@@ -243,3 +246,113 @@ int cmon_parse_config(FILE *configFile, CmonConfig *conf){
   }
   return 0;
 }
+
+
+void config_init(CmonConfig *conf){
+  CmonString *cwd;
+
+  CmonString *conf_file_name;
+  CmonString *conf_file_path;
+
+  // get the cwd
+  conf->cwd = config_get_cwd();
+
+  // get full path for config file
+  conf_file_path = cmon_str_new_from_char_arrs(conf->cwd->string, ".config.cmon", NULL);
+
+  // get the config file fd
+  FILE *config_file = config_open_file(conf_file_path);
+  free(conf_file_path);
+
+  // get tokens
+  struct TokenArr *tok_arr = token_arr_new(); 
+  config_tokenizer(tok_arr, config_file);
+
+  // close the config file
+  fclose(config_file);
+
+  // parse
+  config_parser(tok_arr, conf);
+  token_arr_free(tok_arr);  
+}
+
+
+int config_parser(struct TokenArr *token_arr, CmonConfig *conf){ 
+  struct Token *cur_tok; 
+  struct Token *next_tok; 
+  CmonStringArray *config_target = NULL; 
+  CmonString *new_str;
+  int conf_id;
+  bool in_block = false;
+
+  for (int i = 0; i < token_arr->length; i++){
+    cur_tok = _get_token(token_arr, i);
+    switch (cur_tok->type){
+      case TEXT:
+        next_tok = _get_token(token_arr, i+1);
+        if (next_tok->type == DOUBLE_COLON){
+
+          if (strcmp(cur_tok->value, "WATCH_FILE_EXT_NAMES") == 0){          
+            config_target = &conf->watchExtNames;
+            conf_id = WATCH_FILE_EXT_NAMES;
+          }
+
+          else if (strcmp(cur_tok->value, "IGNORE_FILES") == 0){
+            config_target = &conf->ignoreFiles;
+            conf_id = IGNORE_FILES;
+          }
+
+          else if (strcmp(cur_tok->value, "IGNORE_DIRS") == 0){
+            config_target = &conf->ignoreDirs;
+            conf_id = IGNORE_DIRS;
+          }
+          else {
+            cmon_print_error(true, "parse_config", "the config entry does not exist");
+          }
+        }
+        else {
+          cmon_print_error(true, "parse_config", "invalid text");
+        }
+        break;
+
+      case O_CURLY_BARACKET: 
+        in_block = true;
+        break;
+
+      case C_CURLY_BARACKET:
+        in_block = false;
+        config_target = NULL;
+        break;
+
+      case STRING:
+        if (in_block && config_target != NULL){ 
+          if (conf_id == IGNORE_DIRS || conf_id == IGNORE_FILES){
+            new_str = cmon_str_new_from_char_arrs(cmon_str_get(conf->cwd), cur_tok->value, NULL);
+            cmon_str_arr_add_from_str(config_target, new_str);
+          }
+          else {
+            cmon_str_arr_add_new_char_arr(config_target, cur_tok->value);
+          }
+        }
+        else {
+          cmon_print_error(true, "parse_config", "string has no block");
+        }
+        break;
+    }
+  }
+  return 0;
+}
+
+// [FIXME] here is weird thath the cmon_str_arr_free
+int config_free(CmonConfig *conf){
+  cmon_str_arr_free(&conf->ignoreDirs);
+  cmon_str_arr_free(&conf->ignoreFiles);
+  cmon_str_arr_free(&conf->watchExtNames);
+
+  free(conf->cwd);
+  free(conf);
+
+  return 0;
+}
+
+

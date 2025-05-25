@@ -95,3 +95,15 @@ CmonString *cmon_str_arr_find(CmonStringArray *arr, CmonString *str){
 }
 
 
+int cmon_str_arr_free(CmonStringArray *arr){
+  if (!arr){
+    cmon_print_error(true, "cmon_str_arr_free", "the CmonStringArray is NULL");
+    return 1; 
+  }
+  
+  for(int i = 0; i < arr->len; i++){
+    free(arr->arr[i]);
+  }
+  return 0;
+}
+
