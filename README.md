@@ -6,9 +6,8 @@ This project is licensed under the [MIT License](LICENSE).
 
 Cmon is a tool that automatically restarts a command whenever specified files are modified.
 It's especially useful for restarting a development server while working on a web application or any project that benefits from hot-reloading.
-For now cmon only works on lunx but we are working towards make it abilable on windows and macos
 
-# Installation.
+Currently, Cmon only works on Linux, but we are working to make it available on Windows and macOS.# Installation.
 
 ## Requirements (Linux)
 
