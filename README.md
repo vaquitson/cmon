@@ -14,7 +14,7 @@ For now cmon only works on lunx but we are working towards make it abilable on w
 
 To install Cmon, make sure you have the following dependencies:
 
-- **make**
+- **Cmake**
 - **pstree**
 - **glibc**
 
@@ -25,6 +25,11 @@ Clone the repository and build the binary with make:
 ```sh
 git clone https://github.com/vaquitson/cmon.git
 cd cmon
+
+mkdir build
+cd build
+cmake ..
+
 make
 ```
 # Usage
