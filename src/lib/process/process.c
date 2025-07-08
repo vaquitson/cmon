@@ -1,7 +1,6 @@
 #include <unistd.h>
 #include <signal.h>
 #include <errno.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 #include "process.h"
@@ -9,17 +8,17 @@
 #include "cmon_print.h"
 #include "cmon_int_array.h"
 
-int process_start_child(char *exe, char **argv){
+int process_start_child(CmonConfig *conf){
   cmon_print_msg_to_user("Starting child process");
   pid_t pid;
   int rc; 
   pid = fork();
   switch (pid){
     case 0:
-      rc = execvp(exe, argv);
+      rc = execvp(cmon_str_get(conf->exe), conf->argv);
       if (rc == -1){
         int err = errno;
-        cmon_print_errno_error(true, "cmon_start_child_process", err, "exec terminated incorrectly");
+        cmon_print_errno_error(true, "process_start_child", err, "exec terminated incorrectly");
         exit(errno);
       }
       return 0;
@@ -43,7 +42,6 @@ int process_kill_subtree(CmonIntArray *pid_array){
   }
   
   for (int i = pid_array->len-1; i >= 0; i--){
-    printf("killing %d\n", pid_array->arr[i]);
     if (kill(pid_array->arr[i], SIGTERM) != 0){
       cmon_print_error(true, "process_kill_subtree", "the signal has not been setn");
     }

@@ -11,6 +11,7 @@
 #include "inotify.h"
 #include "cmon_int_array.h"
 #include "cmon_string_array.h"
+#include "cmon_str_utils.h"
 
 #include "config.h"
 #include "ps_tree.h"
@@ -19,7 +20,7 @@
 #define INO_MASK IN_MODIFY
 
 // open a inotify instance
-int cmon_open_ino_fd(){
+int ino_init(){
   int fd;
   fd = inotify_init();
   if (fd < 0){
@@ -30,9 +31,8 @@ int cmon_open_ino_fd(){
 }
 
 
-// watch the test directory
-int cmon_ino_watch_dir(int inFd, char *path, unsigned long mask){
-  int wd; // watch descriptor
+int ino_watch_dir(int inFd, char *path, unsigned long mask){
+  int wd;
   wd = inotify_add_watch(inFd, path, mask);
   if (wd < 0){
     cmon_print_error(true, "cmon_watch_dir", "The path could not be watched");
@@ -43,7 +43,7 @@ int cmon_ino_watch_dir(int inFd, char *path, unsigned long mask){
 
 
 // [FIXME] not if theis should retunr the event or waht : (
-void cmon_procees_events(size_t readSize, char *buff, pid_t *child_pid, char *exe, char **argv){
+void ino_procees_events(CmonConfig *config, size_t readSize, char *buff, pid_t *child_pid){
   static const struct inotify_event *event;
   int rc = 0;
   CmonIntArray *pid_arr;
@@ -52,21 +52,39 @@ void cmon_procees_events(size_t readSize, char *buff, pid_t *child_pid, char *ex
     event = (const struct inotify_event *) ptr;
     printf("event name: %s\n", event->name);
     if (event->mask & IN_MODIFY) {
-      pid_arr = ps_tree_get_int_arr(*child_pid);
-      cmon_int_array_print(pid_arr);
+
+      CmonString *string_event_name = cmon_str_new_from_char_arrs(config->cwd->string ,event->name, NULL); 
+      CmonString *find_res = cmon_str_arr_find(&config->ignoreFiles, string_event_name); 
+      free(string_event_name);
+      if (find_res != NULL){
+        free(find_res);
+        return;
+      }
+
+      char *file_ext_name = get_ext_name_from_cmon_string(string_event_name);
+      printf("ext name %s\n", file_ext_name);
+      CmonString *string_ext_name = cmon_str_new(file_ext_name); 
+      CmonString *find_ext_name_res = cmon_str_arr_find(&config->watchExtNames, string_ext_name);
+      free(string_ext_name);
+      if (find_ext_name_res == NULL){
+        return; 
+      } 
+      free(find_ext_name_res);
+      pid_arr = ps_tree_get_pid_arr(*child_pid);
       process_kill_subtree(pid_arr);
       waitpid(*child_pid, NULL, 0);
+      free(pid_arr);
       if (rc == -1){
         cmon_print_errno_error(true, "cmon_procees_events", errno, "kill faild");
       }
-      *child_pid = process_start_child(exe, argv);
+      *child_pid = process_start_child(config);
     }
   }
 }
 
 
 // recursive funtion that adds nested directories to inotify watch dirs
-void cmon_ino_recursive_dir_add(CmonConfig *conf, int inoFd, CmonString *path, CmonIntArray *wdArr){
+void ino_recursive_dir_add(CmonConfig *conf, int inoFd, CmonString *path, CmonIntArray *wdArr){
   DIR *dir;
   struct dirent *dirEntry;
   CmonString *entryPath;
@@ -84,12 +102,12 @@ void cmon_ino_recursive_dir_add(CmonConfig *conf, int inoFd, CmonString *path, C
           continue;
         }
         else if (!cmon_str_arr_find(&conf->ignoreDirs, entryPath)){
-          wd = cmon_ino_watch_dir(inoFd, cmon_str_get(entryPath), INO_MASK);
+          wd = ino_watch_dir(inoFd, cmon_str_get(entryPath), INO_MASK);
           printf("added: %s\n", cmon_str_get(entryPath));
           wdArr = cmon_int_arr_add(wdArr, wd);
           newPath = cmon_str_new_from_char_arrs(cmon_str_get(entryPath), "/", NULL);  
           if (strcmp(dirEntry->d_name, ".") != 0){
-            cmon_ino_recursive_dir_add(conf, inoFd, newPath, wdArr);
+            ino_recursive_dir_add(conf, inoFd, newPath, wdArr);
           }
         };
     }

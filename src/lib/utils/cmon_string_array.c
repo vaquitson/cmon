@@ -82,9 +82,7 @@ CmonString *cmon_str_arr_add_from_str(CmonStringArray *arr, CmonString *str){
 }
 
 
-// this function finds if a CmonString exists on the CmonStringArray.
-// if the str exists retrun a pointer to the string find in the CmonStringArray.
-// else return NULL
+
 CmonString *cmon_str_arr_find(CmonStringArray *arr, CmonString *str){
   for (int i = 0; i < cmon_str_arr_len(arr); i++){
     if (cmon_str_cmp(str, cmon_str_arr_get_str(arr, i))){

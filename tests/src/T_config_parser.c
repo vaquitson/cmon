@@ -12,7 +12,7 @@ int test1(){
   CmonString *configFileName;
   CmonString *configFilePath;
 
-  cwd = config_get_cwd();
+  cwd = _get_cwd();
   conf->cwd = cwd;
 
   configFileName = cmon_str_new(".config.cmon"); 
@@ -34,17 +34,17 @@ int test1(){
 }
 
 
-int test2(){
+int test2(int argc, char *argv[]){
   CmonConfig *conf = config_new();
-  config_init(conf);
+  config_init(conf, argc, argv);
   config_print(conf);
 
   config_free(conf);
   return 0;
 }
 
-int main(){
-  test2();
+int main(int argc, char *argv[]){
+  test2(argc, argv);
   return 0;
 }
 

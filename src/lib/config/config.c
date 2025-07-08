@@ -31,12 +31,11 @@ void config_print(CmonConfig *config){
   }
 }
 
-
 // this funtion returns the cwd as a CmonString, the format is 
 // /home/.../.../ endig with a /
 // if the function fails, return NULL;
 // the caller of the function is risponsible for the memroy
-CmonString *config_get_cwd(){
+CmonString *_get_cwd(){
   long pathMax;
   size_t size;
   char *charCwd;
@@ -101,6 +100,22 @@ struct CmonCommand *cmon_parse_argv(int argc, char **argv){
 
   command->argv[commandArgvIndex] = NULL;
   return command;
+}
+
+
+// create the struct CmonCommand with the infromation comming from argv
+void config_parse_argv(CmonConfig *conf, int argc, char **argv){
+  struct CmonCommand *command = malloc(sizeof(struct CmonCommand)); 
+  int commandArgvIndex = 1;
+  int argvIndex = 2;
+
+  if (argc < 2){
+    cmon_print_error(true, "cmon_parse_argv", "no arguments provided");
+    exit(1);
+  } 
+
+  conf->exe = cmon_str_new(argv[1]);
+  conf->argv = argv;
 }
 
 
@@ -248,14 +263,20 @@ int cmon_parse_config(FILE *configFile, CmonConfig *conf){
 }
 
 
-void config_init(CmonConfig *conf){
+void config_init(CmonConfig *conf, int argc, char **argv){
   CmonString *cwd;
-
-  CmonString *conf_file_name;
   CmonString *conf_file_path;
 
+  if (argc < 2){
+    cmon_print_error(true, "cmon_parse_argv", "no arguments provided");
+    exit(1);
+  } 
+
+  conf->exe = cmon_str_new(argv[1]);
+  conf->argv = ++argv;
+
   // get the cwd
-  conf->cwd = config_get_cwd();
+  conf->cwd = _get_cwd();
 
   // get full path for config file
   conf_file_path = cmon_str_new_from_char_arrs(conf->cwd->string, ".config.cmon", NULL);
@@ -350,6 +371,7 @@ int config_free(CmonConfig *conf){
   cmon_str_arr_free(&conf->watchExtNames);
 
   free(conf->cwd);
+  free(conf->exe);
   free(conf);
 
   return 0;

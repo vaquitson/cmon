@@ -7,7 +7,7 @@
 #include "cmon_string.h"
 
 
-static unsigned int _char_arr_len(char *charArr){
+static unsigned int _char_arr_len(const char *charArr){
   unsigned int len= 0;
   while (*charArr != '\0'){
     if (len > 256){
@@ -24,15 +24,15 @@ static unsigned int _char_arr_len(char *charArr){
 // arrays provided.
 // the caller of the fucntions is risponsivle for the 
 // memory
-CmonString *cmon_str_new_from_char_arrs(char *charArr, ...){
-  char *buffArgs[MAX_AMOUNT_OF_STRINGS];
+CmonString *cmon_str_new_from_char_arrs(const char *charArr, ...){
+  const char *buffArgs[MAX_AMOUNT_OF_STRINGS];
 
   va_list args;
-  char * arg;
+  char *arg;
   unsigned int nArgs;
 
   unsigned int charBlockSize;
-   
+
   char *ptr;
   CmonString *newStr;
 
@@ -55,8 +55,8 @@ CmonString *cmon_str_new_from_char_arrs(char *charArr, ...){
     buffArgs[nArgs] = arg;
     nArgs++;
   }
- 
-newStr = (CmonString *)malloc(sizeof(CmonString) + charBlockSize + 1);
+
+  newStr = (CmonString *)malloc(sizeof(CmonString) + charBlockSize + 1);
   if (!newStr){
     cmon_print_error(true, "cmon_string_new", "could not allocate memory for the new CmonString");
     return NULL;
@@ -83,8 +83,7 @@ CmonString *cmon_str_new(char *charArr){
   return cmon_str_new_from_char_arrs(charArr, NULL);
 }
 
-// creates a new heap allocated copy of the str provided
-// if fail NULL is returnd
+
 CmonString *cmon_str_copy(CmonString *str){
   if (!str){
     return NULL;

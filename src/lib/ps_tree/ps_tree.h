@@ -14,6 +14,6 @@
  * this function gets a new heap allocated CmonIntArray with
  * the PID'S of the child processes tree including the child PID.
 */
-CmonIntArray *ps_tree_get_int_arr(pid_t childPid);
+CmonIntArray *ps_tree_get_pid_arr(pid_t childPid);
 
 

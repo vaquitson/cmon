@@ -27,14 +27,18 @@ CmonString *cmon_str_new(char *charArr);
 // the caller of the function is risposible for the memory
 CmonString *cmon_str_new_from_str(CmonString *string, ...);
 
-// create a new heap allocated CmonString from char arrays
-// the caller of the function is risponsible for the new allocated
-// CmonString 
-CmonString *cmon_str_new_from_char_arrs(char *charArr, ...);
+/* 
+   This function takes a list of char arrays, ending with a NULL argument to indicate 
+   the end of the list. It creates a new heap-allocated CmonString by combining the given arrays.
+   The caller is responsible for freeing the newly allocated CmonString.
+*/
+CmonString *cmon_str_new_from_char_arrs(const char *charArr, ...);
 
 // this functuon compare two CmonStrings, return true if there are
 // equal and false if there are diferent
 bool cmon_str_cmp(CmonString *a, CmonString *b);
 
-
-
+/* creates a new heap allocated copy of the str provided
+ * if fail NULL is returnd
+*/
+CmonString *cmon_str_copy(CmonString *str);

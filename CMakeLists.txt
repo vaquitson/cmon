@@ -11,6 +11,7 @@ include_directories(${CMAKE_SOURCE_DIR}/src/lib/config)
 include_directories(${CMAKE_SOURCE_DIR}/src/lib/ps_tree)
 include_directories(${CMAKE_SOURCE_DIR}/src/lib/process)
 include_directories(${CMAKE_SOURCE_DIR}/src/lib/inotify)
+include_directories(${CMAKE_SOURCE_DIR}/src/lib/logger)
 
 file(GLOB LIB_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/*.c)
 file(GLOB UTILS_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/utils/*.c)
@@ -19,6 +20,7 @@ file(GLOB CONFIG_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/config/*.c)
 file(GLOB PS_TREE_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/ps_tree/*.c)
 file(GLOB PROCESS_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/process/*.c)
 file(GLOB INOTIFY_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/inotify/*.c)
+file(GLOB LOGGER_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/logger/*.c)
 
 
 # tokenizer test
@@ -53,5 +55,15 @@ set_target_properties(T_ps_tree PROPERTIES
 add_test(NAME T_ps_tree COMMAND ./build/tests/T_ps_tree)
 
 
+add_executable(cmon ./src/main.c 
+                    ${LIB_C_FILES} 
+                    ${UTILS_C_FILES} 
+                    ${PARSER_C_FILES} 
+                    ${CONFIG_C_FILES} 
+                    ${PS_TREE_C_FILES} 
+                    ${PROCESS_C_FILES} 
+                    ${INOTIFY_C_FILES}
+                    ${LOGGER_C_FILES}) 
+
+
 set(DCMAKE_EXPORT_COMPILE_COMMANDS 1)
-add_executable(cmon ./src/main.c ${LIB_C_FILES} ${UTILS_C_FILES} ${PARSER_C_FILES} ${CONFIG_C_FILES} ${PS_TREE_C_FILES} ${PROCESS_C_FILES} ${INOTIFY_C_FILES}) 

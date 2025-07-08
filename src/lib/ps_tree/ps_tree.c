@@ -10,7 +10,6 @@
 #include "cmon_int_array.h"
 #include "text_utils.h"
 
-
 static pid_t ps_tree_exec(pid_t childPid, int pipeRead, int pipeWrite){
   int rc;
   char childPidBuff[10];
@@ -55,7 +54,7 @@ static pid_t ps_tree_exec(pid_t childPid, int pipeRead, int pipeWrite){
 /* 
  * get the pid's from the pipe and added to the pid array
 */
-static int _ps_tree_get_pids_from_pipe(int pipe_read_fd, CmonIntArray *pid_array){ 
+CmonIntArray *_ps_tree_get_pids_from_pipe(int pipe_read_fd, CmonIntArray *pid_array){ 
   char buff[1024];
   ssize_t nBytes;
 
@@ -75,7 +74,7 @@ static int _ps_tree_get_pids_from_pipe(int pipe_read_fd, CmonIntArray *pid_array
         } else {
           if (pid_buff_p > pid_buff){
             *pid_buff_p = '\0';
-            cmon_int_arr_add(pid_array, atoi(pid_buff));
+            pid_array = cmon_int_arr_add(pid_array, atoi(pid_buff));
             pid_buff_p = pid_buff;
           }
         }
@@ -83,11 +82,11 @@ static int _ps_tree_get_pids_from_pipe(int pipe_read_fd, CmonIntArray *pid_array
     }
   } while (nBytes > 0);
 
-  return 0;
+  return pid_array;
 } 
 
 
-CmonIntArray *ps_tree_get_int_arr(pid_t childPid){
+CmonIntArray *ps_tree_get_pid_arr(pid_t childPid){
   int pipes[2];
   int pipe_write_fd;
   int pipe_read_fd; 
@@ -110,7 +109,7 @@ CmonIntArray *ps_tree_get_int_arr(pid_t childPid){
   proc_pid = ps_tree_exec(childPid, pipe_read_fd, pipe_write_fd);
 
   // reed pipe 
-  _ps_tree_get_pids_from_pipe(pipe_read_fd, pid_array);
+  pid_array = _ps_tree_get_pids_from_pipe(pipe_read_fd, pid_array);
  
   while (true){
     waitpid(proc_pid, &proc_status, 0);

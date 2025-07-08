@@ -2,7 +2,6 @@
 #include <wait.h>
 #include <stdbool.h>
 #include <sys/inotify.h>
-#include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <poll.h>
@@ -14,15 +13,9 @@
 
 #define CONFIG_FILE_NAME_LEN 11
 
-void _siguser2Cb(int sig){
-  if (sig == SIGUSR2){
-    printf("Restarting process ...");
-  }
-}
-
 int main(int argc, char **argv){
   int inotifyFd;
-  CmonIntArray *wdArr = cmon_int_arr_new(100);
+  CmonIntArray *wdArr = cmon_int_arr_new(100); // watch descriptor arr
 
   int pollRetV;
   size_t readSize;
@@ -31,31 +24,29 @@ int main(int argc, char **argv){
   struct pollfd fds[1];
 
   CmonConfig *conf;
-  struct CmonCommand *command;  
 
   pid_t sub_pid;
 
-  signal(SIGUSR2, _siguser2Cb);
-
   // config initializer
   conf = config_new();
-  command = cmon_parse_argv(argc, argv);
-  config_init(conf);
+  config_init(conf, argc, argv);
   
-  inotifyFd = cmon_open_ino_fd();
+  inotifyFd = ino_init();
+  ino_recursive_dir_add(conf, inotifyFd, cmon_str_copy(conf->cwd), wdArr);
 
   fds[0].fd = inotifyFd;
   fds[0].events = POLLIN;
 
-  cmon_ino_recursive_dir_add(conf, inotifyFd, cmon_str_copy(conf->cwd), wdArr);
-
-  sub_pid = process_start_child(command->exe, command->argv); 
-
+  sub_pid = process_start_child(conf); 
   printf("parentPid %d\n", getpid());
   printf("childPid %d\n", sub_pid);
+
+  config_print(conf);
   
   // [FIXME] this should be a parameter in config i guess
-  sleep(1);
+  // this sleep is for give time to the chilf child process 
+  // to start all his sub processes
+  sleep(1); 
 
   while (1){
     pollRetV = poll(fds, 1, -1);
@@ -65,7 +56,7 @@ int main(int argc, char **argv){
         cmon_print_error(true, "main", "read size < 0 in reading the events");
         printf("Reading error\n");
       }
-      cmon_procees_events(readSize, buff, &sub_pid, command->exe, command->argv);
+      ino_procees_events(conf, readSize, buff, &sub_pid);
     } else {
       continue;
     }

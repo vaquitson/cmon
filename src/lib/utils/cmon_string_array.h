@@ -33,7 +33,10 @@ CmonStringArray *cmon_str_arr_init(CmonStringArray *arr);
 // if something went wrong NULL is retunr
 CmonString *cmon_str_arr_get_str(CmonStringArray *arr, int index);
 
-/* find the string provided in side the CmonString */
+/* his function finds if a CmonString exists on the CmonStringArray.
+   if the str exists retrun a pointer to the string find in the CmonStringArray.
+   else return NULL
+*/
 CmonString *cmon_str_arr_find(CmonStringArray *arr, CmonString *str);
 
 /* free the internal strings. The CmonStringArray still need to be free */

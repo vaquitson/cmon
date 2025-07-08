@@ -46,6 +46,9 @@ typedef struct {
   CmonStringArray watchExtNames;
   
   CmonString *cwd;
+  CmonString *exe;
+  char **argv;
+  int argc;
 } CmonConfig;
 
 enum ConfigEntry {
@@ -57,7 +60,7 @@ enum ConfigEntry {
 
 // get a char buffer containig the cwd.
 // the caller is responsable for the memory
-CmonString *config_get_cwd();
+CmonString *_get_cwd();
 
 // parse the argv parameters to the CmonCommand struct
 struct CmonCommand *cmon_parse_argv(int argc, char **argv);
@@ -82,7 +85,9 @@ void config_print(CmonConfig *config);
 int config_parser(struct TokenArr *token_arr, CmonConfig *conf);
 
 /* initialize the config, which mens fill the config estructure */
-void config_init(CmonConfig *conf);
+void config_init(CmonConfig *conf, int argc, char **argv);
 
 /* free the config structure */
 int config_free(CmonConfig *conf);
+
+

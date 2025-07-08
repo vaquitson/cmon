@@ -14,16 +14,22 @@ typedef struct {
 } CmonInoWDirsArr;
 
 
-int cmon_open_ino_fd();
+/* init Inotify and return his FD */
+int ino_init();
 
-int cmon_ino_watch_dir(int inFd, char *path, unsigned long mask);
+/* set a single diretory to be watch with the 
+ * inotify_add_watch function and retryn the 
+ * watch descriptor
+*/
+int ino_watch_dir(int inFd, char *path, unsigned long mask);
 
-void cmon_procees_events(size_t readSize, char *buff, pid_t *child_pid, char *exe, char **argv);
+/* process a file notify event */
+void ino_procees_events(CmonConfig *config, size_t readSize, char *buff, pid_t *child_pid);
 
-int process_start_child(char *exe, char **argv);
 
-CmonInoWDirsArr *cmon_ino_w_dirs_arr_new();
+/* 
+ * recursibly add the directories to be watch and filter by the provided
+ * data in the CmonConfig
+*/
+void ino_recursive_dir_add(CmonConfig *conf, int inoFd, CmonString *path, CmonIntArray *wdArr);
 
-void cmon_ino_recursive_dir_add(CmonConfig *conf, int inoFd, CmonString *path, CmonIntArray *wdArr);
-
-CmonString *cmon_str_copy(CmonString *str);

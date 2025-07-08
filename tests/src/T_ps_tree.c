@@ -6,7 +6,7 @@
 
 int test_1(char *pid){
   CmonIntArray *pid_arr;
-  pid_arr = ps_tree_get_int_arr(atoi(pid));
+  pid_arr = ps_tree_get_pid_arr(atoi(pid));
   for (int i = 0; i < pid_arr->len; i++){
     printf("pid: %d\n", pid_arr->arr[i]);
   }
