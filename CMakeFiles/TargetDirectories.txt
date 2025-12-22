@@ -2,3 +2,7 @@
 /home/narval/programing/proyects/cmon/CMakeFiles/test.dir
 /home/narval/programing/proyects/cmon/CMakeFiles/edit_cache.dir
 /home/narval/programing/proyects/cmon/CMakeFiles/rebuild_cache.dir
+/home/narval/programing/proyects/cmon/tests/CMakeFiles/test_logger.dir
+/home/narval/programing/proyects/cmon/tests/CMakeFiles/test.dir
+/home/narval/programing/proyects/cmon/tests/CMakeFiles/edit_cache.dir
+/home/narval/programing/proyects/cmon/tests/CMakeFiles/rebuild_cache.dir

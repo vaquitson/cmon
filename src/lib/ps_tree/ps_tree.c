@@ -4,6 +4,7 @@
 #include <string.h>
 #include <sys/wait.h>
 #include <errno.h>
+#include <logger.h>
 
 #include "ps_tree.h"
 #include "cmon_errors.h"

@@ -12,7 +12,7 @@
 #include "cmon_int_array.h"
 #include "cmon_string_array.h"
 #include "cmon_str_utils.h"
-
+#include "logger.h"
 #include "config.h"
 #include "ps_tree.h"
 #include "process.h"

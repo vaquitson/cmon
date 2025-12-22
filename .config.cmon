@@ -1,3 +1,0 @@
-WATCH_FILE_EXT_NAMES = ["js", "html", "css"]
-IGNORE_FILES = [".gitignore"]
-IGNORE_DIRS = [".git", "build"]

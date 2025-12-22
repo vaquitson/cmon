@@ -1,23 +1,22 @@
 #pragma once
+#include <stdio.h>
+#include <unistd.h>
+
+#define MAX_LOG_MESSAGE_LENGTH 200
 
 enum {
-  DEBUG,
-  INFO,
-  WARNING,
-  ERROR
+  LOG_DEBUG,
+  LOG_INFO,
+  LOG_WARNING,
+  LOG_ERROR
 };
 
-enum {
-  CONFIG,
-  MAIN,
-  INOTIFY,
-  PROCESS,
-  PS_TREE,
-  UTILS,
-};
+struct Logger {
+  FILE *file_p;
+  pid_t pid;
+  char *file_path;
+} typedef Logger;
 
 
-void log_init();
-
-
-void log_log(int level, int module, char *msg);
+Logger *log_init();
+void log_write(Logger *logger, char *meesage, int priority);
