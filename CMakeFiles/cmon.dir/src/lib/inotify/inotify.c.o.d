@@ -69,5 +69,6 @@ CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.o: \
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_string.h \
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_int_array.h \
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_str_utils.h \
+ /home/narval/programing/proyects/cmon/src/lib/logger/logger.h \
  /home/narval/programing/proyects/cmon/src/lib/ps_tree/ps_tree.h \
  /home/narval/programing/proyects/cmon/src/lib/process/process.h

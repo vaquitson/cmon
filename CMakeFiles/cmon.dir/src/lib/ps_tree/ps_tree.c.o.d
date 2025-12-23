@@ -50,6 +50,7 @@ CMakeFiles/cmon.dir/src/lib/ps_tree/ps_tree.c.o: \
  /usr/include/errno.h /usr/include/bits/errno.h \
  /usr/include/linux/errno.h /usr/include/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
+ /home/narval/programing/proyects/cmon/src/lib/logger/logger.h \
  /home/narval/programing/proyects/cmon/src/lib/ps_tree/ps_tree.h \
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_int_array.h \
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_errors.h \

@@ -19,4 +19,4 @@ struct Logger {
 
 
 Logger *log_init();
-void log_write(Logger *logger, char *meesage, int priority);
+void log_write(Logger *logger, int priority, char *meesage, ...);

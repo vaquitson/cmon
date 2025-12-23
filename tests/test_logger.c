@@ -22,14 +22,14 @@ int test_log_init() {
 
   Logger *log_p2 = log_init();
   Logger *log_p3 = log_init();
-  printf("ptr: %p   ptr2: %p   ptr3: %p\n", log_p, log_p2, log_p3);
 
   if (log_p != log_p2 && log_p3 != log_p2) {
     printf("test -test_log_init-: faild -> the singleton feature is not working\n");
     return 1;
   }
 
-  log_write(log_p2, "perro elefante", LOG_INFO);
+  char str[] =  "string agregada";
+  log_write(log_p2, LOG_INFO, "hola %s %d\n", str, 90);
 
   printf("test -test_log_init-: success\n");
   return 1;

@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
+#include <stdarg.h>
+
 #include "logger.h"
 
 #define MAX_PATH_SIZE 2048
@@ -58,11 +60,14 @@ Logger *log_init(){
 
 
 // write a log
-void log_write(Logger *logger, char *meesage, int priority){
+void log_write(Logger *logger, int priority, char *meesage, ...){
   char buff[MAX_LOG_MESSAGE_LENGTH+1];
   char *priority_str;
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
+
+  va_list ap;
+  va_start(ap, meesage);
 
   switch (priority) {
     case LOG_DEBUG:
@@ -78,8 +83,10 @@ void log_write(Logger *logger, char *meesage, int priority){
       priority_str = "ERROR";
       break;
   }
+  
+  fprintf(logger->file_p, "%d | %d-%d-%d | %d:%d | %s |: ", 
+      logger->pid, tm.tm_year + 1900, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min, priority_str);
 
-  snprintf(buff, MAX_LOG_MESSAGE_LENGTH+1, "%d | %d-%d-%d | %d:%d | %s |: %s\n", 
-      logger->pid, tm.tm_year + 1900, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min, priority_str, meesage);
-  fputs(buff, logger->file_p);
+  vfprintf(logger->file_p, meesage, ap);
+  va_end(ap);
 }

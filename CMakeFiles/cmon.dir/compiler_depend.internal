@@ -86,6 +86,7 @@ CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.o
  /home/narval/programing/proyects/cmon/src/lib/inotify/inotify.c
  /home/narval/programing/proyects/cmon/src/lib/config/config.h
  /home/narval/programing/proyects/cmon/src/lib/inotify/inotify.h
+ /home/narval/programing/proyects/cmon/src/lib/logger/logger.h
  /home/narval/programing/proyects/cmon/src/lib/parser/tokenizer.h
  /home/narval/programing/proyects/cmon/src/lib/process/process.h
  /home/narval/programing/proyects/cmon/src/lib/ps_tree/ps_tree.h
@@ -454,6 +455,7 @@ CMakeFiles/cmon.dir/src/lib/process/process.c.o
 
 CMakeFiles/cmon.dir/src/lib/ps_tree/ps_tree.c.o
  /home/narval/programing/proyects/cmon/src/lib/ps_tree/ps_tree.c
+ /home/narval/programing/proyects/cmon/src/lib/logger/logger.h
  /home/narval/programing/proyects/cmon/src/lib/ps_tree/ps_tree.h
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_errors.h
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_int_array.h

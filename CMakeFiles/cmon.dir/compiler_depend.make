@@ -84,6 +84,7 @@ CMakeFiles/cmon.dir/src/lib/config/config.c.o: src/lib/config/config.c \
 CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.o: src/lib/inotify/inotify.c \
   src/lib/config/config.h \
   src/lib/inotify/inotify.h \
+  src/lib/logger/logger.h \
   src/lib/parser/tokenizer.h \
   src/lib/process/process.h \
   src/lib/ps_tree/ps_tree.h \
@@ -448,6 +449,7 @@ CMakeFiles/cmon.dir/src/lib/process/process.c.o: src/lib/process/process.c \
   /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stddef.h
 
 CMakeFiles/cmon.dir/src/lib/ps_tree/ps_tree.c.o: src/lib/ps_tree/ps_tree.c \
+  src/lib/logger/logger.h \
   src/lib/ps_tree/ps_tree.h \
   src/lib/utils/cmon_errors.h \
   src/lib/utils/cmon_int_array.h \
