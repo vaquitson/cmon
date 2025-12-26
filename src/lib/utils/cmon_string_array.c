@@ -82,11 +82,16 @@ CmonString *cmon_str_arr_add_from_str(CmonStringArray *arr, CmonString *str){
 }
 
 
-
+/*
+ * Try to find a CmonString in thhe CmonStringArray, if the found, return a 
+ * reference to the CmonString in the array, else return NULL
+ */
 CmonString *cmon_str_arr_find(CmonStringArray *arr, CmonString *str){
+  CmonString *cur_str;
   for (int i = 0; i < cmon_str_arr_len(arr); i++){
-    if (cmon_str_cmp(str, cmon_str_arr_get_str(arr, i))){
-      return cmon_str_arr_get_str(arr, i);
+    cur_str = cmon_str_arr_get_str(arr, i);
+    if (cmon_str_cmp(str, cur_str)){
+      return cur_str;
     }
   }
   return NULL;

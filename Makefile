@@ -464,6 +464,30 @@ src/lib/utils/text_utils.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/lib/utils/text_utils.c.s
 .PHONY : src/lib/utils/text_utils.c.s
 
+src/lib/utils/util_path.o: src/lib/utils/util_path.c.o
+.PHONY : src/lib/utils/util_path.o
+
+# target to build an object file
+src/lib/utils/util_path.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/lib/utils/util_path.c.o
+.PHONY : src/lib/utils/util_path.c.o
+
+src/lib/utils/util_path.i: src/lib/utils/util_path.c.i
+.PHONY : src/lib/utils/util_path.i
+
+# target to preprocess a source file
+src/lib/utils/util_path.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/lib/utils/util_path.c.i
+.PHONY : src/lib/utils/util_path.c.i
+
+src/lib/utils/util_path.s: src/lib/utils/util_path.c.s
+.PHONY : src/lib/utils/util_path.s
+
+# target to generate assembly for a file
+src/lib/utils/util_path.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/lib/utils/util_path.c.s
+.PHONY : src/lib/utils/util_path.c.s
+
 src/main.o: src/main.c.o
 .PHONY : src/main.o
 
@@ -538,6 +562,9 @@ help:
 	@echo "... src/lib/utils/text_utils.o"
 	@echo "... src/lib/utils/text_utils.i"
 	@echo "... src/lib/utils/text_utils.s"
+	@echo "... src/lib/utils/util_path.o"
+	@echo "... src/lib/utils/util_path.i"
+	@echo "... src/lib/utils/util_path.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

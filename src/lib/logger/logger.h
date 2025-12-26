@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#define MAX_LOG_MESSAGE_LENGTH 200
-
 enum {
   LOG_DEBUG,
   LOG_INFO,
@@ -11,12 +9,13 @@ enum {
   LOG_ERROR
 };
 
-struct Logger {
+typedef struct {
   FILE *file_p;
   pid_t pid;
   char *file_path;
-} typedef Logger;
+} Logger;
 
 
 Logger *log_init();
-void log_write(Logger *logger, int priority, char *meesage, ...);
+void log_write(int priority, char *meesage, ...);
+

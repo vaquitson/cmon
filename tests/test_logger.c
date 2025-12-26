@@ -29,7 +29,7 @@ int test_log_init() {
   }
 
   char str[] =  "string agregada";
-  log_write(log_p2, LOG_INFO, "hola %s %d\n", str, 90);
+  log_write(LOG_INFO, "hola %s %d\n", str, 90);
 
   printf("test -test_log_init-: success\n");
   return 1;

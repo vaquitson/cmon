@@ -22,6 +22,11 @@ file(GLOB LOGGER_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/logger/*.c)
 
 add_executable(cmon) 
 
+target_compile_options(cmon 
+  PRIVATE
+  -Wall -Wextra -Wpedantic
+)
+
 target_sources(cmon
   PRIVATE
   ./src/main.c

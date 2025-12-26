@@ -119,7 +119,7 @@ void config_parse_argv(CmonConfig *conf, int argc, char **argv){
 }
 
 
-// create a heap allocated (malloc) CmonConfig 
+// create a heap allocated CmonConfig 
 // the caller of the function is responsible for free the memory
 CmonConfig *config_new(){
   CmonConfig *config = (CmonConfig *)malloc(sizeof(CmonConfig));

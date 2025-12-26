@@ -6,7 +6,6 @@
 #include "cmon_errors.h"
 #include "cmon_string.h"
 
-
 static unsigned int _char_arr_len(const char *charArr){
   unsigned int len= 0;
   while (*charArr != '\0'){

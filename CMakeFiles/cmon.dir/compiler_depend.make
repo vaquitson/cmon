@@ -842,6 +842,9 @@ CMakeFiles/cmon.dir/src/lib/utils/text_utils.c.o: src/lib/utils/text_utils.c \
   src/lib/utils/text_utils.h \
   /usr/include/stdc-predef.h
 
+CMakeFiles/cmon.dir/src/lib/utils/util_path.c.o: src/lib/utils/util_path.c \
+  /usr/include/stdc-predef.h
+
 CMakeFiles/cmon.dir/src/main.c.o: src/main.c \
   src/lib/config/config.h \
   src/lib/inotify/inotify.h \
@@ -954,6 +957,8 @@ CMakeFiles/cmon.dir/src/main.c.o: src/main.c \
 /usr/include/sys/poll.h:
 
 /usr/include/bits/poll.h:
+
+src/lib/utils/util_path.c:
 
 src/lib/utils/cmon_string_array.c:
 

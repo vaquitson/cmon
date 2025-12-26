@@ -5,6 +5,9 @@
 #include "cmon_str_utils.h"
 #include "cmon_string.h"
 
+/*
+ * Get the extname as a substring of the file_name char arr
+ */
 char *get_ext_name_from_cmon_string(CmonString *file_name){
   for (int i = 0; i < file_name->len; i++){
     if (file_name->string[i] == '.'){

@@ -21,7 +21,7 @@ int ino_init();
  * inotify_add_watch function and retryn the 
  * watch descriptor
 */
-int ino_watch_dir(int inFd, char *path, unsigned long mask);
+int _ino_watch_dir(int inFd, char *path, unsigned long mask);
 
 /* process a file notify event */
 void ino_procees_events(CmonConfig *config, size_t readSize, char *buff, pid_t *child_pid);

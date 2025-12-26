@@ -181,10 +181,24 @@ CMakeFiles/cmon.dir/src/lib/utils/text_utils.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/cmon.dir/src/lib/utils/text_utils.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/narval/programing/proyects/cmon/src/lib/utils/text_utils.c -o CMakeFiles/cmon.dir/src/lib/utils/text_utils.c.s
 
+CMakeFiles/cmon.dir/src/lib/utils/util_path.c.o: CMakeFiles/cmon.dir/flags.make
+CMakeFiles/cmon.dir/src/lib/utils/util_path.c.o: src/lib/utils/util_path.c
+CMakeFiles/cmon.dir/src/lib/utils/util_path.c.o: CMakeFiles/cmon.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/cmon.dir/src/lib/utils/util_path.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/cmon.dir/src/lib/utils/util_path.c.o -MF CMakeFiles/cmon.dir/src/lib/utils/util_path.c.o.d -o CMakeFiles/cmon.dir/src/lib/utils/util_path.c.o -c /home/narval/programing/proyects/cmon/src/lib/utils/util_path.c
+
+CMakeFiles/cmon.dir/src/lib/utils/util_path.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/cmon.dir/src/lib/utils/util_path.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/narval/programing/proyects/cmon/src/lib/utils/util_path.c > CMakeFiles/cmon.dir/src/lib/utils/util_path.c.i
+
+CMakeFiles/cmon.dir/src/lib/utils/util_path.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/cmon.dir/src/lib/utils/util_path.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/narval/programing/proyects/cmon/src/lib/utils/util_path.c -o CMakeFiles/cmon.dir/src/lib/utils/util_path.c.s
+
 CMakeFiles/cmon.dir/src/lib/parser/tokenizer.c.o: CMakeFiles/cmon.dir/flags.make
 CMakeFiles/cmon.dir/src/lib/parser/tokenizer.c.o: src/lib/parser/tokenizer.c
 CMakeFiles/cmon.dir/src/lib/parser/tokenizer.c.o: CMakeFiles/cmon.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/cmon.dir/src/lib/parser/tokenizer.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/cmon.dir/src/lib/parser/tokenizer.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/cmon.dir/src/lib/parser/tokenizer.c.o -MF CMakeFiles/cmon.dir/src/lib/parser/tokenizer.c.o.d -o CMakeFiles/cmon.dir/src/lib/parser/tokenizer.c.o -c /home/narval/programing/proyects/cmon/src/lib/parser/tokenizer.c
 
 CMakeFiles/cmon.dir/src/lib/parser/tokenizer.c.i: cmake_force
@@ -198,7 +212,7 @@ CMakeFiles/cmon.dir/src/lib/parser/tokenizer.c.s: cmake_force
 CMakeFiles/cmon.dir/src/lib/config/config.c.o: CMakeFiles/cmon.dir/flags.make
 CMakeFiles/cmon.dir/src/lib/config/config.c.o: src/lib/config/config.c
 CMakeFiles/cmon.dir/src/lib/config/config.c.o: CMakeFiles/cmon.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/cmon.dir/src/lib/config/config.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/cmon.dir/src/lib/config/config.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/cmon.dir/src/lib/config/config.c.o -MF CMakeFiles/cmon.dir/src/lib/config/config.c.o.d -o CMakeFiles/cmon.dir/src/lib/config/config.c.o -c /home/narval/programing/proyects/cmon/src/lib/config/config.c
 
 CMakeFiles/cmon.dir/src/lib/config/config.c.i: cmake_force
@@ -212,7 +226,7 @@ CMakeFiles/cmon.dir/src/lib/config/config.c.s: cmake_force
 CMakeFiles/cmon.dir/src/lib/ps_tree/ps_tree.c.o: CMakeFiles/cmon.dir/flags.make
 CMakeFiles/cmon.dir/src/lib/ps_tree/ps_tree.c.o: src/lib/ps_tree/ps_tree.c
 CMakeFiles/cmon.dir/src/lib/ps_tree/ps_tree.c.o: CMakeFiles/cmon.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/cmon.dir/src/lib/ps_tree/ps_tree.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/cmon.dir/src/lib/ps_tree/ps_tree.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/cmon.dir/src/lib/ps_tree/ps_tree.c.o -MF CMakeFiles/cmon.dir/src/lib/ps_tree/ps_tree.c.o.d -o CMakeFiles/cmon.dir/src/lib/ps_tree/ps_tree.c.o -c /home/narval/programing/proyects/cmon/src/lib/ps_tree/ps_tree.c
 
 CMakeFiles/cmon.dir/src/lib/ps_tree/ps_tree.c.i: cmake_force
@@ -226,7 +240,7 @@ CMakeFiles/cmon.dir/src/lib/ps_tree/ps_tree.c.s: cmake_force
 CMakeFiles/cmon.dir/src/lib/process/process.c.o: CMakeFiles/cmon.dir/flags.make
 CMakeFiles/cmon.dir/src/lib/process/process.c.o: src/lib/process/process.c
 CMakeFiles/cmon.dir/src/lib/process/process.c.o: CMakeFiles/cmon.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/cmon.dir/src/lib/process/process.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/cmon.dir/src/lib/process/process.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/cmon.dir/src/lib/process/process.c.o -MF CMakeFiles/cmon.dir/src/lib/process/process.c.o.d -o CMakeFiles/cmon.dir/src/lib/process/process.c.o -c /home/narval/programing/proyects/cmon/src/lib/process/process.c
 
 CMakeFiles/cmon.dir/src/lib/process/process.c.i: cmake_force
@@ -240,7 +254,7 @@ CMakeFiles/cmon.dir/src/lib/process/process.c.s: cmake_force
 CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.o: CMakeFiles/cmon.dir/flags.make
 CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.o: src/lib/inotify/inotify.c
 CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.o: CMakeFiles/cmon.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.o -MF CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.o.d -o CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.o -c /home/narval/programing/proyects/cmon/src/lib/inotify/inotify.c
 
 CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.i: cmake_force
@@ -254,7 +268,7 @@ CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.s: cmake_force
 CMakeFiles/cmon.dir/src/lib/logger/logger.c.o: CMakeFiles/cmon.dir/flags.make
 CMakeFiles/cmon.dir/src/lib/logger/logger.c.o: src/lib/logger/logger.c
 CMakeFiles/cmon.dir/src/lib/logger/logger.c.o: CMakeFiles/cmon.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/cmon.dir/src/lib/logger/logger.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object CMakeFiles/cmon.dir/src/lib/logger/logger.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/cmon.dir/src/lib/logger/logger.c.o -MF CMakeFiles/cmon.dir/src/lib/logger/logger.c.o.d -o CMakeFiles/cmon.dir/src/lib/logger/logger.c.o -c /home/narval/programing/proyects/cmon/src/lib/logger/logger.c
 
 CMakeFiles/cmon.dir/src/lib/logger/logger.c.i: cmake_force
@@ -275,6 +289,7 @@ cmon_OBJECTS = \
 "CMakeFiles/cmon.dir/src/lib/utils/cmon_string.c.o" \
 "CMakeFiles/cmon.dir/src/lib/utils/cmon_string_array.c.o" \
 "CMakeFiles/cmon.dir/src/lib/utils/text_utils.c.o" \
+"CMakeFiles/cmon.dir/src/lib/utils/util_path.c.o" \
 "CMakeFiles/cmon.dir/src/lib/parser/tokenizer.c.o" \
 "CMakeFiles/cmon.dir/src/lib/config/config.c.o" \
 "CMakeFiles/cmon.dir/src/lib/ps_tree/ps_tree.c.o" \
@@ -293,6 +308,7 @@ cmon: CMakeFiles/cmon.dir/src/lib/utils/cmon_str_utils.c.o
 cmon: CMakeFiles/cmon.dir/src/lib/utils/cmon_string.c.o
 cmon: CMakeFiles/cmon.dir/src/lib/utils/cmon_string_array.c.o
 cmon: CMakeFiles/cmon.dir/src/lib/utils/text_utils.c.o
+cmon: CMakeFiles/cmon.dir/src/lib/utils/util_path.c.o
 cmon: CMakeFiles/cmon.dir/src/lib/parser/tokenizer.c.o
 cmon: CMakeFiles/cmon.dir/src/lib/config/config.c.o
 cmon: CMakeFiles/cmon.dir/src/lib/ps_tree/ps_tree.c.o
@@ -301,7 +317,7 @@ cmon: CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.o
 cmon: CMakeFiles/cmon.dir/src/lib/logger/logger.c.o
 cmon: CMakeFiles/cmon.dir/build.make
 cmon: CMakeFiles/cmon.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking C executable cmon"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking C executable cmon"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/cmon.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

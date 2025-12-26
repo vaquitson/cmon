@@ -6,5 +6,5 @@ C_DEFINES =
 
 C_INCLUDES = -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/lib/logger
 
-C_FLAGS = 
+C_FLAGS = -Wall -Wextra -Wpedantic
 

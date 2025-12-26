@@ -855,6 +855,10 @@ CMakeFiles/cmon.dir/src/lib/utils/text_utils.c.o
  /home/narval/programing/proyects/cmon/src/lib/utils/text_utils.h
  /usr/include/stdc-predef.h
 
+CMakeFiles/cmon.dir/src/lib/utils/util_path.c.o
+ /home/narval/programing/proyects/cmon/src/lib/utils/util_path.c
+ /usr/include/stdc-predef.h
+
 CMakeFiles/cmon.dir/src/main.c.o
  /home/narval/programing/proyects/cmon/src/main.c
  /home/narval/programing/proyects/cmon/src/lib/config/config.h

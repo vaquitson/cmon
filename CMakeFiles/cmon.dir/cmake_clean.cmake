@@ -25,6 +25,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/cmon.dir/src/lib/utils/cmon_string_array.c.o.d"
   "CMakeFiles/cmon.dir/src/lib/utils/text_utils.c.o"
   "CMakeFiles/cmon.dir/src/lib/utils/text_utils.c.o.d"
+  "CMakeFiles/cmon.dir/src/lib/utils/util_path.c.o"
+  "CMakeFiles/cmon.dir/src/lib/utils/util_path.c.o.d"
   "CMakeFiles/cmon.dir/src/main.c.o"
   "CMakeFiles/cmon.dir/src/main.c.o.d"
   "cmon"

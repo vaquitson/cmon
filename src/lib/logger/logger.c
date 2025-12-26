@@ -60,9 +60,14 @@ Logger *log_init(){
 
 
 // write a log
-void log_write(Logger *logger, int priority, char *meesage, ...){
-  char buff[MAX_LOG_MESSAGE_LENGTH+1];
-  char *priority_str;
+void log_write(int priority, char *meesage, ...){
+  static Logger *logger = NULL;
+  if (logger == NULL) {
+    logger = log_init();
+  }
+
+  static char *priority_str;
+
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
 
@@ -82,11 +87,14 @@ void log_write(Logger *logger, int priority, char *meesage, ...){
     case LOG_ERROR:
       priority_str = "ERROR";
       break;
+    default:
+      priority_str = "UNDEFINED";
   }
   
   fprintf(logger->file_p, "%d | %d-%d-%d | %d:%d | %s |: ", 
       logger->pid, tm.tm_year + 1900, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min, priority_str);
-
   vfprintf(logger->file_p, meesage, ap);
+  fputc('\n', logger->file_p);
+  fflush(logger->file_p);
   va_end(ap);
 }
