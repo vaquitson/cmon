@@ -34,6 +34,11 @@ CMakeFiles/cmon.dir/src/lib/utils/cmon_string.c.o: \
  /usr/include/bits/types/FILE.h /usr/include/bits/types/struct_FILE.h \
  /usr/include/bits/types/cookie_io_functions_t.h \
  /usr/include/bits/stdio_lim.h \
+ /home/narval/programing/proyects/cmon/src/lib/logger/logger.h \
+ /usr/include/unistd.h /usr/include/bits/posix_opt.h \
+ /usr/include/bits/environments.h /usr/include/bits/confname.h \
+ /usr/include/bits/getopt_posix.h /usr/include/bits/getopt_core.h \
+ /usr/include/bits/unistd_ext.h \
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_errors.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdbool.h \
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_string.h

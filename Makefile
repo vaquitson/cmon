@@ -152,6 +152,19 @@ test_logger/fast:
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_logger.dir/build.make tests/CMakeFiles/test_logger.dir/build
 .PHONY : test_logger/fast
 
+#=============================================================================
+# Target rules for targets named test_cmon_path
+
+# Build rule for target.
+test_cmon_path: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_cmon_path
+.PHONY : test_cmon_path
+
+# fast build rule for target.
+test_cmon_path/fast:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/build
+.PHONY : test_cmon_path/fast
+
 src/lib/config/config.o: src/lib/config/config.c.o
 .PHONY : src/lib/config/config.o
 
@@ -344,6 +357,30 @@ src/lib/utils/cmon_int_array.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/lib/utils/cmon_int_array.c.s
 .PHONY : src/lib/utils/cmon_int_array.c.s
 
+src/lib/utils/cmon_path.o: src/lib/utils/cmon_path.c.o
+.PHONY : src/lib/utils/cmon_path.o
+
+# target to build an object file
+src/lib/utils/cmon_path.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/lib/utils/cmon_path.c.o
+.PHONY : src/lib/utils/cmon_path.c.o
+
+src/lib/utils/cmon_path.i: src/lib/utils/cmon_path.c.i
+.PHONY : src/lib/utils/cmon_path.i
+
+# target to preprocess a source file
+src/lib/utils/cmon_path.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/lib/utils/cmon_path.c.i
+.PHONY : src/lib/utils/cmon_path.c.i
+
+src/lib/utils/cmon_path.s: src/lib/utils/cmon_path.c.s
+.PHONY : src/lib/utils/cmon_path.s
+
+# target to generate assembly for a file
+src/lib/utils/cmon_path.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/lib/utils/cmon_path.c.s
+.PHONY : src/lib/utils/cmon_path.c.s
+
 src/lib/utils/cmon_print.o: src/lib/utils/cmon_print.c.o
 .PHONY : src/lib/utils/cmon_print.o
 
@@ -367,6 +404,30 @@ src/lib/utils/cmon_print.s: src/lib/utils/cmon_print.c.s
 src/lib/utils/cmon_print.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/lib/utils/cmon_print.c.s
 .PHONY : src/lib/utils/cmon_print.c.s
+
+src/lib/utils/cmon_str_array.o: src/lib/utils/cmon_str_array.c.o
+.PHONY : src/lib/utils/cmon_str_array.o
+
+# target to build an object file
+src/lib/utils/cmon_str_array.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/lib/utils/cmon_str_array.c.o
+.PHONY : src/lib/utils/cmon_str_array.c.o
+
+src/lib/utils/cmon_str_array.i: src/lib/utils/cmon_str_array.c.i
+.PHONY : src/lib/utils/cmon_str_array.i
+
+# target to preprocess a source file
+src/lib/utils/cmon_str_array.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/lib/utils/cmon_str_array.c.i
+.PHONY : src/lib/utils/cmon_str_array.c.i
+
+src/lib/utils/cmon_str_array.s: src/lib/utils/cmon_str_array.c.s
+.PHONY : src/lib/utils/cmon_str_array.s
+
+# target to generate assembly for a file
+src/lib/utils/cmon_str_array.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/lib/utils/cmon_str_array.c.s
+.PHONY : src/lib/utils/cmon_str_array.c.s
 
 src/lib/utils/cmon_str_utils.o: src/lib/utils/cmon_str_utils.c.o
 .PHONY : src/lib/utils/cmon_str_utils.o
@@ -464,30 +525,6 @@ src/lib/utils/text_utils.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/lib/utils/text_utils.c.s
 .PHONY : src/lib/utils/text_utils.c.s
 
-src/lib/utils/util_path.o: src/lib/utils/util_path.c.o
-.PHONY : src/lib/utils/util_path.o
-
-# target to build an object file
-src/lib/utils/util_path.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/lib/utils/util_path.c.o
-.PHONY : src/lib/utils/util_path.c.o
-
-src/lib/utils/util_path.i: src/lib/utils/util_path.c.i
-.PHONY : src/lib/utils/util_path.i
-
-# target to preprocess a source file
-src/lib/utils/util_path.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/lib/utils/util_path.c.i
-.PHONY : src/lib/utils/util_path.c.i
-
-src/lib/utils/util_path.s: src/lib/utils/util_path.c.s
-.PHONY : src/lib/utils/util_path.s
-
-# target to generate assembly for a file
-src/lib/utils/util_path.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/lib/utils/util_path.c.s
-.PHONY : src/lib/utils/util_path.c.s
-
 src/main.o: src/main.c.o
 .PHONY : src/main.o
 
@@ -522,6 +559,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... cmon"
+	@echo "... test_cmon_path"
 	@echo "... test_logger"
 	@echo "... src/lib/config/config.o"
 	@echo "... src/lib/config/config.i"
@@ -547,9 +585,15 @@ help:
 	@echo "... src/lib/utils/cmon_int_array.o"
 	@echo "... src/lib/utils/cmon_int_array.i"
 	@echo "... src/lib/utils/cmon_int_array.s"
+	@echo "... src/lib/utils/cmon_path.o"
+	@echo "... src/lib/utils/cmon_path.i"
+	@echo "... src/lib/utils/cmon_path.s"
 	@echo "... src/lib/utils/cmon_print.o"
 	@echo "... src/lib/utils/cmon_print.i"
 	@echo "... src/lib/utils/cmon_print.s"
+	@echo "... src/lib/utils/cmon_str_array.o"
+	@echo "... src/lib/utils/cmon_str_array.i"
+	@echo "... src/lib/utils/cmon_str_array.s"
 	@echo "... src/lib/utils/cmon_str_utils.o"
 	@echo "... src/lib/utils/cmon_str_utils.i"
 	@echo "... src/lib/utils/cmon_str_utils.s"
@@ -562,9 +606,6 @@ help:
 	@echo "... src/lib/utils/text_utils.o"
 	@echo "... src/lib/utils/text_utils.i"
 	@echo "... src/lib/utils/text_utils.s"
-	@echo "... src/lib/utils/util_path.o"
-	@echo "... src/lib/utils/util_path.i"
-	@echo "... src/lib/utils/util_path.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

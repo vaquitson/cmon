@@ -28,4 +28,15 @@ CMakeFiles/cmon.dir/src/lib/utils/cmon_string_array.c.o: \
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_string.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdbool.h \
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_string_array.h \
- /home/narval/programing/proyects/cmon/src/lib/utils/cmon_errors.h
+ /home/narval/programing/proyects/cmon/src/lib/utils/cmon_errors.h \
+ /home/narval/programing/proyects/cmon/src/lib/logger/logger.h \
+ /usr/include/stdio.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdarg.h \
+ /usr/include/bits/types/__fpos_t.h /usr/include/bits/types/__mbstate_t.h \
+ /usr/include/bits/types/__fpos64_t.h /usr/include/bits/types/__FILE.h \
+ /usr/include/bits/types/FILE.h /usr/include/bits/types/struct_FILE.h \
+ /usr/include/bits/types/cookie_io_functions_t.h \
+ /usr/include/bits/stdio_lim.h /usr/include/unistd.h \
+ /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
+ /usr/include/bits/confname.h /usr/include/bits/getopt_posix.h \
+ /usr/include/bits/getopt_core.h /usr/include/bits/unistd_ext.h

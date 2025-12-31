@@ -5,7 +5,7 @@
 #define INITIAL_ARRAY_SIZE 50
 
 typedef struct  {
-  unsigned int len; 
+  size_t len; 
   CmonString *arr[INITIAL_ARRAY_SIZE];
 } CmonStringArray;
 
@@ -31,7 +31,7 @@ CmonStringArray *cmon_str_arr_init(CmonStringArray *arr);
 
 // get the CmonString at index position in the arr 
 // if something went wrong NULL is retunr
-CmonString *cmon_str_arr_get_str(CmonStringArray *arr, int index);
+CmonString *cmon_str_arr_get_str(CmonStringArray *arr, size_t index);
 
 /* his function finds if a CmonString exists on the CmonStringArray.
    if the str exists retrun a pointer to the string find in the CmonStringArray.

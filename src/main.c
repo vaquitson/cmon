@@ -10,12 +10,14 @@
 #include "inotify.h"
 #include "process.h"
 #include "config.h"
+#include "logger.h"
 
 #define CONFIG_FILE_NAME_LEN 11
 
 int main(int argc, char **argv){
   int inotifyFd;
-  CmonIntArray *wdArr = cmon_int_arr_new(100); // watch descriptor arr
+  CmonIntArray *wdArr = cmon_int_arr_new(100); // watch descriptor arr 
+  log_write(LOG_INFO, "from main: The cmon_int array is initialized");
 
   int pollRetV;
   size_t readSize;
@@ -30,6 +32,7 @@ int main(int argc, char **argv){
   // config initializer
   conf = config_new();
   config_init(conf, argc, argv);
+  log_write(LOG_INFO, "from main: The conf is initialized");
   
   inotifyFd = ino_init();
   ino_recursive_dir_add(conf, inotifyFd, cmon_str_copy(conf->cwd), wdArr);

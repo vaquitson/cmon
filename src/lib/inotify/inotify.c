@@ -21,7 +21,7 @@
 #define INO_MASK IN_MODIFY
 
 // open a inotify instance
-int ino_init(){
+int ino_init(void){
   int fd;
   fd = inotify_init();
   if (fd < 0){
@@ -62,8 +62,8 @@ void ino_procees_events(CmonConfig *config, size_t readSize, char *buff, pid_t *
     // find if the file is in the ignore list
     if (event->mask & IN_MODIFY) {
       CmonString *string_event_name = cmon_str_new_from_char_arrs(config->cwd->string ,event->name, NULL);
-      CmonString *find_res = cmon_str_arr_find(&config->ignoreFiles, string_event_name);
 
+      CmonString *find_res = cmon_str_arr_find(&config->ignoreFiles, string_event_name);
       if (find_res != NULL){
         log_write(LOG_INFO, "the file %s is in the ignore list", event->name);
         return;
@@ -72,8 +72,8 @@ void ino_procees_events(CmonConfig *config, size_t readSize, char *buff, pid_t *
       // find if the file has the extname we are watching
       char *file_ext_name = get_ext_name_from_cmon_string(string_event_name);
       CmonString *string_ext_name = cmon_str_new(file_ext_name); 
-      CmonString *find_ext_name_res = cmon_str_arr_find(&config->watchExtNames, string_ext_name);
 
+      CmonString *find_ext_name_res = cmon_str_arr_find(&config->watchExtNames, string_ext_name);
       free(string_ext_name);
       if (find_ext_name_res == NULL){
         log_write(LOG_INFO, "the file %s is has a extname we arent looking");
@@ -83,6 +83,7 @@ void ino_procees_events(CmonConfig *config, size_t readSize, char *buff, pid_t *
       pid_arr = ps_tree_get_pid_arr(*child_pid);
       process_kill_subtree(pid_arr);
       waitpid(*child_pid, NULL, 0);
+
       free(pid_arr);
       if (rc == -1){
         log_write(LOG_ERROR, "cmon_procees_events could not kill the ps tree of the process %d", *child_pid);
@@ -94,7 +95,6 @@ void ino_procees_events(CmonConfig *config, size_t readSize, char *buff, pid_t *
     }
   }
 }
-
 
 // recursive funtion that adds nested directories to inotify watch dirs
 void ino_recursive_dir_add(CmonConfig *conf, int inoFd, CmonString *path, CmonIntArray *wdArr){
@@ -108,6 +108,7 @@ void ino_recursive_dir_add(CmonConfig *conf, int inoFd, CmonString *path, CmonIn
   errno = 0;
   
   while ((dirEntry = readdir(dir)) != NULL){
+    
     entryPath = cmon_str_new_from_char_arrs(cmon_str_get(path), dirEntry->d_name, NULL);
     switch (dirEntry->d_type){
       case DT_DIR:
@@ -115,8 +116,9 @@ void ino_recursive_dir_add(CmonConfig *conf, int inoFd, CmonString *path, CmonIn
           continue;
         }
         else if (!cmon_str_arr_find(&conf->ignoreDirs, entryPath)){
+          printf("dir name: %s\n", dirEntry->d_name);
           wd = _ino_watch_dir(inoFd, cmon_str_get(entryPath), INO_MASK);
-          printf("added: %s\n", cmon_str_get(entryPath));
+          log_write(LOG_INFO, "the directory %s has been added", cmon_str_get(entryPath));
           wdArr = cmon_int_arr_add(wdArr, wd);
           newPath = cmon_str_new_from_char_arrs(cmon_str_get(entryPath), "/", NULL);  
           if (strcmp(dirEntry->d_name, ".") != 0){

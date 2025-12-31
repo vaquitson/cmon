@@ -3,12 +3,13 @@
 #define MAX_STRING_LEN 250
 #define MAX_AMOUNT_OF_STRINGS 50
 
+#include <stdlib.h>
 #include <stdbool.h>
 
 // this strings are inmutable
 typedef struct{
-  unsigned int len; // without NULL char
-  char string[];
+  size_t len; // without NULL char
+  char *string;
 } CmonString;
 
 // this macro gets the char arra of the cmon string
@@ -32,7 +33,7 @@ CmonString *cmon_str_new_from_str(CmonString *string, ...);
    the end of the list. It creates a new heap-allocated CmonString by combining the given arrays.
    The caller is responsible for freeing the newly allocated CmonString.
 */
-CmonString *cmon_str_new_from_char_arrs(const char *charArr, ...);
+CmonString *cmon_str_new_from_char_arrs(char *charArr, ...);
 
 // this functuon compare two CmonStrings, return true if there are
 // equal and false if there are diferent

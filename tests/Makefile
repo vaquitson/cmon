@@ -140,12 +140,27 @@ test_logger/fast:
 	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_logger.dir/build.make tests/CMakeFiles/test_logger.dir/build
 .PHONY : test_logger/fast
 
+# Convenience name for target.
+tests/CMakeFiles/test_cmon_path.dir/rule:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_cmon_path.dir/rule
+.PHONY : tests/CMakeFiles/test_cmon_path.dir/rule
+
+# Convenience name for target.
+test_cmon_path: tests/CMakeFiles/test_cmon_path.dir/rule
+.PHONY : test_cmon_path
+
+# fast build rule for target.
+test_cmon_path/fast:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/build
+.PHONY : test_cmon_path/fast
+
 __/src/lib/logger/logger.o: __/src/lib/logger/logger.c.o
 .PHONY : __/src/lib/logger/logger.o
 
 # target to build an object file
 __/src/lib/logger/logger.c.o:
 	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_logger.dir/build.make tests/CMakeFiles/test_logger.dir/__/src/lib/logger/logger.c.o
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/logger/logger.c.o
 .PHONY : __/src/lib/logger/logger.c.o
 
 __/src/lib/logger/logger.i: __/src/lib/logger/logger.c.i
@@ -154,6 +169,7 @@ __/src/lib/logger/logger.i: __/src/lib/logger/logger.c.i
 # target to preprocess a source file
 __/src/lib/logger/logger.c.i:
 	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_logger.dir/build.make tests/CMakeFiles/test_logger.dir/__/src/lib/logger/logger.c.i
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/logger/logger.c.i
 .PHONY : __/src/lib/logger/logger.c.i
 
 __/src/lib/logger/logger.s: __/src/lib/logger/logger.c.s
@@ -162,7 +178,248 @@ __/src/lib/logger/logger.s: __/src/lib/logger/logger.c.s
 # target to generate assembly for a file
 __/src/lib/logger/logger.c.s:
 	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_logger.dir/build.make tests/CMakeFiles/test_logger.dir/__/src/lib/logger/logger.c.s
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/logger/logger.c.s
 .PHONY : __/src/lib/logger/logger.c.s
+
+__/src/lib/utils/cmon_errors.o: __/src/lib/utils/cmon_errors.c.o
+.PHONY : __/src/lib/utils/cmon_errors.o
+
+# target to build an object file
+__/src/lib/utils/cmon_errors.c.o:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_errors.c.o
+.PHONY : __/src/lib/utils/cmon_errors.c.o
+
+__/src/lib/utils/cmon_errors.i: __/src/lib/utils/cmon_errors.c.i
+.PHONY : __/src/lib/utils/cmon_errors.i
+
+# target to preprocess a source file
+__/src/lib/utils/cmon_errors.c.i:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_errors.c.i
+.PHONY : __/src/lib/utils/cmon_errors.c.i
+
+__/src/lib/utils/cmon_errors.s: __/src/lib/utils/cmon_errors.c.s
+.PHONY : __/src/lib/utils/cmon_errors.s
+
+# target to generate assembly for a file
+__/src/lib/utils/cmon_errors.c.s:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_errors.c.s
+.PHONY : __/src/lib/utils/cmon_errors.c.s
+
+__/src/lib/utils/cmon_int_array.o: __/src/lib/utils/cmon_int_array.c.o
+.PHONY : __/src/lib/utils/cmon_int_array.o
+
+# target to build an object file
+__/src/lib/utils/cmon_int_array.c.o:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_int_array.c.o
+.PHONY : __/src/lib/utils/cmon_int_array.c.o
+
+__/src/lib/utils/cmon_int_array.i: __/src/lib/utils/cmon_int_array.c.i
+.PHONY : __/src/lib/utils/cmon_int_array.i
+
+# target to preprocess a source file
+__/src/lib/utils/cmon_int_array.c.i:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_int_array.c.i
+.PHONY : __/src/lib/utils/cmon_int_array.c.i
+
+__/src/lib/utils/cmon_int_array.s: __/src/lib/utils/cmon_int_array.c.s
+.PHONY : __/src/lib/utils/cmon_int_array.s
+
+# target to generate assembly for a file
+__/src/lib/utils/cmon_int_array.c.s:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_int_array.c.s
+.PHONY : __/src/lib/utils/cmon_int_array.c.s
+
+__/src/lib/utils/cmon_path.o: __/src/lib/utils/cmon_path.c.o
+.PHONY : __/src/lib/utils/cmon_path.o
+
+# target to build an object file
+__/src/lib/utils/cmon_path.c.o:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_path.c.o
+.PHONY : __/src/lib/utils/cmon_path.c.o
+
+__/src/lib/utils/cmon_path.i: __/src/lib/utils/cmon_path.c.i
+.PHONY : __/src/lib/utils/cmon_path.i
+
+# target to preprocess a source file
+__/src/lib/utils/cmon_path.c.i:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_path.c.i
+.PHONY : __/src/lib/utils/cmon_path.c.i
+
+__/src/lib/utils/cmon_path.s: __/src/lib/utils/cmon_path.c.s
+.PHONY : __/src/lib/utils/cmon_path.s
+
+# target to generate assembly for a file
+__/src/lib/utils/cmon_path.c.s:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_path.c.s
+.PHONY : __/src/lib/utils/cmon_path.c.s
+
+__/src/lib/utils/cmon_print.o: __/src/lib/utils/cmon_print.c.o
+.PHONY : __/src/lib/utils/cmon_print.o
+
+# target to build an object file
+__/src/lib/utils/cmon_print.c.o:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_print.c.o
+.PHONY : __/src/lib/utils/cmon_print.c.o
+
+__/src/lib/utils/cmon_print.i: __/src/lib/utils/cmon_print.c.i
+.PHONY : __/src/lib/utils/cmon_print.i
+
+# target to preprocess a source file
+__/src/lib/utils/cmon_print.c.i:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_print.c.i
+.PHONY : __/src/lib/utils/cmon_print.c.i
+
+__/src/lib/utils/cmon_print.s: __/src/lib/utils/cmon_print.c.s
+.PHONY : __/src/lib/utils/cmon_print.s
+
+# target to generate assembly for a file
+__/src/lib/utils/cmon_print.c.s:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_print.c.s
+.PHONY : __/src/lib/utils/cmon_print.c.s
+
+__/src/lib/utils/cmon_str_array.o: __/src/lib/utils/cmon_str_array.c.o
+.PHONY : __/src/lib/utils/cmon_str_array.o
+
+# target to build an object file
+__/src/lib/utils/cmon_str_array.c.o:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_str_array.c.o
+.PHONY : __/src/lib/utils/cmon_str_array.c.o
+
+__/src/lib/utils/cmon_str_array.i: __/src/lib/utils/cmon_str_array.c.i
+.PHONY : __/src/lib/utils/cmon_str_array.i
+
+# target to preprocess a source file
+__/src/lib/utils/cmon_str_array.c.i:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_str_array.c.i
+.PHONY : __/src/lib/utils/cmon_str_array.c.i
+
+__/src/lib/utils/cmon_str_array.s: __/src/lib/utils/cmon_str_array.c.s
+.PHONY : __/src/lib/utils/cmon_str_array.s
+
+# target to generate assembly for a file
+__/src/lib/utils/cmon_str_array.c.s:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_str_array.c.s
+.PHONY : __/src/lib/utils/cmon_str_array.c.s
+
+__/src/lib/utils/cmon_str_utils.o: __/src/lib/utils/cmon_str_utils.c.o
+.PHONY : __/src/lib/utils/cmon_str_utils.o
+
+# target to build an object file
+__/src/lib/utils/cmon_str_utils.c.o:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_str_utils.c.o
+.PHONY : __/src/lib/utils/cmon_str_utils.c.o
+
+__/src/lib/utils/cmon_str_utils.i: __/src/lib/utils/cmon_str_utils.c.i
+.PHONY : __/src/lib/utils/cmon_str_utils.i
+
+# target to preprocess a source file
+__/src/lib/utils/cmon_str_utils.c.i:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_str_utils.c.i
+.PHONY : __/src/lib/utils/cmon_str_utils.c.i
+
+__/src/lib/utils/cmon_str_utils.s: __/src/lib/utils/cmon_str_utils.c.s
+.PHONY : __/src/lib/utils/cmon_str_utils.s
+
+# target to generate assembly for a file
+__/src/lib/utils/cmon_str_utils.c.s:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_str_utils.c.s
+.PHONY : __/src/lib/utils/cmon_str_utils.c.s
+
+__/src/lib/utils/cmon_string.o: __/src/lib/utils/cmon_string.c.o
+.PHONY : __/src/lib/utils/cmon_string.o
+
+# target to build an object file
+__/src/lib/utils/cmon_string.c.o:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_string.c.o
+.PHONY : __/src/lib/utils/cmon_string.c.o
+
+__/src/lib/utils/cmon_string.i: __/src/lib/utils/cmon_string.c.i
+.PHONY : __/src/lib/utils/cmon_string.i
+
+# target to preprocess a source file
+__/src/lib/utils/cmon_string.c.i:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_string.c.i
+.PHONY : __/src/lib/utils/cmon_string.c.i
+
+__/src/lib/utils/cmon_string.s: __/src/lib/utils/cmon_string.c.s
+.PHONY : __/src/lib/utils/cmon_string.s
+
+# target to generate assembly for a file
+__/src/lib/utils/cmon_string.c.s:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_string.c.s
+.PHONY : __/src/lib/utils/cmon_string.c.s
+
+__/src/lib/utils/cmon_string_array.o: __/src/lib/utils/cmon_string_array.c.o
+.PHONY : __/src/lib/utils/cmon_string_array.o
+
+# target to build an object file
+__/src/lib/utils/cmon_string_array.c.o:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_string_array.c.o
+.PHONY : __/src/lib/utils/cmon_string_array.c.o
+
+__/src/lib/utils/cmon_string_array.i: __/src/lib/utils/cmon_string_array.c.i
+.PHONY : __/src/lib/utils/cmon_string_array.i
+
+# target to preprocess a source file
+__/src/lib/utils/cmon_string_array.c.i:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_string_array.c.i
+.PHONY : __/src/lib/utils/cmon_string_array.c.i
+
+__/src/lib/utils/cmon_string_array.s: __/src/lib/utils/cmon_string_array.c.s
+.PHONY : __/src/lib/utils/cmon_string_array.s
+
+# target to generate assembly for a file
+__/src/lib/utils/cmon_string_array.c.s:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_string_array.c.s
+.PHONY : __/src/lib/utils/cmon_string_array.c.s
+
+__/src/lib/utils/text_utils.o: __/src/lib/utils/text_utils.c.o
+.PHONY : __/src/lib/utils/text_utils.o
+
+# target to build an object file
+__/src/lib/utils/text_utils.c.o:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/text_utils.c.o
+.PHONY : __/src/lib/utils/text_utils.c.o
+
+__/src/lib/utils/text_utils.i: __/src/lib/utils/text_utils.c.i
+.PHONY : __/src/lib/utils/text_utils.i
+
+# target to preprocess a source file
+__/src/lib/utils/text_utils.c.i:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/text_utils.c.i
+.PHONY : __/src/lib/utils/text_utils.c.i
+
+__/src/lib/utils/text_utils.s: __/src/lib/utils/text_utils.c.s
+.PHONY : __/src/lib/utils/text_utils.s
+
+# target to generate assembly for a file
+__/src/lib/utils/text_utils.c.s:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/text_utils.c.s
+.PHONY : __/src/lib/utils/text_utils.c.s
+
+test_cmon_path.o: test_cmon_path.c.o
+.PHONY : test_cmon_path.o
+
+# target to build an object file
+test_cmon_path.c.o:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/test_cmon_path.c.o
+.PHONY : test_cmon_path.c.o
+
+test_cmon_path.i: test_cmon_path.c.i
+.PHONY : test_cmon_path.i
+
+# target to preprocess a source file
+test_cmon_path.c.i:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/test_cmon_path.c.i
+.PHONY : test_cmon_path.c.i
+
+test_cmon_path.s: test_cmon_path.c.s
+.PHONY : test_cmon_path.s
+
+# target to generate assembly for a file
+test_cmon_path.c.s:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/test_cmon_path.c.s
+.PHONY : test_cmon_path.c.s
 
 test_logger.o: test_logger.c.o
 .PHONY : test_logger.o
@@ -197,10 +454,41 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... test"
+	@echo "... test_cmon_path"
 	@echo "... test_logger"
 	@echo "... __/src/lib/logger/logger.o"
 	@echo "... __/src/lib/logger/logger.i"
 	@echo "... __/src/lib/logger/logger.s"
+	@echo "... __/src/lib/utils/cmon_errors.o"
+	@echo "... __/src/lib/utils/cmon_errors.i"
+	@echo "... __/src/lib/utils/cmon_errors.s"
+	@echo "... __/src/lib/utils/cmon_int_array.o"
+	@echo "... __/src/lib/utils/cmon_int_array.i"
+	@echo "... __/src/lib/utils/cmon_int_array.s"
+	@echo "... __/src/lib/utils/cmon_path.o"
+	@echo "... __/src/lib/utils/cmon_path.i"
+	@echo "... __/src/lib/utils/cmon_path.s"
+	@echo "... __/src/lib/utils/cmon_print.o"
+	@echo "... __/src/lib/utils/cmon_print.i"
+	@echo "... __/src/lib/utils/cmon_print.s"
+	@echo "... __/src/lib/utils/cmon_str_array.o"
+	@echo "... __/src/lib/utils/cmon_str_array.i"
+	@echo "... __/src/lib/utils/cmon_str_array.s"
+	@echo "... __/src/lib/utils/cmon_str_utils.o"
+	@echo "... __/src/lib/utils/cmon_str_utils.i"
+	@echo "... __/src/lib/utils/cmon_str_utils.s"
+	@echo "... __/src/lib/utils/cmon_string.o"
+	@echo "... __/src/lib/utils/cmon_string.i"
+	@echo "... __/src/lib/utils/cmon_string.s"
+	@echo "... __/src/lib/utils/cmon_string_array.o"
+	@echo "... __/src/lib/utils/cmon_string_array.i"
+	@echo "... __/src/lib/utils/cmon_string_array.s"
+	@echo "... __/src/lib/utils/text_utils.o"
+	@echo "... __/src/lib/utils/text_utils.i"
+	@echo "... __/src/lib/utils/text_utils.s"
+	@echo "... test_cmon_path.o"
+	@echo "... test_cmon_path.i"
+	@echo "... test_cmon_path.s"
 	@echo "... test_logger.o"
 	@echo "... test_logger.i"
 	@echo "... test_logger.s"

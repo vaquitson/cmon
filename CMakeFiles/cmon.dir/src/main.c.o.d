@@ -61,4 +61,5 @@ CMakeFiles/cmon.dir/src/main.c.o: \
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_string_array.h \
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_string.h \
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_int_array.h \
- /home/narval/programing/proyects/cmon/src/lib/process/process.h
+ /home/narval/programing/proyects/cmon/src/lib/process/process.h \
+ /home/narval/programing/proyects/cmon/src/lib/logger/logger.h

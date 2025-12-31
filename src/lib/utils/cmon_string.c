@@ -2,12 +2,13 @@
 #include <string.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <logger.h>
 
 #include "cmon_errors.h"
 #include "cmon_string.h"
 
-static unsigned int _char_arr_len(const char *charArr){
-  unsigned int len= 0;
+size_t _char_arr_len(const char *charArr){
+  size_t len= 0;
   while (*charArr != '\0'){
     if (len > 256){
       cmon_print_error(true, "_char_arr_len", "the char array is too large");
@@ -23,14 +24,14 @@ static unsigned int _char_arr_len(const char *charArr){
 // arrays provided.
 // the caller of the fucntions is risponsivle for the 
 // memory
-CmonString *cmon_str_new_from_char_arrs(const char *charArr, ...){
-  const char *buffArgs[MAX_AMOUNT_OF_STRINGS];
+CmonString *cmon_str_new_from_char_arrs(char *charArr, ...){
+  char *buffArgs[MAX_AMOUNT_OF_STRINGS*sizeof(char *)];
 
   va_list args;
   char *arg;
   unsigned int nArgs;
 
-  unsigned int charBlockSize;
+  size_t charBlockSize;
 
   char *ptr;
   CmonString *newStr;
@@ -54,15 +55,26 @@ CmonString *cmon_str_new_from_char_arrs(const char *charArr, ...){
     buffArgs[nArgs] = arg;
     nArgs++;
   }
+  
+  newStr = (CmonString *)malloc(sizeof(CmonString));
+  if (newStr == NULL){
+    log_write(LOG_ERROR, "From cmon_str_new_from_char_arrs: coudl not allocate memory for the CmonString");
+    return NULL;
+  }
 
-  newStr = (CmonString *)malloc(sizeof(CmonString) + charBlockSize + 1);
+  newStr->string = malloc(sizeof(char)*charBlockSize+1);
+  if (newStr->string == NULL){
+    log_write(LOG_ERROR, "From cmon_str_new_from_char_arrs: coudl not allocate memory for the CmonString->string");
+    return NULL;
+  }
+
   if (!newStr){
     cmon_print_error(true, "cmon_string_new", "could not allocate memory for the new CmonString");
     return NULL;
   }
 
   ptr = newStr->string;
-  for (int i = 0; i < nArgs; i++){
+  for (unsigned int i = 0; i < nArgs; i++){
     arg = buffArgs[i];
     while (*arg != '\0'){
       *ptr = *arg;
@@ -134,7 +146,7 @@ bool cmon_str_cmp(CmonString *a, CmonString *b){
     return false;
   }
 
-  for (int i = 0; i < a->len; i++){
+  for (size_t i = 0; i < a->len; i++){
     if (a->string[i] != b->string[i]){
       return false;
     }
@@ -185,9 +197,9 @@ CmonString *cmon_str_new_from_str(CmonString *string, ...){
   }
 
   ptr = newStr->string;
-  for (int i = 0; i < nArgs; i++){
+  for (size_t i = 0; i < nArgs; i++){
     arg = strBuff[i];
-    for (int j = 0; j < arg->len; j++){
+    for (size_t j = 0; j < arg->len; j++){
       *ptr = arg->string[j];
       ptr++;
     }

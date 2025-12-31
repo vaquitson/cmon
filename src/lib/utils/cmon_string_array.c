@@ -3,10 +3,15 @@
 #include "cmon_string.h"
 #include "cmon_string_array.h"
 #include "cmon_errors.h"
+#include "logger.h"
 
 
 CmonStringArray *cmon_str_arr_new(){
   CmonStringArray *newArray = (CmonStringArray *)malloc(sizeof(CmonStringArray));
+  if (newArray == NULL){
+    log_write(LOG_ERROR, "from cmon_str_arr_new: could not allocate memory for the CmonStringArray"); 
+    return NULL;
+  }
   newArray->len = 0;
   return newArray;
 }
@@ -20,19 +25,15 @@ CmonStringArray *cmon_str_arr_init(CmonStringArray *arr){
 }
 
 
-CmonString *cmon_str_arr_get_str(CmonStringArray *arr, int index){
+CmonString *cmon_str_arr_get_str(CmonStringArray *arr, size_t index){
   if (!arr){
     return NULL;
   }
 
   if (index >= arr->len){
     return NULL;
-  }
+  }  
 
-  if (index < 0){
-    return NULL;
-  }
-  
   return arr->arr[index];
 }
 
@@ -88,7 +89,7 @@ CmonString *cmon_str_arr_add_from_str(CmonStringArray *arr, CmonString *str){
  */
 CmonString *cmon_str_arr_find(CmonStringArray *arr, CmonString *str){
   CmonString *cur_str;
-  for (int i = 0; i < cmon_str_arr_len(arr); i++){
+  for (size_t i = 0; i < cmon_str_arr_len(arr); i++){
     cur_str = cmon_str_arr_get_str(arr, i);
     if (cmon_str_cmp(str, cur_str)){
       return cur_str;
@@ -104,7 +105,7 @@ int cmon_str_arr_free(CmonStringArray *arr){
     return 1; 
   }
   
-  for(int i = 0; i < arr->len; i++){
+  for(size_t i = 0; i < arr->len; i++){
     free(arr->arr[i]);
   }
   return 0;

@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdbool.h>
 
+#include "logger.h"
 #include "tokenizer.h"
 #include "cmon_errors.h"
 #include "text_utils.h"
@@ -83,6 +84,9 @@ struct TokenArr *cmon_tokenizer(FILE *configFile){
   lexemPtr = lexem;
 
   struct TokenArr *tokenList = (struct TokenArr *)malloc(sizeof(struct TokenArr));
+  if (tokenList == NULL){
+    log_write(LOG_ERROR, "from cmon_tokenizer: the tokenList could not be intialized");
+  }
   tokenList->length = 0;
 
   while(fgets(buff, buffSize, configFile)){
@@ -190,7 +194,7 @@ int token_arr_print(struct TokenArr *tok_arr){
 // this function takes the config file and make a malloc allocated struct tokenList
 // the caller is responsible to free the memory
 struct TokenArr *config_tokenizer(struct TokenArr *tokArr, FILE *configFile){
-  int buffSize = 2048;
+  size_t buffSize = 2048;
   char buff[buffSize];
   static char *buffPtr;
 

@@ -26,8 +26,16 @@ Logger *log_init(){
   }
 
   logger = (Logger *)malloc(sizeof(Logger));
+  if (logger == NULL){
+    printf("from log_init: could not allocate memory for the Logger");
+    exit(1);
+  }
 
   char *log_path = (char *)malloc(MAX_PATH_SIZE);
+  if (log_path == NULL){
+    printf("from log_init: could not allocate memory for the log path");
+    exit(2);
+  }
   int log_path_size;
 
   char *path_sufix;
@@ -91,7 +99,7 @@ void log_write(int priority, char *meesage, ...){
       priority_str = "UNDEFINED";
   }
   
-  fprintf(logger->file_p, "%d | %d-%d-%d | %d:%d | %s |: ", 
+  fprintf(logger->file_p, "%d | %d-%d-%d | %d:%d | %s | ", 
       logger->pid, tm.tm_year + 1900, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min, priority_str);
   vfprintf(logger->file_p, meesage, ap);
   fputc('\n', logger->file_p);

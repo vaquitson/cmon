@@ -4,15 +4,16 @@
 #include <string.h>
 #include <stdbool.h>
 
+#include "logger.h"
 #include "cmon_errors.h"
 #include "cmon_print.h"
 #include "config.h"
+#include "cmon_string_array.h"
 #include "tokenizer.h"
-
 
 // print to std the config structure.
 void config_print(CmonConfig *config){
-  int i = 0;
+  size_t i = 0;
   printf("cwd: %s\n\n", config->cwd->string);
 
   printf("Ignore Dirs\n");
@@ -52,6 +53,9 @@ CmonString *_get_cwd(){
     size = pathMax; 
   }
   charCwd = (char *)malloc(pathMax); 
+  if (charCwd == NULL){
+    log_write(LOG_ERROR, "from _get_cwd: could not allocate the buffer charCwd");
+  }
 
   if (!charCwd){
     cmon_print_error(true, "cmon_get_cwd", "could not allocate memmory for the cwd");
@@ -73,18 +77,15 @@ CmonString *_get_cwd(){
 // create the struct CmonCommand with the infromation comming from argv
 struct CmonCommand *cmon_parse_argv(int argc, char **argv){
   struct CmonCommand *command = malloc(sizeof(struct CmonCommand)); 
+  if (command == NULL){
+    log_write(LOG_ERROR, "from cmon_parse_argv: could not allocate memory for the CmonCommand");
+    return NULL;
+  }
   int commandArgvIndex = 1;
   int argvIndex = 2;
 
   if (argc < 2){
     cmon_print_error(true, "cmon_parse_argv", "there is no exe in the arguments");
-    exit(1);
-  }
-
-  command = malloc(sizeof(struct CmonCommand)); 
-
-  if (!command){
-    cmon_print_error(true, "cmon_parse_argv", "memory could not be allocated for CmonCommand");
     exit(1);
   }
 
@@ -105,10 +106,6 @@ struct CmonCommand *cmon_parse_argv(int argc, char **argv){
 
 // create the struct CmonCommand with the infromation comming from argv
 void config_parse_argv(CmonConfig *conf, int argc, char **argv){
-  struct CmonCommand *command = malloc(sizeof(struct CmonCommand)); 
-  int commandArgvIndex = 1;
-  int argvIndex = 2;
-
   if (argc < 2){
     cmon_print_error(true, "cmon_parse_argv", "no arguments provided");
     exit(1);
@@ -123,7 +120,8 @@ void config_parse_argv(CmonConfig *conf, int argc, char **argv){
 // the caller of the function is responsible for free the memory
 CmonConfig *config_new(){
   CmonConfig *config = (CmonConfig *)malloc(sizeof(CmonConfig));
-  if (!config){
+  if (config == NULL){
+    log_write(LOG_ERROR, "from config_new_: could not allocate memory for the CmonConfig");
     cmon_print_error(true, "cmon_init_config", "could not allocate memory for the struct CmonConfig");
     exit(1);
   }
@@ -195,7 +193,6 @@ struct Token *_get_token(struct TokenArr *tokenList, int i){
 // parse the config file into the config struct
 int cmon_parse_config(FILE *configFile, CmonConfig *conf){
   struct Token *curTok; 
-  struct Token *nextTok; 
   struct TokenArr *tokenList = cmon_tokenizer(configFile);
 
   CmonStringArray *configTarget = NULL; 
@@ -264,7 +261,6 @@ int cmon_parse_config(FILE *configFile, CmonConfig *conf){
 
 
 void config_init(CmonConfig *conf, int argc, char **argv){
-  CmonString *cwd;
   CmonString *conf_file_path;
 
   if (argc < 2){
@@ -286,7 +282,9 @@ void config_init(CmonConfig *conf, int argc, char **argv){
   free(conf_file_path);
 
   // get tokens
-  struct TokenArr *tok_arr = token_arr_new(); 
+  
+  struct TokenArr *tok_arr = token_arr_new();
+  printf("perro\n");
   config_tokenizer(tok_arr, config_file);
 
   // close the config file
@@ -376,5 +374,4 @@ int config_free(CmonConfig *conf){
 
   return 0;
 }
-
 

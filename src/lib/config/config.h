@@ -18,7 +18,7 @@
   "}\n"\
   "\n"\
   "IGNORE_FILES: {\n"\
-  "  \"gitignore\",\n"\
+  "  \".gitignore\",\n"\
   "  \"c000mand1.go\"\n"\
   "}\n"\
   "\n"\

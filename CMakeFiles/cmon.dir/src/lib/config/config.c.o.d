@@ -34,9 +34,7 @@ CMakeFiles/cmon.dir/src/lib/config/config.c.o: \
  /usr/include/bits/types/locale_t.h /usr/include/bits/types/__locale_t.h \
  /usr/include/strings.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdbool.h \
- /home/narval/programing/proyects/cmon/src/lib/utils/cmon_errors.h \
- /home/narval/programing/proyects/cmon/src/lib/utils/cmon_print.h \
- /home/narval/programing/proyects/cmon/src/lib/config/config.h \
+ /home/narval/programing/proyects/cmon/src/lib/logger/logger.h \
  /usr/include/stdio.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdarg.h \
  /usr/include/bits/types/__fpos_t.h /usr/include/bits/types/__mbstate_t.h \
@@ -44,6 +42,9 @@ CMakeFiles/cmon.dir/src/lib/config/config.c.o: \
  /usr/include/bits/types/FILE.h /usr/include/bits/types/struct_FILE.h \
  /usr/include/bits/types/cookie_io_functions_t.h \
  /usr/include/bits/stdio_lim.h \
+ /home/narval/programing/proyects/cmon/src/lib/utils/cmon_errors.h \
+ /home/narval/programing/proyects/cmon/src/lib/utils/cmon_print.h \
+ /home/narval/programing/proyects/cmon/src/lib/config/config.h \
  /home/narval/programing/proyects/cmon/src/lib/parser/tokenizer.h \
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_string_array.h \
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_string.h
