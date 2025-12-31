@@ -65,7 +65,7 @@ int test_test_1(){
 
 
   CmonString *ext_string = cmon_str_new(".c");
-  CmonString *path_ext_as_string = cmon_path_get_ext_as_cmon_string(file_path);
+  CmonString *path_ext_as_string = cmon_path_cast_ext_as_cmon_string(file_path);
 
   if (cmon_str_cmp(ext_string, path_ext_as_string) != true) {
     printf("test_test_1: the ext is not castable to a CmonString\n");
@@ -130,5 +130,6 @@ int test_test_2(){
 int main() { 
   TEST(test_test_1(), "test 1");
   TEST(test_test_2(), "test 2");
+
   return 0;
 }

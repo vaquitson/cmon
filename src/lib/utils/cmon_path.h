@@ -30,7 +30,7 @@ void cmon_path_free(CmonPath *path);
  * Lifetime: the returned view is valid only as long as the owning CmonPath
  * remains alive and its `path` buffer is not modified or freed.
  */
-#define cmon_path_get_ext_as_cmon_string(path) \
+#define cmon_path_cast_ext_as_cmon_string(path) \
   (CmonString *)((char *)path + sizeof(CmonString))
 
 

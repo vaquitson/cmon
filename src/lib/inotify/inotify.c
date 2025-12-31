@@ -17,6 +17,7 @@
 #include "config.h"
 #include "ps_tree.h"
 #include "process.h"
+#include "cmon_path.h"
 
 #define INO_MASK IN_MODIFY
 
@@ -61,25 +62,30 @@ void ino_procees_events(CmonConfig *config, size_t readSize, char *buff, pid_t *
 
     // find if the file is in the ignore list
     if (event->mask & IN_MODIFY) {
-      CmonString *string_event_name = cmon_str_new_from_char_arrs(config->cwd->string ,event->name, NULL);
+      CmonPath *path = cmon_path_new_full_path(event->name);
+      printf("1\n");
 
-      CmonString *find_res = cmon_str_arr_find(&config->ignoreFiles, string_event_name);
+      CmonString *find_res = cmon_str_arr_find(&config->ignoreFiles, 
+          (CmonString *)path);
+
+      printf("2\n");
       if (find_res != NULL){
         log_write(LOG_INFO, "the file %s is in the ignore list", event->name);
-        return;
+        cmon_path_free(path);
+        continue;
       }
 
-      // find if the file has the extname we are watching
-      char *file_ext_name = get_ext_name_from_cmon_string(string_event_name);
-      CmonString *string_ext_name = cmon_str_new(file_ext_name); 
+      CmonString *find_ext_name_res = cmon_str_arr_find(&config->watchExtNames, 
+          cmon_path_cast_ext_as_cmon_string(path));
 
-      CmonString *find_ext_name_res = cmon_str_arr_find(&config->watchExtNames, string_ext_name);
-      free(string_ext_name);
-      if (find_ext_name_res == NULL){
-        log_write(LOG_INFO, "the file %s is has a extname we arent looking");
-        return; 
+      printf("3\n");
+      if (find_ext_name_res != NULL){
+        log_write(LOG_INFO, "the file %s is not an extname we arent looking");
+        cmon_path_free(path);
+        continue;
       }
-
+      
+      printf("4\n");
       pid_arr = ps_tree_get_pid_arr(*child_pid);
       process_kill_subtree(pid_arr);
       waitpid(*child_pid, NULL, 0);
@@ -116,7 +122,6 @@ void ino_recursive_dir_add(CmonConfig *conf, int inoFd, CmonString *path, CmonIn
           continue;
         }
         else if (!cmon_str_arr_find(&conf->ignoreDirs, entryPath)){
-          printf("dir name: %s\n", dirEntry->d_name);
           wd = _ino_watch_dir(inoFd, cmon_str_get(entryPath), INO_MASK);
           log_write(LOG_INFO, "the directory %s has been added", cmon_str_get(entryPath));
           wdArr = cmon_int_arr_add(wdArr, wd);

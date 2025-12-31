@@ -91,6 +91,7 @@ CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.o: src/lib/inotify/inotify.c \
   src/lib/ps_tree/ps_tree.h \
   src/lib/utils/cmon_errors.h \
   src/lib/utils/cmon_int_array.h \
+  src/lib/utils/cmon_path.h \
   src/lib/utils/cmon_str_utils.h \
   src/lib/utils/cmon_string.h \
   src/lib/utils/cmon_string_array.h \
@@ -1083,6 +1084,10 @@ src/lib/parser/tokenizer.c:
 
 /usr/include/bits/types/struct_tm.h:
 
+/usr/include/bits/struct_stat.h:
+
+/usr/include/bits/types/time_t.h:
+
 /usr/include/bits/types/struct_itimerspec.h:
 
 /usr/include/bits/struct_rwlock.h:
@@ -1161,10 +1166,6 @@ src/lib/config/config.c:
 
 src/lib/utils/cmon_print.h:
 
-/usr/include/bits/types/time_t.h:
-
-/usr/include/bits/struct_stat.h:
-
 /usr/include/asm-generic/errno-base.h:
 
 /usr/include/gnu/stubs-64.h:
@@ -1204,10 +1205,6 @@ src/lib/config/config.h:
 /usr/include/bits/types/timer_t.h:
 
 /usr/include/stdio.h:
-
-src/lib/utils/cmon_path.h:
-
-/usr/include/bits/confname.h:
 
 /usr/include/bits/environments.h:
 
@@ -1302,6 +1299,10 @@ src/lib/utils/cmon_int_array.h:
 /usr/include/bits/unistd_ext.h:
 
 src/lib/ps_tree/ps_tree.h:
+
+/usr/include/bits/confname.h:
+
+src/lib/utils/cmon_path.h:
 
 /usr/include/bits/posix1_lim.h:
 
