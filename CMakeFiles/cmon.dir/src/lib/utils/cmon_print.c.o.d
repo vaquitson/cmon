@@ -15,5 +15,5 @@ CMakeFiles/cmon.dir/src/lib/utils/cmon_print.c.o: \
  /usr/include/bits/types/FILE.h /usr/include/bits/types/struct_FILE.h \
  /usr/include/bits/types/cookie_io_functions_t.h \
  /usr/include/bits/stdio_lim.h /usr/include/bits/floatn.h \
- /usr/include/bits/floatn-common.h \
+ /usr/include/bits/floatn-common.h /usr/include/bits/stdio.h \
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_print.h

@@ -7,6 +7,7 @@
 #include "cmon_errors.h"
 #include "cmon_print.h"
 #include "cmon_int_array.h"
+#include "logger.h"
 
 int process_start_child(CmonConfig *conf){
   cmon_print_msg_to_user("Starting child process");
@@ -32,20 +33,19 @@ int process_start_child(CmonConfig *conf){
 
 int process_kill_subtree(CmonIntArray *pid_array){
   if (!pid_array){
-    cmon_print_error(true, "process_kill_subtree", "no pid array provided");
+    log_write(LOG_WARNING, "from process_kill_subtree: the pid array is NULL");
     return 1;
   }
 
   if (pid_array->len == 0){
-    cmon_print_error(true, "process_kill_subtree", "the pid array is empty");
+    log_write(LOG_WARNING, "from process_kill_subtree: the pid array is empty");
     return 1;
   }
   
   for (int i = pid_array->len-1; i >= 0; i--){
     if (kill(pid_array->arr[i], SIGTERM) != 0){
-      cmon_print_error(true, "process_kill_subtree", "the signal has not been setn");
+      log_write(LOG_WARNING, "from process_kill_subtree: could not kill the pid %d", pid_array->arr[i]);
     }
   }
-  return 0;
- 
+  return 0; 
 }

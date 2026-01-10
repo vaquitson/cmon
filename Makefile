@@ -95,6 +95,51 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/usr/local/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/usr/local/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/usr/local/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/usr/local/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/usr/local/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/usr/local/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/narval/programing/proyects/cmon/CMakeFiles /home/narval/programing/proyects/cmon//CMakeFiles/progress.marks
@@ -140,6 +185,19 @@ cmon/fast:
 .PHONY : cmon/fast
 
 #=============================================================================
+# Target rules for targets named llhttp_shared
+
+# Build rule for target.
+llhttp_shared: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 llhttp_shared
+.PHONY : llhttp_shared
+
+# fast build rule for target.
+llhttp_shared/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/llhttp-build/CMakeFiles/llhttp_shared.dir/build.make _deps/llhttp-build/CMakeFiles/llhttp_shared.dir/build
+.PHONY : llhttp_shared/fast
+
+#=============================================================================
 # Target rules for targets named test_logger
 
 # Build rule for target.
@@ -164,6 +222,19 @@ test_cmon_path: cmake_check_build_system
 test_cmon_path/fast:
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/build
 .PHONY : test_cmon_path/fast
+
+#=============================================================================
+# Target rules for targets named test_cmon_sse
+
+# Build rule for target.
+test_cmon_sse: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_cmon_sse
+.PHONY : test_cmon_sse
+
+# fast build rule for target.
+test_cmon_sse/fast:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/build
+.PHONY : test_cmon_sse/fast
 
 src/lib/config/config.o: src/lib/config/config.c.o
 .PHONY : src/lib/config/config.o
@@ -549,6 +620,30 @@ src/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/main.c.s
 .PHONY : src/main.c.s
 
+src/sse/sse.o: src/sse/sse.c.o
+.PHONY : src/sse/sse.o
+
+# target to build an object file
+src/sse/sse.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/sse/sse.c.o
+.PHONY : src/sse/sse.c.o
+
+src/sse/sse.i: src/sse/sse.c.i
+.PHONY : src/sse/sse.i
+
+# target to preprocess a source file
+src/sse/sse.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/sse/sse.c.i
+.PHONY : src/sse/sse.c.i
+
+src/sse/sse.s: src/sse/sse.c.s
+.PHONY : src/sse/sse.s
+
+# target to generate assembly for a file
+src/sse/sse.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/sse/sse.c.s
+.PHONY : src/sse/sse.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -556,10 +651,16 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... cmon"
+	@echo "... llhttp_shared"
 	@echo "... test_cmon_path"
+	@echo "... test_cmon_sse"
 	@echo "... test_logger"
 	@echo "... src/lib/config/config.o"
 	@echo "... src/lib/config/config.i"
@@ -609,6 +710,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/sse/sse.o"
+	@echo "... src/sse/sse.i"
+	@echo "... src/sse/sse.s"
 .PHONY : help
 
 

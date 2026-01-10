@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/lib/logger
+C_INCLUDES = -I/home/narval/programing/proyects/cmon/_deps/llhttp-src/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/lib/logger -I/home/narval/programing/proyects/cmon/src/sse
 
-C_FLAGS = -Wall -Wextra -Wpedantic
+C_FLAGS = -O2 -g -DNDEBUG -Wall -Wextra -Wpedantic
 

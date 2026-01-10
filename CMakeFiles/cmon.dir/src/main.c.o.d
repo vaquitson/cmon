@@ -15,8 +15,8 @@ CMakeFiles/cmon.dir/src/main.c.o: \
  /usr/include/bits/types/FILE.h /usr/include/bits/types/struct_FILE.h \
  /usr/include/bits/types/cookie_io_functions_t.h \
  /usr/include/bits/stdio_lim.h /usr/include/bits/floatn.h \
- /usr/include/bits/floatn-common.h /usr/include/wait.h \
- /usr/include/sys/wait.h /usr/include/signal.h \
+ /usr/include/bits/floatn-common.h /usr/include/bits/stdio.h \
+ /usr/include/wait.h /usr/include/sys/wait.h /usr/include/signal.h \
  /usr/include/bits/signum-generic.h /usr/include/bits/signum-arch.h \
  /usr/include/bits/types/sig_atomic_t.h \
  /usr/include/bits/types/sigset_t.h /usr/include/bits/types/__sigset_t.h \
@@ -55,7 +55,7 @@ CMakeFiles/cmon.dir/src/main.c.o: \
  /usr/include/bits/byteswap.h /usr/include/bits/uintn-identity.h \
  /usr/include/sys/select.h /usr/include/bits/select.h \
  /usr/include/bits/types/struct_timeval.h /usr/include/alloca.h \
- /usr/include/bits/stdlib-float.h \
+ /usr/include/bits/stdlib-bsearch.h /usr/include/bits/stdlib-float.h \
  /home/narval/programing/proyects/cmon/src/lib/config/config.h \
  /home/narval/programing/proyects/cmon/src/lib/parser/tokenizer.h \
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_string_array.h \

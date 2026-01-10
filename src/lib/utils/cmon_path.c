@@ -152,25 +152,6 @@ CmonPath *cmon_path_new_full_path(const char *src){
   return path;
 }
  
-/*
- * Returns the file extension of `path` as a CmonString view, including the dot.
- *
- * No memory is allocated and no data is copied. The returned CmonString is a
- * non-owning view into the internal `CmonPath::path` buffer: it starts at
- * `CmonPath::ext` and has length `CmonPath::ext_len`.
- *
- * The extension includes the leading '.' (e.g. ".c", ".js", ".rs").
- *
- * If the path has no extension (i.e., `path->ext == NULL` / `path->ext_len == 0`),
- * this function returns NULL.
- *
- * Lifetime: the returned view is valid only as long as the owning CmonPath
- * remains alive and its `path` buffer is not modified or freed.
- */
-#define cmon_path_get_ext_as_cmon_string(path) \
-  (CmonString *)((char *)path + sizeof(CmonString))
-
-
 /* Free the all the memory asiciated with the CmonPath.
  * If path is NULL nothing happens and a warning is write to the logs
 */

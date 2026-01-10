@@ -16,6 +16,7 @@ To install Cmon, make sure you have the following dependencies:
 - **Cmake**
 - **pstree**
 - **glibc**
+- **llhttp**
 
 ### Steps
 

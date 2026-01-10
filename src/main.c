@@ -22,7 +22,6 @@ int main(int argc, char **argv){
   int pollRetV;
   size_t readSize;
   char buff[4096];
-  const struct inotify_event *event;
   struct pollfd fds[1];
 
   CmonConfig *conf;

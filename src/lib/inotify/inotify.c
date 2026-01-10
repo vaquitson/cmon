@@ -50,7 +50,6 @@ int _ino_watch_dir(int inFd, char *path, unsigned long mask){
 }
 
 
-// [FIXME] not if theis should retunr the event or waht : (
 void ino_procees_events(CmonConfig *config, size_t readSize, char *buff, pid_t *child_pid){
   static const struct inotify_event *event;
   int rc = 0;
@@ -60,15 +59,11 @@ void ino_procees_events(CmonConfig *config, size_t readSize, char *buff, pid_t *
     event = (const struct inotify_event *) ptr;
     log_write(LOG_INFO, "envet from %s", event->name);
 
-    // find if the file is in the ignore list
     if (event->mask & IN_MODIFY) {
       CmonPath *path = cmon_path_new_full_path(event->name);
-      printf("1\n");
 
       CmonString *find_res = cmon_str_arr_find(&config->ignoreFiles, 
           (CmonString *)path);
-
-      printf("2\n");
       if (find_res != NULL){
         log_write(LOG_INFO, "the file %s is in the ignore list", event->name);
         cmon_path_free(path);
@@ -77,27 +72,24 @@ void ino_procees_events(CmonConfig *config, size_t readSize, char *buff, pid_t *
 
       CmonString *find_ext_name_res = cmon_str_arr_find(&config->watchExtNames, 
           cmon_path_cast_ext_as_cmon_string(path));
-
-      printf("3\n");
       if (find_ext_name_res != NULL){
         log_write(LOG_INFO, "the file %s is not an extname we arent looking");
         cmon_path_free(path);
         continue;
       }
       
-      printf("4\n");
       pid_arr = ps_tree_get_pid_arr(*child_pid);
-      process_kill_subtree(pid_arr);
+      rc = process_kill_subtree(pid_arr);
       waitpid(*child_pid, NULL, 0);
 
       free(pid_arr);
-      if (rc == -1){
-        log_write(LOG_ERROR, "cmon_procees_events could not kill the ps tree of the process %d", *child_pid);
-        cmon_print_errno_error(true, "cmon_procees_events", errno, "kill faild");
+      if (rc != 0){
+        log_write(LOG_WARNING, "cmon_procees_events could not kill the ps tree of the process %d", *child_pid);
       }
 
       *child_pid = process_start_child(config);
       log_write(LOG_INFO, "the process has been restarted", *child_pid);
+      cmon_path_free(path);
     }
   }
 }

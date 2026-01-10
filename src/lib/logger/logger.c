@@ -19,7 +19,7 @@
 // if the function was previously call, return the previously initialized
 // Logger pointer 
 // The if the logger faild, the program will exit
-Logger *log_init(){
+Logger *log_init(void){
   static Logger *logger = NULL;
   if (logger != NULL){
     return logger;
@@ -36,7 +36,6 @@ Logger *log_init(){
     printf("from log_init: could not allocate memory for the log path");
     exit(2);
   }
-  int log_path_size;
 
   char *path_sufix;
   char *env_path;

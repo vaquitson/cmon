@@ -53,16 +53,17 @@ CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.o: \
  /usr/include/bits/types/FILE.h /usr/include/bits/types/struct_FILE.h \
  /usr/include/bits/types/cookie_io_functions_t.h \
  /usr/include/bits/stdio_lim.h /usr/include/bits/floatn.h \
- /usr/include/bits/floatn-common.h /usr/include/dirent.h \
- /usr/include/bits/dirent.h /usr/include/bits/posix1_lim.h \
- /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/floatn-common.h /usr/include/bits/stdio.h \
+ /usr/include/dirent.h /usr/include/bits/dirent.h \
+ /usr/include/bits/posix1_lim.h /usr/include/bits/local_lim.h \
+ /usr/include/linux/limits.h \
  /usr/include/bits/pthread_stack_min-dynamic.h \
  /usr/include/bits/pthread_stack_min.h /usr/include/bits/dirent_ext.h \
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_errors.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdbool.h \
  /home/narval/programing/proyects/cmon/src/lib/inotify/inotify.h \
  /usr/include/stdlib.h /usr/include/alloca.h \
- /usr/include/bits/stdlib-float.h \
+ /usr/include/bits/stdlib-bsearch.h /usr/include/bits/stdlib-float.h \
  /home/narval/programing/proyects/cmon/src/lib/config/config.h \
  /home/narval/programing/proyects/cmon/src/lib/parser/tokenizer.h \
  /home/narval/programing/proyects/cmon/src/lib/utils/cmon_string_array.h \

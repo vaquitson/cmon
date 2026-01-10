@@ -11,6 +11,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.30.2/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.30.2/CMakeSystem.cmake"
   "CMakeLists.txt"
+  "_deps/llhttp-src/CMakeLists.txt"
+  "_deps/llhttp-src/libllhttp.pc.in"
   "tests/CMakeLists.txt"
   "/usr/local/share/cmake-3.30/Modules/CMakeCInformation.cmake"
   "/usr/local/share/cmake-3.30/Modules/CMakeCXXInformation.cmake"
@@ -24,6 +26,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/local/share/cmake-3.30/Modules/Compiler/GNU-C.cmake"
   "/usr/local/share/cmake-3.30/Modules/Compiler/GNU-CXX.cmake"
   "/usr/local/share/cmake-3.30/Modules/Compiler/GNU.cmake"
+  "/usr/local/share/cmake-3.30/Modules/ExternalProject/shared_internal_commands.cmake"
+  "/usr/local/share/cmake-3.30/Modules/FetchContent.cmake"
+  "/usr/local/share/cmake-3.30/Modules/FetchContent/CMakeLists.cmake.in"
+  "/usr/local/share/cmake-3.30/Modules/GNUInstallDirs.cmake"
   "/usr/local/share/cmake-3.30/Modules/Platform/Linux-GNU-C.cmake"
   "/usr/local/share/cmake-3.30/Modules/Platform/Linux-GNU-CXX.cmake"
   "/usr/local/share/cmake-3.30/Modules/Platform/Linux-GNU.cmake"
@@ -40,13 +46,18 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
+  "_deps/llhttp-subbuild/CMakeLists.txt"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
+  "_deps/llhttp-src/libllhttp.pc"
+  "_deps/llhttp-build/CMakeFiles/CMakeDirectoryInformation.cmake"
   "tests/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/cmon.dir/DependInfo.cmake"
+  "_deps/llhttp-build/CMakeFiles/llhttp_shared.dir/DependInfo.cmake"
   "tests/CMakeFiles/test_logger.dir/DependInfo.cmake"
   "tests/CMakeFiles/test_cmon_path.dir/DependInfo.cmake"
+  "tests/CMakeFiles/test_cmon_sse.dir/DependInfo.cmake"
   )
