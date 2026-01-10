@@ -26,7 +26,9 @@ tests/CMakeFiles/test_cmon_path.dir/__/src/lib/logger/logger.c.o: src/lib/logger
   /usr/include/bits/select.h \
   /usr/include/bits/stat.h \
   /usr/include/bits/stdint-intn.h \
+  /usr/include/bits/stdio.h \
   /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/stdlib-bsearch.h \
   /usr/include/bits/stdlib-float.h \
   /usr/include/bits/struct_mutex.h \
   /usr/include/bits/struct_rwlock.h \
@@ -88,6 +90,7 @@ tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_errors.c.o: src/lib/ut
   /usr/include/bits/floatn.h \
   /usr/include/bits/libc-header-start.h \
   /usr/include/bits/long-double.h \
+  /usr/include/bits/stdio.h \
   /usr/include/bits/stdio_lim.h \
   /usr/include/bits/time64.h \
   /usr/include/bits/timesize.h \
@@ -132,7 +135,9 @@ tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_int_array.c.o: src/lib
   /usr/include/bits/pthreadtypes.h \
   /usr/include/bits/select.h \
   /usr/include/bits/stdint-intn.h \
+  /usr/include/bits/stdio.h \
   /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/stdlib-bsearch.h \
   /usr/include/bits/stdlib-float.h \
   /usr/include/bits/struct_mutex.h \
   /usr/include/bits/struct_rwlock.h \
@@ -197,7 +202,9 @@ tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_path.c.o: src/lib/util
   /usr/include/bits/pthreadtypes.h \
   /usr/include/bits/select.h \
   /usr/include/bits/stdint-intn.h \
+  /usr/include/bits/stdio.h \
   /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/stdlib-bsearch.h \
   /usr/include/bits/stdlib-float.h \
   /usr/include/bits/struct_mutex.h \
   /usr/include/bits/struct_rwlock.h \
@@ -252,6 +259,7 @@ tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_print.c.o: src/lib/uti
   /usr/include/bits/floatn.h \
   /usr/include/bits/libc-header-start.h \
   /usr/include/bits/long-double.h \
+  /usr/include/bits/stdio.h \
   /usr/include/bits/stdio_lim.h \
   /usr/include/bits/time64.h \
   /usr/include/bits/timesize.h \
@@ -294,6 +302,7 @@ tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_str_utils.c.o: src/lib
   /usr/include/bits/pthreadtypes.h \
   /usr/include/bits/select.h \
   /usr/include/bits/stdint-intn.h \
+  /usr/include/bits/stdlib-bsearch.h \
   /usr/include/bits/stdlib-float.h \
   /usr/include/bits/struct_mutex.h \
   /usr/include/bits/struct_rwlock.h \
@@ -353,7 +362,9 @@ tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_string.c.o: src/lib/ut
   /usr/include/bits/pthreadtypes.h \
   /usr/include/bits/select.h \
   /usr/include/bits/stdint-intn.h \
+  /usr/include/bits/stdio.h \
   /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/stdlib-bsearch.h \
   /usr/include/bits/stdlib-float.h \
   /usr/include/bits/struct_mutex.h \
   /usr/include/bits/struct_rwlock.h \
@@ -425,7 +436,9 @@ tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_string_array.c.o: src/
   /usr/include/bits/pthreadtypes.h \
   /usr/include/bits/select.h \
   /usr/include/bits/stdint-intn.h \
+  /usr/include/bits/stdio.h \
   /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/stdlib-bsearch.h \
   /usr/include/bits/stdlib-float.h \
   /usr/include/bits/struct_mutex.h \
   /usr/include/bits/struct_rwlock.h \
@@ -491,7 +504,9 @@ tests/CMakeFiles/test_cmon_path.dir/test_cmon_path.c.o: tests/test_cmon_path.c \
   /usr/include/bits/pthreadtypes.h \
   /usr/include/bits/select.h \
   /usr/include/bits/stdint-intn.h \
+  /usr/include/bits/stdio.h \
   /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/stdlib-bsearch.h \
   /usr/include/bits/stdlib-float.h \
   /usr/include/bits/struct_mutex.h \
   /usr/include/bits/struct_rwlock.h \
@@ -567,8 +582,6 @@ src/lib/utils/cmon_int_array.h:
 
 /usr/include/unistd.h:
 
-/usr/include/time.h:
-
 /usr/include/sys/cdefs.h:
 
 src/lib/utils/cmon_str_utils.c:
@@ -591,11 +604,21 @@ src/lib/utils/cmon_errors.h:
 
 /usr/include/bits/wordsize.h:
 
+src/lib/utils/cmon_str_utils.h:
+
+/usr/include/bits/waitstatus.h:
+
+/usr/include/bits/waitflags.h:
+
+/usr/include/time.h:
+
+/usr/include/bits/stdlib-bsearch.h:
+
+src/lib/logger/logger.c:
+
+/usr/include/bits/types/sigset_t.h:
+
 /usr/include/bits/stdint-intn.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stddef.h:
-
-/usr/include/bits/struct_mutex.h:
 
 /usr/include/bits/select.h:
 
@@ -619,10 +642,6 @@ src/lib/utils/cmon_errors.h:
 
 /usr/include/bits/floatn.h:
 
-src/lib/logger/logger.c:
-
-/usr/include/bits/types/sigset_t.h:
-
 /usr/include/bits/floatn-common.h:
 
 /usr/include/bits/types/struct_timeval.h:
@@ -642,8 +661,6 @@ src/lib/logger/logger.h:
 /usr/include/sys/types.h:
 
 /usr/include/bits/types/struct_itimerspec.h:
-
-/usr/include/bits/waitflags.h:
 
 src/lib/utils/cmon_int_array.c:
 
@@ -685,6 +702,10 @@ tests/test_cmon_path.c:
 
 /usr/include/bits/time64.h:
 
+/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stddef.h:
+
+/usr/include/bits/struct_mutex.h:
+
 src/lib/utils/cmon_print.h:
 
 /usr/include/bits/struct_stat.h:
@@ -700,6 +721,8 @@ src/lib/utils/cmon_print.h:
 /usr/include/bits/types/__FILE.h:
 
 /usr/include/bits/types/__locale_t.h:
+
+/usr/include/bits/stdio.h:
 
 /usr/include/bits/unistd_ext.h:
 
@@ -734,7 +757,3 @@ src/lib/utils/cmon_str_array.c:
 /usr/include/bits/struct_rwlock.h:
 
 /usr/include/bits/types/time_t.h:
-
-src/lib/utils/cmon_str_utils.h:
-
-/usr/include/bits/waitstatus.h:

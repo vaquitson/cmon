@@ -29,3 +29,8 @@ int open_socket(uint16_t port){
 
   return fd;
 }
+
+
+void make_request(){
+
+}

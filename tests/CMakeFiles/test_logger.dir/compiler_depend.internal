@@ -27,7 +27,9 @@ tests/CMakeFiles/test_logger.dir/__/src/lib/logger/logger.c.o
  /usr/include/bits/select.h
  /usr/include/bits/stat.h
  /usr/include/bits/stdint-intn.h
+ /usr/include/bits/stdio.h
  /usr/include/bits/stdio_lim.h
+ /usr/include/bits/stdlib-bsearch.h
  /usr/include/bits/stdlib-float.h
  /usr/include/bits/struct_mutex.h
  /usr/include/bits/struct_rwlock.h
@@ -95,6 +97,7 @@ tests/CMakeFiles/test_logger.dir/test_logger.c.o
  /usr/include/bits/libc-header-start.h
  /usr/include/bits/long-double.h
  /usr/include/bits/posix_opt.h
+ /usr/include/bits/stdio.h
  /usr/include/bits/stdio_lim.h
  /usr/include/bits/time64.h
  /usr/include/bits/timesize.h
