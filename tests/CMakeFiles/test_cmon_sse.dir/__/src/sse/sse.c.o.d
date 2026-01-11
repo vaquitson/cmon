@@ -51,5 +51,5 @@ tests/CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.o: \
  /usr/include/asm/errno.h /usr/include/asm-generic/errno.h \
  /usr/include/asm-generic/errno-base.h /usr/include/string.h \
  /usr/include/bits/types/locale_t.h /usr/include/bits/types/__locale_t.h \
- /usr/include/strings.h \
+ /usr/include/strings.h /usr/include/arpa/inet.h \
  /home/narval/programing/proyects/cmon/src/sse/sse.h
