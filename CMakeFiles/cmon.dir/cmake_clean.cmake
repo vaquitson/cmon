@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/cmon.dir/src/cmon_proxy/sse.c.o"
+  "CMakeFiles/cmon.dir/src/cmon_proxy/sse.c.o.d"
   "CMakeFiles/cmon.dir/src/lib/config/config.c.o"
   "CMakeFiles/cmon.dir/src/lib/config/config.c.o.d"
   "CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.o"
@@ -31,8 +33,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/cmon.dir/src/lib/utils/text_utils.c.o.d"
   "CMakeFiles/cmon.dir/src/main.c.o"
   "CMakeFiles/cmon.dir/src/main.c.o.d"
-  "CMakeFiles/cmon.dir/src/sse/sse.c.o"
-  "CMakeFiles/cmon.dir/src/sse/sse.c.o.d"
   "cmon"
   "cmon.pdb"
 )

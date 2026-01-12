@@ -73,6 +73,4 @@ IGNORE_DIRS: {
 * IGNORE_FILES: 
     A list of specific files to ignore when monitoring for changes.
 
-* WATCH_FILE_EXT_NAMES: this tell wich folders to ignore.
-    A list of directories to exclude from file watching.
-
+* WATCH_FILE_EXT_NAMES: this tell wich extension names to ignore.

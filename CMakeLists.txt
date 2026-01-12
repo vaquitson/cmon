@@ -17,7 +17,7 @@ file(GLOB PS_TREE_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/ps_tree/*.c)
 file(GLOB PROCESS_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/process/*.c)
 file(GLOB INOTIFY_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/inotify/*.c)
 file(GLOB LOGGER_C_FILES  ${CMAKE_SOURCE_DIR}/src/lib/logger/*.c)
-file(GLOB SSE_C_FILES     ${CMAKE_SOURCE_DIR}/src/sse/*.c)
+file(GLOB SSE_C_FILES     ${CMAKE_SOURCE_DIR}/src/cmon_proxy/*.c)
 
 add_executable(cmon
   ./src/main.c
@@ -42,7 +42,7 @@ target_include_directories(cmon PRIVATE
   ${CMAKE_SOURCE_DIR}/src/lib/process
   ${CMAKE_SOURCE_DIR}/src/lib/inotify
   ${CMAKE_SOURCE_DIR}/src/lib/logger
-  ${CMAKE_SOURCE_DIR}/src/sse
+  ${CMAKE_SOURCE_DIR}/src/cmon_proxy
 )
 
 enable_testing()

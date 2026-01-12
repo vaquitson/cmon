@@ -97,32 +97,32 @@ tests/CMakeFiles/test_cmon_sse.dir/__/src/lib/logger/logger.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/test_cmon_sse.dir/__/src/lib/logger/logger.c.s"
 	cd /home/narval/programing/proyects/cmon/tests && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/narval/programing/proyects/cmon/src/lib/logger/logger.c -o CMakeFiles/test_cmon_sse.dir/__/src/lib/logger/logger.c.s
 
-tests/CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.o: tests/CMakeFiles/test_cmon_sse.dir/flags.make
-tests/CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.o: src/sse/sse.c
-tests/CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.o: tests/CMakeFiles/test_cmon_sse.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object tests/CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.o"
-	cd /home/narval/programing/proyects/cmon/tests && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT tests/CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.o -MF CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.o.d -o CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.o -c /home/narval/programing/proyects/cmon/src/sse/sse.c
+tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.o: tests/CMakeFiles/test_cmon_sse.dir/flags.make
+tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.o: src/cmon_proxy/sse.c
+tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.o: tests/CMakeFiles/test_cmon_sse.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.o"
+	cd /home/narval/programing/proyects/cmon/tests && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.o -MF CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.o.d -o CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/sse.c
 
-tests/CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.i"
-	cd /home/narval/programing/proyects/cmon/tests && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/narval/programing/proyects/cmon/src/sse/sse.c > CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.i
+tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.i"
+	cd /home/narval/programing/proyects/cmon/tests && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/narval/programing/proyects/cmon/src/cmon_proxy/sse.c > CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.i
 
-tests/CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.s"
-	cd /home/narval/programing/proyects/cmon/tests && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/narval/programing/proyects/cmon/src/sse/sse.c -o CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.s
+tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.s"
+	cd /home/narval/programing/proyects/cmon/tests && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/narval/programing/proyects/cmon/src/cmon_proxy/sse.c -o CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.s
 
 # Object files for target test_cmon_sse
 test_cmon_sse_OBJECTS = \
 "CMakeFiles/test_cmon_sse.dir/test_cmon_sse.c.o" \
 "CMakeFiles/test_cmon_sse.dir/__/src/lib/logger/logger.c.o" \
-"CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.o"
+"CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.o"
 
 # External object files for target test_cmon_sse
 test_cmon_sse_EXTERNAL_OBJECTS =
 
 tests/test_cmon_sse: tests/CMakeFiles/test_cmon_sse.dir/test_cmon_sse.c.o
 tests/test_cmon_sse: tests/CMakeFiles/test_cmon_sse.dir/__/src/lib/logger/logger.c.o
-tests/test_cmon_sse: tests/CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.o
+tests/test_cmon_sse: tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.o
 tests/test_cmon_sse: tests/CMakeFiles/test_cmon_sse.dir/build.make
 tests/test_cmon_sse: tests/CMakeFiles/test_cmon_sse.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable test_cmon_sse"

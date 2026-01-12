@@ -213,6 +213,30 @@ test_cmon_sse/fast:
 	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/build
 .PHONY : test_cmon_sse/fast
 
+__/src/cmon_proxy/sse.o: __/src/cmon_proxy/sse.c.o
+.PHONY : __/src/cmon_proxy/sse.o
+
+# target to build an object file
+__/src/cmon_proxy/sse.c.o:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.o
+.PHONY : __/src/cmon_proxy/sse.c.o
+
+__/src/cmon_proxy/sse.i: __/src/cmon_proxy/sse.c.i
+.PHONY : __/src/cmon_proxy/sse.i
+
+# target to preprocess a source file
+__/src/cmon_proxy/sse.c.i:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.i
+.PHONY : __/src/cmon_proxy/sse.c.i
+
+__/src/cmon_proxy/sse.s: __/src/cmon_proxy/sse.c.s
+.PHONY : __/src/cmon_proxy/sse.s
+
+# target to generate assembly for a file
+__/src/cmon_proxy/sse.c.s:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.s
+.PHONY : __/src/cmon_proxy/sse.c.s
+
 __/src/lib/logger/logger.o: __/src/lib/logger/logger.c.o
 .PHONY : __/src/lib/logger/logger.o
 
@@ -459,30 +483,6 @@ __/src/lib/utils/text_utils.c.s:
 	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/text_utils.c.s
 .PHONY : __/src/lib/utils/text_utils.c.s
 
-__/src/sse/sse.o: __/src/sse/sse.c.o
-.PHONY : __/src/sse/sse.o
-
-# target to build an object file
-__/src/sse/sse.c.o:
-	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.o
-.PHONY : __/src/sse/sse.c.o
-
-__/src/sse/sse.i: __/src/sse/sse.c.i
-.PHONY : __/src/sse/sse.i
-
-# target to preprocess a source file
-__/src/sse/sse.c.i:
-	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.i
-.PHONY : __/src/sse/sse.c.i
-
-__/src/sse/sse.s: __/src/sse/sse.c.s
-.PHONY : __/src/sse/sse.s
-
-# target to generate assembly for a file
-__/src/sse/sse.c.s:
-	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.s
-.PHONY : __/src/sse/sse.c.s
-
 test_cmon_path.o: test_cmon_path.c.o
 .PHONY : test_cmon_path.o
 
@@ -571,6 +571,9 @@ help:
 	@echo "... test_cmon_path"
 	@echo "... test_cmon_sse"
 	@echo "... test_logger"
+	@echo "... __/src/cmon_proxy/sse.o"
+	@echo "... __/src/cmon_proxy/sse.i"
+	@echo "... __/src/cmon_proxy/sse.s"
 	@echo "... __/src/lib/logger/logger.o"
 	@echo "... __/src/lib/logger/logger.i"
 	@echo "... __/src/lib/logger/logger.s"
@@ -601,9 +604,6 @@ help:
 	@echo "... __/src/lib/utils/text_utils.o"
 	@echo "... __/src/lib/utils/text_utils.i"
 	@echo "... __/src/lib/utils/text_utils.s"
-	@echo "... __/src/sse/sse.o"
-	@echo "... __/src/sse/sse.i"
-	@echo "... __/src/sse/sse.s"
 	@echo "... test_cmon_path.o"
 	@echo "... test_cmon_path.i"
 	@echo "... test_cmon_path.s"

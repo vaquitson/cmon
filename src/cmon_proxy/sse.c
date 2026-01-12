@@ -44,8 +44,8 @@ int open_req_sock(uint16_t serv_port, char *ipv4){
   if (inet_pton(AF_INET, ipv4, &server_addr.sin_addr) != 1){
     printf("error\n");
     exit(1);
-  };
-  
+  }
+
   if (connect(sock_fd, (struct sockaddr *) &server_addr, sizeof(server_addr)) < 0){
     printf("error\n");
   }

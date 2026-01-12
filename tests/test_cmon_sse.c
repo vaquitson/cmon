@@ -1,28 +1,15 @@
 #include <sys/socket.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
+#include <errno.h>
+#include <stdlib.h>
 
 #include "sse.h"
-#include <unistd.h>
 
-
-#define TEST_REQ \
-"GET / HTTP/1.1\r\n" \
-"Host: localhost:5832\r\n" \
-"User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:146.0) Gecko/20100101 Firefox/146.0\r\n" \
-"Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\n" \
-"Accept-Language: en-US,en;q=0.5\r\n" \
-"Accept-Encoding: gzip, deflate, br, zstd\r\n" \
-"Sec-GPC: 1\r\n" \
-"Connection: keep-alive\r\n" \
-"Cookie: served_banks=WzMsMiwwXQ==\r\n" \
-"Upgrade-Insecure-Requests: 1\r\n" \
-"Sec-Fetch-Dest: document\r\n" \
-"Sec-Fetch-Mode: navigate\r\n" \
-"Sec-Fetch-Site: none\r\n" \
-"Priority: u=0, i\r\n" \
-"\r\n"
-
+#define PROXY_PORT 7000
+#define SERVER_PORT 3000
+#define SERVER_PROXY_BUF_LEN 102400 
 
 void echo_req(int sock_fd){
   ssize_t n;
@@ -33,7 +20,7 @@ void echo_req(int sock_fd){
 }
 
 int test_1(){
-  uint16_t port = 5832;
+  uint16_t port = PROXY_PORT;
   int conn_fd;
   socklen_t client_sockaddr_len;
   int fd = open_serv_sock(port);
@@ -48,10 +35,45 @@ int test_1(){
   return 0;
 }
 
-int main(void){
-  uint16_t port = 3000;
-  int req_fd;
+int test_2(){
+  return 0;
+}
 
-  req_fd = open_req_sock(port, "192.168.4.120");
-  write(req_fd, TEST_REQ, strlen(TEST_REQ));
+int main(void){
+  char server_proxy_buf[SERVER_PROXY_BUF_LEN];
+  char client_proxy_buf[1024];
+  int req_fd;
+  size_t read_size;
+
+  int server_proxy_fd = open_req_sock(SERVER_PORT, "192.168.4.120");
+  int client_proxy_fd = open_serv_sock(PROXY_PORT);
+  int client_proxy_connection_fd;
+
+  socklen_t client_sockaddr_len;
+  struct sockaddr_in clinent_addr; 
+  bzero(&clinent_addr, sizeof(clinent_addr));
+
+  listen(client_proxy_fd, 0);
+  while (1) { 
+    client_proxy_connection_fd = accept(client_proxy_fd, (struct sockaddr *)&clinent_addr, &client_sockaddr_len);
+    if (client_proxy_connection_fd < 0){
+      printf("error: %s\n", strerror(errno));
+      exit(errno);
+    }
+
+    printf("client request\n");
+    read_size = read(client_proxy_connection_fd, client_proxy_buf, 1024);
+    printf("%s", client_proxy_buf);
+    write(server_proxy_fd, client_proxy_buf, read_size);
+
+    printf("\n\n");
+    printf("hello\n");
+
+    printf("server response\n");
+    while ((read_size = read(server_proxy_fd, server_proxy_buf, 1024)) > 0){
+      write(client_proxy_connection_fd, server_proxy_buf, read_size);  
+      printf("%s", server_proxy_buf);
+    }
+    printf("\n\n");
+  }
 }

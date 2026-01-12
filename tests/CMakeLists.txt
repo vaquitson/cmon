@@ -1,10 +1,10 @@
 file(GLOB LOGGER_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/logger/*.c)
 file(GLOB UTILS_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/utils/*.c)
-file(GLOB SSE_C_FILES ${CMAKE_SOURCE_DIR}/src/sse/*.c)
+file(GLOB SSE_C_FILES ${CMAKE_SOURCE_DIR}/src/cmon_proxy/*.c)
 
 include_directories(${CMAKE_SOURCE_DIR}/src/lib/logger)
 include_directories(${CMAKE_SOURCE_DIR}/src/lib/utils)
-include_directories(${CMAKE_SOURCE_DIR}/src/sse)
+include_directories(${CMAKE_SOURCE_DIR}/src/cmon_proxy)
 
 add_executable(test_logger)
 target_sources(test_logger

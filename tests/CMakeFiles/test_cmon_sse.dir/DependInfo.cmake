@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/narval/programing/proyects/cmon/src/cmon_proxy/sse.c" "tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.o" "gcc" "tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.o.d"
   "/home/narval/programing/proyects/cmon/src/lib/logger/logger.c" "tests/CMakeFiles/test_cmon_sse.dir/__/src/lib/logger/logger.c.o" "gcc" "tests/CMakeFiles/test_cmon_sse.dir/__/src/lib/logger/logger.c.o.d"
-  "/home/narval/programing/proyects/cmon/src/sse/sse.c" "tests/CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.o" "gcc" "tests/CMakeFiles/test_cmon_sse.dir/__/src/sse/sse.c.o.d"
   "/home/narval/programing/proyects/cmon/tests/test_cmon_sse.c" "tests/CMakeFiles/test_cmon_sse.dir/test_cmon_sse.c.o" "gcc" "tests/CMakeFiles/test_cmon_sse.dir/test_cmon_sse.c.o.d"
   )
 

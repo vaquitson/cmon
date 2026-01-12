@@ -236,6 +236,30 @@ test_cmon_sse/fast:
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/build
 .PHONY : test_cmon_sse/fast
 
+src/cmon_proxy/sse.o: src/cmon_proxy/sse.c.o
+.PHONY : src/cmon_proxy/sse.o
+
+# target to build an object file
+src/cmon_proxy/sse.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/cmon_proxy/sse.c.o
+.PHONY : src/cmon_proxy/sse.c.o
+
+src/cmon_proxy/sse.i: src/cmon_proxy/sse.c.i
+.PHONY : src/cmon_proxy/sse.i
+
+# target to preprocess a source file
+src/cmon_proxy/sse.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/cmon_proxy/sse.c.i
+.PHONY : src/cmon_proxy/sse.c.i
+
+src/cmon_proxy/sse.s: src/cmon_proxy/sse.c.s
+.PHONY : src/cmon_proxy/sse.s
+
+# target to generate assembly for a file
+src/cmon_proxy/sse.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/cmon_proxy/sse.c.s
+.PHONY : src/cmon_proxy/sse.c.s
+
 src/lib/config/config.o: src/lib/config/config.c.o
 .PHONY : src/lib/config/config.o
 
@@ -620,30 +644,6 @@ src/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/main.c.s
 .PHONY : src/main.c.s
 
-src/sse/sse.o: src/sse/sse.c.o
-.PHONY : src/sse/sse.o
-
-# target to build an object file
-src/sse/sse.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/sse/sse.c.o
-.PHONY : src/sse/sse.c.o
-
-src/sse/sse.i: src/sse/sse.c.i
-.PHONY : src/sse/sse.i
-
-# target to preprocess a source file
-src/sse/sse.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/sse/sse.c.i
-.PHONY : src/sse/sse.c.i
-
-src/sse/sse.s: src/sse/sse.c.s
-.PHONY : src/sse/sse.s
-
-# target to generate assembly for a file
-src/sse/sse.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/sse/sse.c.s
-.PHONY : src/sse/sse.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -662,6 +662,9 @@ help:
 	@echo "... test_cmon_path"
 	@echo "... test_cmon_sse"
 	@echo "... test_logger"
+	@echo "... src/cmon_proxy/sse.o"
+	@echo "... src/cmon_proxy/sse.i"
+	@echo "... src/cmon_proxy/sse.s"
 	@echo "... src/lib/config/config.o"
 	@echo "... src/lib/config/config.i"
 	@echo "... src/lib/config/config.s"
@@ -710,9 +713,6 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/sse/sse.o"
-	@echo "... src/sse/sse.i"
-	@echo "... src/sse/sse.s"
 .PHONY : help
 
 
