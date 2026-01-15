@@ -49,7 +49,9 @@ tests/CMakeFiles/test_cmon_sse.dir/test_cmon_sse.c.o: \
  /usr/include/asm-generic/errno-base.h /usr/include/stdlib.h \
  /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
  /usr/include/alloca.h /usr/include/bits/stdlib-bsearch.h \
- /usr/include/bits/stdlib-float.h \
- /home/narval/programing/proyects/cmon/src/cmon_proxy/sse.h \
+ /usr/include/bits/stdlib-float.h /usr/include/arpa/inet.h \
  /usr/include/netinet/in.h /usr/include/bits/stdint-uintn.h \
- /usr/include/bits/in.h
+ /usr/include/bits/in.h /usr/include/netdb.h /usr/include/rpc/netdb.h \
+ /usr/include/bits/netdb.h \
+ /home/narval/programing/proyects/cmon/src/cmon_proxy/sse.h \
+ /home/narval/programing/proyects/cmon/src/cmon_proxy/s_client_connection.h

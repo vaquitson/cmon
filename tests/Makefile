@@ -213,6 +213,30 @@ test_cmon_sse/fast:
 	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/build
 .PHONY : test_cmon_sse/fast
 
+__/src/cmon_proxy/s_client_connection.o: __/src/cmon_proxy/s_client_connection.c.o
+.PHONY : __/src/cmon_proxy/s_client_connection.o
+
+# target to build an object file
+__/src/cmon_proxy/s_client_connection.c.o:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/s_client_connection.c.o
+.PHONY : __/src/cmon_proxy/s_client_connection.c.o
+
+__/src/cmon_proxy/s_client_connection.i: __/src/cmon_proxy/s_client_connection.c.i
+.PHONY : __/src/cmon_proxy/s_client_connection.i
+
+# target to preprocess a source file
+__/src/cmon_proxy/s_client_connection.c.i:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/s_client_connection.c.i
+.PHONY : __/src/cmon_proxy/s_client_connection.c.i
+
+__/src/cmon_proxy/s_client_connection.s: __/src/cmon_proxy/s_client_connection.c.s
+.PHONY : __/src/cmon_proxy/s_client_connection.s
+
+# target to generate assembly for a file
+__/src/cmon_proxy/s_client_connection.c.s:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/s_client_connection.c.s
+.PHONY : __/src/cmon_proxy/s_client_connection.c.s
+
 __/src/cmon_proxy/sse.o: __/src/cmon_proxy/sse.c.o
 .PHONY : __/src/cmon_proxy/sse.o
 
@@ -571,6 +595,9 @@ help:
 	@echo "... test_cmon_path"
 	@echo "... test_cmon_sse"
 	@echo "... test_logger"
+	@echo "... __/src/cmon_proxy/s_client_connection.o"
+	@echo "... __/src/cmon_proxy/s_client_connection.i"
+	@echo "... __/src/cmon_proxy/s_client_connection.s"
 	@echo "... __/src/cmon_proxy/sse.o"
 	@echo "... __/src/cmon_proxy/sse.i"
 	@echo "... __/src/cmon_proxy/sse.s"

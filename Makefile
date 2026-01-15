@@ -236,6 +236,30 @@ test_cmon_sse/fast:
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/build
 .PHONY : test_cmon_sse/fast
 
+src/cmon_proxy/s_client_connection.o: src/cmon_proxy/s_client_connection.c.o
+.PHONY : src/cmon_proxy/s_client_connection.o
+
+# target to build an object file
+src/cmon_proxy/s_client_connection.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/cmon_proxy/s_client_connection.c.o
+.PHONY : src/cmon_proxy/s_client_connection.c.o
+
+src/cmon_proxy/s_client_connection.i: src/cmon_proxy/s_client_connection.c.i
+.PHONY : src/cmon_proxy/s_client_connection.i
+
+# target to preprocess a source file
+src/cmon_proxy/s_client_connection.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/cmon_proxy/s_client_connection.c.i
+.PHONY : src/cmon_proxy/s_client_connection.c.i
+
+src/cmon_proxy/s_client_connection.s: src/cmon_proxy/s_client_connection.c.s
+.PHONY : src/cmon_proxy/s_client_connection.s
+
+# target to generate assembly for a file
+src/cmon_proxy/s_client_connection.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/src/cmon_proxy/s_client_connection.c.s
+.PHONY : src/cmon_proxy/s_client_connection.c.s
+
 src/cmon_proxy/sse.o: src/cmon_proxy/sse.c.o
 .PHONY : src/cmon_proxy/sse.o
 
@@ -662,6 +686,9 @@ help:
 	@echo "... test_cmon_path"
 	@echo "... test_cmon_sse"
 	@echo "... test_logger"
+	@echo "... src/cmon_proxy/s_client_connection.o"
+	@echo "... src/cmon_proxy/s_client_connection.i"
+	@echo "... src/cmon_proxy/s_client_connection.s"
 	@echo "... src/cmon_proxy/sse.o"
 	@echo "... src/cmon_proxy/sse.i"
 	@echo "... src/cmon_proxy/sse.s"

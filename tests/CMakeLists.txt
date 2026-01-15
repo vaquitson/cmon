@@ -1,6 +1,6 @@
 file(GLOB LOGGER_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/logger/*.c)
 file(GLOB UTILS_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/utils/*.c)
-file(GLOB SSE_C_FILES ${CMAKE_SOURCE_DIR}/src/cmon_proxy/*.c)
+file(GLOB CMON_PROXY_C_FILES ${CMAKE_SOURCE_DIR}/src/cmon_proxy/*.c)
 
 include_directories(${CMAKE_SOURCE_DIR}/src/lib/logger)
 include_directories(${CMAKE_SOURCE_DIR}/src/lib/utils)
@@ -29,5 +29,7 @@ target_sources(test_cmon_sse
   ./test_cmon_sse.c
   ./test_macros.h
   ${LOGGER_C_FILES}
-  ${SSE_C_FILES})
+  ${CMON_PROXY_C_FILES})
+
+
 

@@ -10,14 +10,14 @@ FetchContent_Declare(llhttp
 
 FetchContent_MakeAvailable(llhttp)
 
-file(GLOB UTILS_C_FILES   ${CMAKE_SOURCE_DIR}/src/lib/utils/*.c)
-file(GLOB PARSER_C_FILES  ${CMAKE_SOURCE_DIR}/src/lib/parser/*.c)
-file(GLOB CONFIG_C_FILES  ${CMAKE_SOURCE_DIR}/src/lib/config/*.c)
-file(GLOB PS_TREE_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/ps_tree/*.c)
-file(GLOB PROCESS_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/process/*.c)
-file(GLOB INOTIFY_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/inotify/*.c)
-file(GLOB LOGGER_C_FILES  ${CMAKE_SOURCE_DIR}/src/lib/logger/*.c)
-file(GLOB SSE_C_FILES     ${CMAKE_SOURCE_DIR}/src/cmon_proxy/*.c)
+file(GLOB UTILS_C_FILES       ${CMAKE_SOURCE_DIR}/src/lib/utils/*.c)
+file(GLOB PARSER_C_FILES      ${CMAKE_SOURCE_DIR}/src/lib/parser/*.c)
+file(GLOB CONFIG_C_FILES      ${CMAKE_SOURCE_DIR}/src/lib/config/*.c)
+file(GLOB PS_TREE_C_FILES     ${CMAKE_SOURCE_DIR}/src/lib/ps_tree/*.c)
+file(GLOB PROCESS_C_FILES     ${CMAKE_SOURCE_DIR}/src/lib/process/*.c)
+file(GLOB INOTIFY_C_FILES     ${CMAKE_SOURCE_DIR}/src/lib/inotify/*.c)
+file(GLOB LOGGER_C_FILES      ${CMAKE_SOURCE_DIR}/src/lib/logger/*.c)
+file(GLOB CMON_PROXY_C_FILES  ${CMAKE_SOURCE_DIR}/src/cmon_proxy/*.c)
 
 add_executable(cmon
   ./src/main.c
@@ -28,7 +28,7 @@ add_executable(cmon
   ${PROCESS_C_FILES}
   ${INOTIFY_C_FILES}
   ${LOGGER_C_FILES}
-  ${SSE_C_FILES}
+  ${CMON_PROXY_C_FILES}
 )
 
 target_compile_options(cmon PRIVATE -Wall -Wextra -Wpedantic)
