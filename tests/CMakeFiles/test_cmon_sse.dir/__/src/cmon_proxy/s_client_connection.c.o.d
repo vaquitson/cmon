@@ -43,7 +43,9 @@ tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/s_client_connection.c.o: \
  /usr/include/alloca.h /usr/include/bits/stdlib-bsearch.h \
  /usr/include/bits/stdlib-float.h /usr/include/arpa/inet.h \
  /usr/include/netinet/in.h /usr/include/bits/stdint-uintn.h \
- /usr/include/bits/in.h \
+ /usr/include/bits/in.h /usr/include/time.h /usr/include/bits/time.h \
+ /usr/include/bits/types/struct_tm.h \
+ /usr/include/bits/types/struct_itimerspec.h \
  /home/narval/programing/proyects/cmon/src/lib/logger/logger.h \
  /usr/include/stdio.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdarg.h \

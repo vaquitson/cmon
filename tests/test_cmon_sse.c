@@ -1,14 +1,12 @@
 #include <sys/socket.h>
 #include <stdio.h>
-#include <string.h>
 #include <unistd.h>
-#include <errno.h>
-#include <stdlib.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <pthread.h>
 
-#include "sse.h"
 #include "s_client_connection.h"
+#include "logger.h"
 
 #define PROXY_PORT 7000
 #define SERVER_PROXY_BUF_LEN 102400 
@@ -50,30 +48,21 @@ int test_1(){
   char server_buff[client_buf_len];
 
   listening_fd = _get_listening_socket(port);
-  server_conn_fd = _get_server_connection(server_port);
+  //server_conn_fd = _get_server_connection(server_port, NULL);
     
   ssize_t rc;
 
-  for (;;){
-    client_conn_fd = accept(listening_fd, (struct sockaddr *)&client_addr, &client_addr_len);
-    while ((recv_len = recv(client_conn_fd, client_buff, client_buf_len, 0)) > 0){
-      printf("%s\n", client_buff);
-      
-      write(server_conn_fd, client_buff, recv_len);
-
-      recv_len = read(server_conn_fd, server_buff, server_buf_len);
-
-      write(client_conn_fd, server_buff, recv_len);
-    }
-    printf("hello\n");
-  }
-
+  client_conn_fd = accept(listening_fd, (struct sockaddr *)&client_addr, &client_addr_len);
+  log_write(LOG_DEBUG, "client accepted");
+  cc_handle_client_connection(client_conn_fd);
 
   return 0;
 }
 
 
 int test_2(){
+  char text[17] = "hello i am \r\n\r\n";
+  printf("%ld\n", _find_patern("\r\n\r\n", text, 15));
   return 0;
 }
 
