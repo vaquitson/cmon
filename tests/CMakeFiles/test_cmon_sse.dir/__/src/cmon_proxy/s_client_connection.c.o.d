@@ -54,4 +54,5 @@ tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/s_client_connection.c.o: \
  /usr/include/bits/types/FILE.h /usr/include/bits/types/struct_FILE.h \
  /usr/include/bits/types/cookie_io_functions_t.h \
  /usr/include/bits/stdio_lim.h /usr/include/bits/stdio.h \
+ /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_http.h \
  /home/narval/programing/proyects/cmon/src/cmon_proxy/s_client_connection.h

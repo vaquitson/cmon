@@ -1,5 +1,5 @@
-CMakeFiles/cmon.dir/src/lib/utils/cmon_string_array.c.o: \
- /home/narval/programing/proyects/cmon/src/lib/utils/cmon_string_array.c \
+tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_http.c.o: \
+ /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_http.c \
  /usr/include/stdc-predef.h /usr/include/stdlib.h \
  /usr/include/bits/libc-header-start.h /usr/include/features.h \
  /usr/include/features-time64.h /usr/include/bits/wordsize.h \
@@ -25,10 +25,11 @@ CMakeFiles/cmon.dir/src/lib/utils/cmon_string_array.c.o: \
  /usr/include/bits/atomic_wide_counter.h /usr/include/bits/struct_mutex.h \
  /usr/include/bits/struct_rwlock.h /usr/include/alloca.h \
  /usr/include/bits/stdlib-bsearch.h /usr/include/bits/stdlib-float.h \
- /home/narval/programing/proyects/cmon/src/lib/utils/cmon_string.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdbool.h \
- /home/narval/programing/proyects/cmon/src/lib/utils/cmon_string_array.h \
- /home/narval/programing/proyects/cmon/src/lib/utils/cmon_errors.h \
+ /usr/include/string.h /usr/include/bits/types/locale_t.h \
+ /usr/include/bits/types/__locale_t.h /usr/include/strings.h \
+ /usr/include/errno.h /usr/include/bits/errno.h \
+ /usr/include/linux/errno.h /usr/include/asm/errno.h \
+ /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
  /home/narval/programing/proyects/cmon/src/lib/logger/logger.h \
  /usr/include/stdio.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdarg.h \

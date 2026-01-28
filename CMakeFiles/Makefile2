@@ -120,12 +120,12 @@ tests/clean: tests/CMakeFiles/test_cmon_sse.dir/clean
 CMakeFiles/cmon.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cmon.dir/build.make CMakeFiles/cmon.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 "Built target cmon"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 "Built target cmon"
 .PHONY : CMakeFiles/cmon.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/cmon.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/narval/programing/proyects/cmon/CMakeFiles 19
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/narval/programing/proyects/cmon/CMakeFiles 20
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/cmon.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/narval/programing/proyects/cmon/CMakeFiles 0
 .PHONY : CMakeFiles/cmon.dir/rule
@@ -146,7 +146,7 @@ CMakeFiles/cmon.dir/clean:
 _deps/llhttp-build/CMakeFiles/llhttp_shared.dir/all:
 	$(MAKE) $(MAKESILENT) -f _deps/llhttp-build/CMakeFiles/llhttp_shared.dir/build.make _deps/llhttp-build/CMakeFiles/llhttp_shared.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/llhttp-build/CMakeFiles/llhttp_shared.dir/build.make _deps/llhttp-build/CMakeFiles/llhttp_shared.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=20,21,22,23 "Built target llhttp_shared"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=21,22,23,24 "Built target llhttp_shared"
 .PHONY : _deps/llhttp-build/CMakeFiles/llhttp_shared.dir/all
 
 # Build rule for subdir invocation for target.
@@ -172,7 +172,7 @@ _deps/llhttp-build/CMakeFiles/llhttp_shared.dir/clean:
 tests/CMakeFiles/test_logger.dir/all:
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_logger.dir/build.make tests/CMakeFiles/test_logger.dir/depend
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_logger.dir/build.make tests/CMakeFiles/test_logger.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=41,42,43 "Built target test_logger"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=43,44,45 "Built target test_logger"
 .PHONY : tests/CMakeFiles/test_logger.dir/all
 
 # Build rule for subdir invocation for target.
@@ -198,7 +198,7 @@ tests/CMakeFiles/test_logger.dir/clean:
 tests/CMakeFiles/test_cmon_path.dir/all:
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/depend
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=24,25,26,27,28,29,30,31,32,33,34,35 "Built target test_cmon_path"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=25,26,27,28,29,30,31,32,33,34,35,36 "Built target test_cmon_path"
 .PHONY : tests/CMakeFiles/test_cmon_path.dir/all
 
 # Build rule for subdir invocation for target.
@@ -224,12 +224,12 @@ tests/CMakeFiles/test_cmon_path.dir/clean:
 tests/CMakeFiles/test_cmon_sse.dir/all:
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/depend
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=36,37,38,39,40 "Built target test_cmon_sse"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=37,38,39,40,41,42 "Built target test_cmon_sse"
 .PHONY : tests/CMakeFiles/test_cmon_sse.dir/all
 
 # Build rule for subdir invocation for target.
 tests/CMakeFiles/test_cmon_sse.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/narval/programing/proyects/cmon/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/narval/programing/proyects/cmon/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_cmon_sse.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/narval/programing/proyects/cmon/CMakeFiles 0
 .PHONY : tests/CMakeFiles/test_cmon_sse.dir/rule

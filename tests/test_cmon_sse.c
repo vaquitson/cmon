@@ -53,7 +53,6 @@ int test_1(){
   ssize_t rc;
 
   client_conn_fd = accept(listening_fd, (struct sockaddr *)&client_addr, &client_addr_len);
-  log_write(LOG_DEBUG, "client accepted");
   cc_handle_client_connection(client_conn_fd);
 
   return 0;

@@ -213,6 +213,30 @@ test_cmon_sse/fast:
 	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/build
 .PHONY : test_cmon_sse/fast
 
+__/src/cmon_proxy/cmon_http.o: __/src/cmon_proxy/cmon_http.c.o
+.PHONY : __/src/cmon_proxy/cmon_http.o
+
+# target to build an object file
+__/src/cmon_proxy/cmon_http.c.o:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_http.c.o
+.PHONY : __/src/cmon_proxy/cmon_http.c.o
+
+__/src/cmon_proxy/cmon_http.i: __/src/cmon_proxy/cmon_http.c.i
+.PHONY : __/src/cmon_proxy/cmon_http.i
+
+# target to preprocess a source file
+__/src/cmon_proxy/cmon_http.c.i:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_http.c.i
+.PHONY : __/src/cmon_proxy/cmon_http.c.i
+
+__/src/cmon_proxy/cmon_http.s: __/src/cmon_proxy/cmon_http.c.s
+.PHONY : __/src/cmon_proxy/cmon_http.s
+
+# target to generate assembly for a file
+__/src/cmon_proxy/cmon_http.c.s:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_http.c.s
+.PHONY : __/src/cmon_proxy/cmon_http.c.s
+
 __/src/cmon_proxy/s_client_connection.o: __/src/cmon_proxy/s_client_connection.c.o
 .PHONY : __/src/cmon_proxy/s_client_connection.o
 
@@ -595,6 +619,9 @@ help:
 	@echo "... test_cmon_path"
 	@echo "... test_cmon_sse"
 	@echo "... test_logger"
+	@echo "... __/src/cmon_proxy/cmon_http.o"
+	@echo "... __/src/cmon_proxy/cmon_http.i"
+	@echo "... __/src/cmon_proxy/cmon_http.s"
 	@echo "... __/src/cmon_proxy/s_client_connection.o"
 	@echo "... __/src/cmon_proxy/s_client_connection.i"
 	@echo "... __/src/cmon_proxy/s_client_connection.s"

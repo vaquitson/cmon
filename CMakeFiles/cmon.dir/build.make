@@ -293,10 +293,24 @@ CMakeFiles/cmon.dir/src/lib/logger/logger.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/cmon.dir/src/lib/logger/logger.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/narval/programing/proyects/cmon/src/lib/logger/logger.c -o CMakeFiles/cmon.dir/src/lib/logger/logger.c.s
 
+CMakeFiles/cmon.dir/src/cmon_proxy/cmon_http.c.o: CMakeFiles/cmon.dir/flags.make
+CMakeFiles/cmon.dir/src/cmon_proxy/cmon_http.c.o: src/cmon_proxy/cmon_http.c
+CMakeFiles/cmon.dir/src/cmon_proxy/cmon_http.c.o: CMakeFiles/cmon.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/cmon.dir/src/cmon_proxy/cmon_http.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/cmon.dir/src/cmon_proxy/cmon_http.c.o -MF CMakeFiles/cmon.dir/src/cmon_proxy/cmon_http.c.o.d -o CMakeFiles/cmon.dir/src/cmon_proxy/cmon_http.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_http.c
+
+CMakeFiles/cmon.dir/src/cmon_proxy/cmon_http.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/cmon.dir/src/cmon_proxy/cmon_http.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_http.c > CMakeFiles/cmon.dir/src/cmon_proxy/cmon_http.c.i
+
+CMakeFiles/cmon.dir/src/cmon_proxy/cmon_http.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/cmon.dir/src/cmon_proxy/cmon_http.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_http.c -o CMakeFiles/cmon.dir/src/cmon_proxy/cmon_http.c.s
+
 CMakeFiles/cmon.dir/src/cmon_proxy/s_client_connection.c.o: CMakeFiles/cmon.dir/flags.make
 CMakeFiles/cmon.dir/src/cmon_proxy/s_client_connection.c.o: src/cmon_proxy/s_client_connection.c
 CMakeFiles/cmon.dir/src/cmon_proxy/s_client_connection.c.o: CMakeFiles/cmon.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/cmon.dir/src/cmon_proxy/s_client_connection.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object CMakeFiles/cmon.dir/src/cmon_proxy/s_client_connection.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/cmon.dir/src/cmon_proxy/s_client_connection.c.o -MF CMakeFiles/cmon.dir/src/cmon_proxy/s_client_connection.c.o.d -o CMakeFiles/cmon.dir/src/cmon_proxy/s_client_connection.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/s_client_connection.c
 
 CMakeFiles/cmon.dir/src/cmon_proxy/s_client_connection.c.i: cmake_force
@@ -310,7 +324,7 @@ CMakeFiles/cmon.dir/src/cmon_proxy/s_client_connection.c.s: cmake_force
 CMakeFiles/cmon.dir/src/cmon_proxy/sse.c.o: CMakeFiles/cmon.dir/flags.make
 CMakeFiles/cmon.dir/src/cmon_proxy/sse.c.o: src/cmon_proxy/sse.c
 CMakeFiles/cmon.dir/src/cmon_proxy/sse.c.o: CMakeFiles/cmon.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object CMakeFiles/cmon.dir/src/cmon_proxy/sse.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object CMakeFiles/cmon.dir/src/cmon_proxy/sse.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/cmon.dir/src/cmon_proxy/sse.c.o -MF CMakeFiles/cmon.dir/src/cmon_proxy/sse.c.o.d -o CMakeFiles/cmon.dir/src/cmon_proxy/sse.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/sse.c
 
 CMakeFiles/cmon.dir/src/cmon_proxy/sse.c.i: cmake_force
@@ -339,6 +353,7 @@ cmon_OBJECTS = \
 "CMakeFiles/cmon.dir/src/lib/process/process.c.o" \
 "CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.o" \
 "CMakeFiles/cmon.dir/src/lib/logger/logger.c.o" \
+"CMakeFiles/cmon.dir/src/cmon_proxy/cmon_http.c.o" \
 "CMakeFiles/cmon.dir/src/cmon_proxy/s_client_connection.c.o" \
 "CMakeFiles/cmon.dir/src/cmon_proxy/sse.c.o"
 
@@ -361,11 +376,12 @@ cmon: CMakeFiles/cmon.dir/src/lib/ps_tree/ps_tree.c.o
 cmon: CMakeFiles/cmon.dir/src/lib/process/process.c.o
 cmon: CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.o
 cmon: CMakeFiles/cmon.dir/src/lib/logger/logger.c.o
+cmon: CMakeFiles/cmon.dir/src/cmon_proxy/cmon_http.c.o
 cmon: CMakeFiles/cmon.dir/src/cmon_proxy/s_client_connection.c.o
 cmon: CMakeFiles/cmon.dir/src/cmon_proxy/sse.c.o
 cmon: CMakeFiles/cmon.dir/build.make
 cmon: CMakeFiles/cmon.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Linking C executable cmon"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/narval/programing/proyects/cmon/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Linking C executable cmon"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/cmon.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

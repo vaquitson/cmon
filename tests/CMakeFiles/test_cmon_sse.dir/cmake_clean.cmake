@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_http.c.o"
+  "CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_http.c.o.d"
   "CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/s_client_connection.c.o"
   "CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/s_client_connection.c.o.d"
   "CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.o"
