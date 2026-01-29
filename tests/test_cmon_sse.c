@@ -24,7 +24,7 @@ void echo_req(int sock_fd){
   ssize_t n;
   char buf[3072];
 
-  while ( (n = read(sock_fd, buf, 2046)) >0) {
+  while ((n = read(sock_fd, buf, 2046)) >0) {
     printf("req ->\n%s\n", buf);
   }
 }

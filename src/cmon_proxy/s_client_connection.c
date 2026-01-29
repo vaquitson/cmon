@@ -144,27 +144,27 @@ int _get_server_connection(const uint16_t port, const char *addr){
 
 
 int cc_handle_client_connection(int fd){
-  char req_buff[sizeof(char) * READ_BUFF_LEN] = {0};
-  char res_buff[sizeof(char) * READ_BUFF_LEN] = {0};
-  ssize_t server_read_len;
+  char req_body_buff[sizeof(char) * READ_BUFF_LEN] = {'\0'};
+  char res_body_buff[sizeof(char) * READ_BUFF_LEN] = {'\0'};
 
-  size_t req_read_len;
+  ssize_t req_read_len;
   ssize_t req_headder_len;
 
-  size_t res_read_len;
+  ssize_t res_read_len;
   ssize_t res_headder_len;
+
+  int body_length;
 
   int client_fd = fd;
   int server_fd = _get_server_connection(SERVER_PORT, NULL);
   
-  req_headder_len = _http_get_headders(client_fd, req_buff, READ_BUFF_LEN, &req_read_len);
-  write(server_fd, req_buff, req_headder_len);
+  // client
+  CmonHttpMessage *req_msg = http_get_message(client_fd);
+  http_send_http_message(client_fd, server_fd, req_msg);
   
-  res_headder_len = _http_get_headders(server_fd, res_buff, READ_BUFF_LEN, &res_read_len);
-  res_buff[res_headder_len] = '\0';
-  printf("%s\n", res_buff);
-  
-  //write(client_fd, response_buff, server_read_len);
+  // server
+  CmonHttpMessage *res_msg = http_get_message(server_fd);
+  http_send_http_message(server_fd, client_fd, res_msg);
 
   return 0;
 }

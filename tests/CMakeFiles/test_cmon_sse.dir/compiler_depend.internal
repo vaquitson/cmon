@@ -3,6 +3,7 @@
 
 tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_http.c.o
  /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_http.c
+ /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_http.h
  /home/narval/programing/proyects/cmon/src/lib/logger/logger.h
  /usr/include/alloca.h
  /usr/include/asm-generic/errno-base.h
