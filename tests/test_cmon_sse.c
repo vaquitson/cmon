@@ -30,6 +30,7 @@ void echo_req(int sock_fd){
 }
 
 int test_1(){
+  log_write(LOG_DEBUG, "start time");
   uint16_t port = PROXY_PORT;
   uint16_t server_port = 3000;
 
@@ -48,14 +49,13 @@ int test_1(){
   char server_buff[client_buf_len];
 
   listening_fd = _get_listening_socket(port);
-  //server_conn_fd = _get_server_connection(server_port, NULL);
-    
   ssize_t rc;
-
-  client_conn_fd = accept(listening_fd, (struct sockaddr *)&client_addr, &client_addr_len);
-  cc_handle_client_connection(client_conn_fd);
-
-  return 0;
+  
+  for (;;){
+    client_conn_fd = accept(listening_fd, (struct sockaddr *)&client_addr, &client_addr_len);
+    cc_handle_client_connection(client_conn_fd);
+  }
+    return 0;
 }
 
 

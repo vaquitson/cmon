@@ -98,8 +98,8 @@ void log_write(int priority, char *meesage, ...){
       priority_str = "UNDEFINED";
   }
   
-  fprintf(logger->file_p, "%d | %d-%d-%d | %d:%d | %s | ", 
-      logger->pid, tm.tm_year + 1900, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min, priority_str);
+  fprintf(logger->file_p, "%d | %d-%d-%d | %d:%d:%d | %s | ", 
+      logger->pid, tm.tm_year + 1900, tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, priority_str);
   vfprintf(logger->file_p, meesage, ap);
   fputc('\n', logger->file_p);
   fflush(logger->file_p);

@@ -133,6 +133,7 @@ int _get_server_connection(const uint16_t port, const char *addr){
   
   sock_fd = _try_connect(&server_addr);
   if (sock_fd > 0){
+    log_write(LOG_INFO, "from _get_server_connection: connection stablish with server");
     return sock_fd;
   }
 
@@ -144,27 +145,42 @@ int _get_server_connection(const uint16_t port, const char *addr){
 
 
 int cc_handle_client_connection(int fd){
-  char req_body_buff[sizeof(char) * READ_BUFF_LEN] = {'\0'};
-  char res_body_buff[sizeof(char) * READ_BUFF_LEN] = {'\0'};
-
-  ssize_t req_read_len;
-  ssize_t req_headder_len;
-
-  ssize_t res_read_len;
-  ssize_t res_headder_len;
-
-  int body_length;
+  ssize_t data_send;
 
   int client_fd = fd;
   int server_fd = _get_server_connection(SERVER_PORT, NULL);
   
-  // client
-  CmonHttpMessage *req_msg = http_get_message(client_fd);
-  http_send_http_message(client_fd, server_fd, req_msg);
-  
-  // server
-  CmonHttpMessage *res_msg = http_get_message(server_fd);
-  http_send_http_message(server_fd, client_fd, res_msg);
+  for (;;) {
+    // client
+    log_write(LOG_DEBUG, "client part start 1");
+    CmonHttpMessage *req_msg = http_get_message(client_fd);
+    if (req_msg->headders_size == 0){
+      log_write(LOG_DEBUG, "the client droped the connection");
+      return 0;
+    }
+    log_write(LOG_DEBUG, "client part end 1");
 
-  return 0;
+    log_write(LOG_DEBUG, "client part start 2");
+    data_send = http_send_http_message(client_fd, server_fd, req_msg);
+    if (data_send == 0){
+      return 0;
+    }
+    log_write(LOG_DEBUG, "client end 2");
+
+    // server
+    log_write(LOG_DEBUG, "server part start 1");
+    CmonHttpMessage *res_msg = http_get_message(server_fd);
+    if (res_msg->headders_size == 0){
+      log_write(LOG_DEBUG, "the server droped the connection");
+      return 0;
+    }
+    log_write(LOG_DEBUG, "server part end 1");
+    
+    log_write(LOG_DEBUG, "server part start 2");
+    data_send = http_send_http_message(server_fd, client_fd, res_msg);
+    if (data_send == 0){
+      return 0;
+    }
+    log_write(LOG_DEBUG, "server part end 2");
+  }
 }
