@@ -1,59 +1,79 @@
-#include <sys/socket.h>
 #include <stdio.h>
+#include <string.h>
+#include <errno.h>
+
 #include <unistd.h>
-#include <arpa/inet.h>
-#include <netdb.h>
+
 #include <pthread.h>
 
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+
+#include <sys/epoll.h>
+#include <fcntl.h>
+
+#include "cmon_sockets.h"
 #include "s_client_connection.h"
 #include "logger.h"
 
 #define PROXY_PORT 7000
-#define SERVER_PROXY_BUF_LEN 102400 
-
-#define HTTP_RES_MIN_HTML \
-"HTTP/1.1 200 OK\r\n" \
-"Content-Type: text/html; charset=utf-8\r\n" \
-"Content-Length: 11\r\n" \
-"Connection: close\r\n" \
-"\r\n" \
-"<h1>hi</h1>"
-
-
-void echo_req(int sock_fd){
-  ssize_t n;
-  char buf[3072];
-
-  while ((n = read(sock_fd, buf, 2046)) >0) {
-    printf("req ->\n%s\n", buf);
-  }
-}
+#define SSE_SERVER_PORT 7001
+#define MAX_EPOLL_EVENTS 15
 
 int test_1(){
-  log_write(LOG_DEBUG, "start time");
-  uint16_t port = PROXY_PORT;
-  uint16_t server_port = 3000;
+  int epoll_fd;
+  struct epoll_event epoll_events[2];
+  struct epoll_event event_queue[MAX_EPOLL_EVENTS];
+
+  int fd_arr[10];
+  int cur_fd_arr_index = 0;
+
+  pthread_t thread_id;
 
   socklen_t client_addr_len;
   struct sockaddr_in client_addr;
-  int client_conn_fd; 
-  int listening_fd, server_conn_fd;
 
-  ssize_t recv_len;
-  ssize_t send_len;
+  int listening_fd;
+  int sse_listening_fd; 
 
-  size_t client_buf_len = 3072;
-  char client_buff[client_buf_len];
+  epoll_fd = epoll_create1(0);
+  if (epoll_fd < 0){
+    return -1;
+  }
 
-  size_t server_buf_len = 3072;
-  char server_buff[client_buf_len];
+  listening_fd = c_sockets_get_listening_socket(PROXY_PORT); 
+  if (listening_fd < 0){
+    printf("The listening socket for the proxy could not be open");
+    return -1;
+  }
+  epoll_events[0].events = EPOLLIN;
+  epoll_events[0].data.fd = listening_fd;  
 
-  listening_fd = _get_listening_socket(port);
-  ssize_t rc;
-  
+  sse_listening_fd = c_sockets_get_listening_socket(SSE_SERVER_PORT);
+  if (sse_listening_fd < 0){
+    printf("The listening socket for the sse server could not be open");
+    return -1;
+  }
+
+  epoll_events[1].events = EPOLLIN;
+  epoll_events[1].data.fd = sse_listening_fd;  
+
+  if (epoll_ctl(epoll_fd, EPOLL_CTL_ADD, listening_fd, epoll_events) < 0){
+    printf("the file descriptor could not be added to the epoll instance -> %s", strerror(errno));
+    return -1;
+  }
+
+  if (epoll_ctl(epoll_fd, EPOLL_CTL_ADD, sse_listening_fd, epoll_events+1) < 0){
+    printf("the file descriptor could not be added to the epoll instance -> %s", strerror(errno));
+    return -1;
+  }
+
   for (;;){
-    client_conn_fd = accept(listening_fd, (struct sockaddr *)&client_addr, &client_addr_len);
-    cc_handle_client_connection(client_conn_fd);
+    fd_arr[cur_fd_arr_index] = accept(listening_fd, (struct sockaddr *)&client_addr, &client_addr_len);
+    //epoll_wait(epoll_fd, event_queue, MAX_EPOLL_EVENTS, -1);
+    pthread_create(&thread_id, NULL, cc_handle_client_connection, fd_arr+cur_fd_arr_index);
+    cur_fd_arr_index++;
   }
     return 0;
 }
