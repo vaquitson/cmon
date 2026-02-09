@@ -13,9 +13,6 @@ CMakeFiles/cmon.dir/src/cmon_proxy/s_client_connection.c.o: \
  /usr/include/bits/typesizes.h /usr/include/bits/time64.h \
  /usr/include/bits/confname.h /usr/include/bits/getopt_posix.h \
  /usr/include/bits/getopt_core.h /usr/include/bits/unistd_ext.h \
- /usr/include/errno.h /usr/include/bits/errno.h \
- /usr/include/linux/errno.h /usr/include/asm/errno.h \
- /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
  /usr/include/sys/socket.h /usr/include/bits/types/struct_iovec.h \
  /usr/include/bits/socket.h /usr/include/sys/types.h \
  /usr/include/bits/types/clock_t.h /usr/include/bits/types/clockid_t.h \
@@ -45,7 +42,14 @@ CMakeFiles/cmon.dir/src/cmon_proxy/s_client_connection.c.o: \
  /usr/include/netinet/in.h /usr/include/bits/stdint-uintn.h \
  /usr/include/bits/in.h /usr/include/time.h /usr/include/bits/time.h \
  /usr/include/bits/types/struct_tm.h \
- /usr/include/bits/types/struct_itimerspec.h \
+ /usr/include/bits/types/struct_itimerspec.h /usr/include/stdio.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdarg.h \
+ /usr/include/bits/types/__fpos_t.h /usr/include/bits/types/__mbstate_t.h \
+ /usr/include/bits/types/__fpos64_t.h /usr/include/bits/types/__FILE.h \
+ /usr/include/bits/types/FILE.h /usr/include/bits/types/struct_FILE.h \
+ /usr/include/bits/types/cookie_io_functions_t.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/stdio.h \
  /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_http.h \
  /home/narval/programing/proyects/cmon/src/cmon_proxy/s_client_connection.h \
- /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_sockets.h
+ /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_sockets.h \
+ /home/narval/programing/proyects/cmon/src/lib/logger/logger.h

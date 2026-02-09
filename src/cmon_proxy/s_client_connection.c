@@ -30,24 +30,49 @@ void * cc_handle_client_connection(void *fd){
     // client
     CmonHttpMessage *req_msg = c_http_get_message(client_fd);
     if (req_msg == NULL){
-      log_write(LOG_ERROR, "from cc_handle_client_connection: the req msg has problems");
+      close(client_fd);
+      close(server_fd);
+      return NULL;
+    };
+
+    data_send = c_http_send_message(req_msg, server_fd, &read_size);
+    if (data_send == -1){
+      log_write(LOG_WARNING, "from c_handle_client_connection: something unexpected happen while sending");
+      close(client_fd);
+      close(server_fd);
+      free(req_msg);
       return NULL;
     }
 
-    data_send = c_http_send_message1(req_msg, server_fd, &read_size);
-    if (data_send == 0){
+    if (data_send == C_HTTP_CONNECTION_CLOSED){
+      close(client_fd);
+      close(server_fd);
+      free(req_msg);
       return NULL;
     }
+    free(req_msg);
 
-    // server
+    // server 
     CmonHttpMessage *res_msg = c_http_get_message(server_fd);
     if (res_msg->headders_size == 0){
+      close(client_fd);
+      close(server_fd);
       return NULL;
     }
     
-    data_send = c_http_send_message1(res_msg, client_fd, &read_size);
-    if (data_send == 0){
+    data_send = c_http_send_message(res_msg, client_fd, &read_size);
+    if (data_send == C_HTTP_CONNECTION_CLOSED){
+      close(client_fd);
+      close(server_fd);
+      free(res_msg);
       return NULL;
     }
+    if (data_send == -1){
+      close(client_fd);
+      close(server_fd);
+      free(res_msg);
+      return NULL;
+    } 
+    free(res_msg); 
   }
 }
