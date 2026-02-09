@@ -32,6 +32,6 @@ ssize_t _http_get_headders(int fd, char *buff, size_t buff_len, ssize_t *read_le
 CmonHttpMessage *c_http_get_message(int fd);
 ssize_t _http_get_content_length_headder(const char *buff, const size_t length);
 ssize_t c_http_send_message(int sender, int recever, CmonHttpMessage *http_msg);
-
+int c_http_send_message1(CmonHttpMessage *http_msg, int recever, size_t *send_size);
 
 

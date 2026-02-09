@@ -2,6 +2,7 @@
 #include <string.h>
 #include <errno.h>
 #include <limits.h>
+#include <string.h>
 
 #include "logger.h"
 #include "cmon_http.h"
@@ -47,6 +48,16 @@ ssize_t _parse_str_to_int(char *str, size_t size){
  * or -1 if no match is found.
 */
 ssize_t _find_patern(const char *p, const char *t, const size_t t_len){
+  if (p == NULL){
+    log_write(LOG_ERROR, "from _find_patern: the pattern is NULL");
+    return -1;
+  }
+
+  if (t == NULL){
+    log_write(LOG_ERROR, "from _find_patern: the text is NULL");
+    return -1;
+  }
+
   size_t p_len = strlen(p);
   
   for (size_t s=0; s <= t_len - p_len; s++){
@@ -94,14 +105,14 @@ ssize_t _http_get_headders(int fd, char *buff, size_t buff_len, ssize_t *read_le
     read_size = read(fd, buff, buff_len);
     if (read_size < 0) {
       log_write(LOG_ERROR, 
-          "from _get_full_reuqest: read errror -> %s",
+          "from _http_get_headders: read errror -> %s",
           strerror(errno));
       return -1;
     }
 
     if (read_size == 0){
       log_write(LOG_WARNING,
-          "from _get_full_reuqest: the connection was closed before the end of the headers");
+          "from _http_get_headders: the connection was closed before the end of the headers");
       *read_len = tot_size;
       return 0;
     }
@@ -123,6 +134,35 @@ ssize_t _http_get_headders(int fd, char *buff, size_t buff_len, ssize_t *read_le
 }
 
 
+/* this function send the header segment of the 
+ * CmonHttpMessage to the provided fd.
+ *
+ * On succes return the number of bytes writed
+ * on error return -1
+*/ 
+ssize_t c_http_send_headers(CmonHttpMessage *msg, int fd){
+  if (msg == NULL){
+    return -1;
+  }
+
+  ssize_t write_size; 
+
+  write_size = write(fd, msg->headders_buff, msg->headders_size);
+  if (write_size < 0){
+    log_write(LOG_ERROR, "from c_http_send_headers: an error ocurre while reading -> %s", strerror(errno)); 
+    return -1;
+  }
+  
+  // This might be recoverable
+  if (write_size != msg->headders_size){
+    log_write(LOG_ERROR, "from c_http_send_headers: coulden't send the full headder");
+    return -1;
+  }
+
+  return write_size;
+}
+
+
 
 /*
  * This function gets a buffer with an http headders of a (req,res) and
@@ -135,6 +175,7 @@ ssize_t _http_get_content_length_headder(const char *buff, const size_t length){
   ssize_t heaader_index;
   size_t number_buf_size = 0;
   ssize_t parse_val;
+
   int iterations = 0;
   char number_buf[MAX_LENGTH_OF_CONTEMT_LENGTH_CHARS] = {'\0'};
   const char *p_c;
@@ -142,7 +183,7 @@ ssize_t _http_get_content_length_headder(const char *buff, const size_t length){
   heaader_index = _find_patern("Content-Length:", buff, length);
   if (heaader_index == -1){
     return 0;
-  }
+  } 
 
   p_c = buff + heaader_index + 14;
 
@@ -190,7 +231,7 @@ ssize_t _http_get_content_length_headder(const char *buff, const size_t length){
  * heap-allocated CmonHttpMessage representing the request.
  *
  * This function may read past the end of the header section. Any excess bytes
- * (i.e., bytes already read beyond "\r\n\r\n") are stored in `msg->body_buff`,
+ * (i.e., bytes already read beyond "\r\n\r\n") are stored in `msg->body_chunk`,
  * and `msg->cur_body_size` is set to the number of excess bytes. If no excess
  * bytes are read, `msg->cur_body_size` is set to 0.
  *
@@ -215,8 +256,16 @@ CmonHttpMessage *c_http_get_message(int fd){
   }
 
   CmonHttpMessage *http_message = malloc(sizeof(CmonHttpMessage));
+  if (http_message == NULL){
+    log_write(LOG_ERROR, 
+        "from c_http_get_message: coudl not allocate memory for the http_message -> %s",
+        strerror(errno));
+    return NULL;
+  }
+
   http_message->cur_body_size = 0;
   http_message->headders_size = 0;
+  http_message->remaining_data = 0;
   
   headders_size = _http_get_headders(fd, 
       http_message->headders_buff, 
@@ -224,16 +273,20 @@ CmonHttpMessage *c_http_get_message(int fd){
       &total_read_size);
 
   if (headders_size <= 0){
-    log_write(LOG_WARNING, "from http_get_message: bad request");
+    log_write(LOG_WARNING, 
+        "from http_get_message: bad request, heeader size is %ld",
+        headders_size);
     free(http_message);
     return NULL;
   }
+  http_message->headders_size = headders_size;
 
   for (ssize_t i = 0; i < total_read_size - headders_size; i++){
     http_message->body_chunk[i] = http_message->headders_buff[headders_size+i];
   }
 
-  content_length = _http_get_content_length_headder( http_message->headders_buff, 
+  content_length = _http_get_content_length_headder(
+      http_message->headders_buff, 
       http_message->headders_size);
 
   if (content_length < 0){
@@ -243,10 +296,7 @@ CmonHttpMessage *c_http_get_message(int fd){
   }
 
   http_message->total_msg_size = headders_size + content_length;
-  http_message->remaining_data = http_message->total_msg_size - total_read_size; 
-  
   http_message->content_length = content_length;
-  http_message->headders_size = headders_size;
   http_message->cur_body_size = total_read_size - headders_size;
   http_message->fd = fd;
 
@@ -269,12 +319,12 @@ ssize_t c_http_send_message(int sender, int recever, CmonHttpMessage *http_msg){
   ssize_t total_sended_size = 0;
 
   if (http_msg == NULL){
-    log_write(LOG_ERROR, "from http_send_http_message: the http message is null");
+    log_write(LOG_ERROR, "from c_http_send_message: the http message is null");
     return -1;
   }
 
   if (sender < 0 || recever < 0){
-    log_write(LOG_ERROR, "from http_send_http_message: the fd are not valid");
+    log_write(LOG_ERROR, "from c_http_send_message: the fd are not valid");
     return -1;
   }
 
@@ -284,14 +334,14 @@ ssize_t c_http_send_message(int sender, int recever, CmonHttpMessage *http_msg){
 
   content_length = _http_get_content_length_headder(http_msg->headders_buff, http_msg->headders_size); 
   if (content_length < 0){
-    log_write(LOG_ERROR, "from http_send_http_message: the content length is incorrect");
+    log_write(LOG_ERROR, "from c_http_send_message: the content length is incorrect");
     return -1;
   }
 
   write_size = write(recever, http_msg->headders_buff, http_msg->headders_size);
   if (write_size < 0){
     log_write(LOG_ERROR, 
-        "from http_send_http_message: error while trying to send headders to recever -> %s", strerror(errno));
+        "from c_http_send_message: error while trying to send headders to recever -> %s", strerror(errno));
     return -1;
   }
 
@@ -369,7 +419,7 @@ ssize_t c_http_send_message(int sender, int recever, CmonHttpMessage *http_msg){
 
 
 /*
- * Sends the bytes currently stored in `msg->body_buff` to the receiver file
+ * Sends the bytes currently stored in `msg->body_chunk` to the receiver file
  * descriptor.
  *
  * `op` is a bitmask of optional flags defined in cmon_http.h.
@@ -465,110 +515,74 @@ int c_http_recev_http_body_chunk(CmonHttpMessage *msg){
   }
 
   msg->remaining_data -= read_size;
+  msg->cur_body_size += read_size;
 
   return read_size;
 }
 
 
 
+
 /*
  * Sends `http_msg` from `sender` to `receiver`.
  *
- * Returns the total number of bytes sent (headers + body).
+ * Forwards the full HTTP message (header section and body). This call blocks as
+ * needed to read the complete message from `sender` and write it to `receiver`.
+ *
+ * Returns the total number of bytes forwarded (headers + body) on success.
  * Returns 0 if the connection was closed by the peer, or -1 on error.
  */
-ssize_t c_http_send_message1(CmonHttpMessage *http_msg, int recever){
+int c_http_send_message1(CmonHttpMessage *http_msg, int recever, size_t *send_size){
   ssize_t write_size;
-  ssize_t read_size;
+  int read_size;
 
-  ssize_t total_sended_size = 0;
+  size_t total_sended_size = 0;
 
   if (http_msg == NULL){
-    log_write(LOG_ERROR, "from http_send_http_message: the http message is null");
+    log_write(LOG_ERROR, "from c_http_send_message: the http message is null");
+    *send_size = total_sended_size;
     return -1;
   }
 
   if (recever < 0){
-    log_write(LOG_ERROR, "from http_send_http_message: the fd are not valid");
+    log_write(LOG_ERROR, "from c_http_send_message: the fd are not valid");
+    *send_size = total_sended_size;
     return -1;
   }
 
-  write_size = write(recever, http_msg->headders_buff, http_msg->headders_size);
+  write_size = c_http_send_headers(http_msg, recever);
   if (write_size < 0){
-    log_write(LOG_ERROR, 
-        "from http_send_http_message: error while trying to send headders to recever -> %s", strerror(errno));
+    *send_size = total_sended_size;
     return -1;
-  }
-
-  if (write_size != http_msg->headders_size){
-    log_write(LOG_ERROR, 
-        "from http_send_http_message: error while trying to send headders to recever, the length dosent match, expect to send %ld send %ld",
-        http_msg->headders_size,
-        write_size);
-    return -1;
-  }
-  
+  } 
   total_sended_size += write_size;
-
-  if (http_msg->cur_body_size == http_msg->content_length){
-    write_size = write(recever, http_msg->body_buff, http_msg->cur_body_size);
-
-    if (write_size != http_msg->cur_body_size){
-      log_write(LOG_ERROR, 
-          "from http_send_http_message: write less data than expected. Expect %ld send %ld",
-          http_msg->cur_body_size,
-          write_size);
+  
+  while(total_sended_size < http_msg->total_msg_size){
+    read_size = c_http_recev_http_body_chunk(http_msg);
+    if (read_size == -1){
+      log_write(LOG_ERROR ,"from c_http_send_message: something went wrong while reding");
+      *send_size = total_sended_size;
       return -1;
     }
+
+    if (read_size == C_HTTP_CONNECTION_CLOSED){
+      log_write(LOG_WARNING, "from c_http_send_message: the connection was closed unexpectedly");
+      *send_size = total_sended_size;
+      return C_HTTP_CONNECTION_CLOSED;
+    }
+
+    write_size = c_http_send_body(http_msg, recever, 0);
     total_sended_size += write_size;
   }
 
-  while(total_sended_size < http_msg->headders_size + http_msg->content_length){
-    read_size = read(http_msg->fd, 
-        http_msg->body_buff + http_msg->cur_body_size, 
-        HTTP_MAX_HEADDER_SIZE - http_msg->cur_body_size);
-
-    if (read_size < 0){
-      log_write(LOG_ERROR, 
-          "from http_send_http_message: a problem ocurre while reading the sender -> %s", 
-          strerror(errno));
-      return -1;
-    }
-    
-    if (read_size == 0){
-      log_write(LOG_WARNING, "from http_send_http_message: the connection was closed before all data is sent. Expect to send %ld send %ld",
-          http_msg->headders_size + http_msg->content_length,
-          total_sended_size);
-      break;
-    }
-
-
-    http_msg->cur_body_size += read_size; 
-    write_size = write(recever, http_msg->body_buff, http_msg->cur_body_size);
-
-    if (write_size != http_msg->cur_body_size){
-      log_write(LOG_ERROR, 
-          "from http_send_http_message: write less data than expected. Expect %ld send %ld",
-          http_msg->cur_body_size,
-          write_size);
-      return -1;
-    }
-
-    
-    http_msg->cur_body_size = 0;
-    total_sended_size += write_size;
-
-  }
-
-  if (total_sended_size == http_msg->headders_size + http_msg->content_length){
+  if (total_sended_size == http_msg->total_msg_size){
+    *send_size = total_sended_size;
     return total_sended_size;
 
   } else {
-    log_write(LOG_ERROR, "from http_send_http_message: expect to send %ld but send %ld",
-        http_msg->headders_size + http_msg->content_length,
+    log_write(LOG_ERROR, "from c_http_send_message: expect to send %ld but send %ld",
+        http_msg->total_msg_size,
         total_sended_size);
     return -1;
   }
 }
-
-

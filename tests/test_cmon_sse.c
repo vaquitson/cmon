@@ -76,7 +76,8 @@ int test_1(){
     pthread_create(&thread_id, NULL, cc_handle_client_connection, fd_arr+cur_fd_arr_index);
     cur_fd_arr_index++;
   }
-    return 0;
+
+  return 0;
 }
 
 

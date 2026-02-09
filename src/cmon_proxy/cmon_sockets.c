@@ -117,13 +117,12 @@ int c_sockets_get_server_connection(const uint16_t port, const char *addr){
   inet_pton(AF_INET, ip_addr, &server_addr.sin_addr);
   
   sock_fd = _try_connect(&server_addr);
-  if (sock_fd > 0){
-    log_write(LOG_INFO, "from _get_server_connection: connection stablish with server");
-    return sock_fd;
+  if (sock_fd < 0){
+     log_write(LOG_ERROR, 
+         "from _get_client_connection: the connection process faild");
+     return -1;
   }
 
-  log_write(LOG_ERROR, 
-      "from _get_client_connection: the connection process faild");
-
-  return -1;
+  log_write(LOG_INFO, "from _get_server_connection: connection stablish with server");
+  return sock_fd;
 }

@@ -2,14 +2,6 @@ cmake_minimum_required(VERSION 3.11)
 project(cmon C)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-include(FetchContent)
-
-FetchContent_Declare(llhttp
-  URL "https://github.com/nodejs/llhttp/archive/refs/tags/release/v8.1.0.tar.gz"
-)
-
-FetchContent_MakeAvailable(llhttp)
-
 file(GLOB UTILS_C_FILES       ${CMAKE_SOURCE_DIR}/src/lib/utils/*.c)
 file(GLOB PARSER_C_FILES      ${CMAKE_SOURCE_DIR}/src/lib/parser/*.c)
 file(GLOB CONFIG_C_FILES      ${CMAKE_SOURCE_DIR}/src/lib/config/*.c)
