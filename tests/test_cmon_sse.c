@@ -44,7 +44,7 @@ int test_1(){
 
   listening_fd = c_sockets_get_listening_socket(PROXY_PORT); 
   if (listening_fd < 0){
-    printf("The listening socket for the proxy could not be open");
+    printf("The listening socket for the proxy could not be open\n");
     return -1;
   }
   epoll_events[0].events = EPOLLIN;
@@ -52,7 +52,7 @@ int test_1(){
 
   sse_listening_fd = c_sockets_get_listening_socket(SSE_SERVER_PORT);
   if (sse_listening_fd < 0){
-    printf("The listening socket for the sse server could not be open");
+    printf("The listening socket for the sse server could not be open\n");
     return -1;
   }
 
@@ -60,17 +60,18 @@ int test_1(){
   epoll_events[1].data.fd = sse_listening_fd;  
 
   if (epoll_ctl(epoll_fd, EPOLL_CTL_ADD, listening_fd, epoll_events) < 0){
-    printf("the file descriptor could not be added to the epoll instance -> %s", strerror(errno));
+    printf("the file descriptor could not be added to the epoll instance -> %s\n", strerror(errno));
     return -1;
   }
 
   if (epoll_ctl(epoll_fd, EPOLL_CTL_ADD, sse_listening_fd, epoll_events+1) < 0){
-    printf("the file descriptor could not be added to the epoll instance -> %s", strerror(errno));
+    printf("the file descriptor could not be added to the epoll instance -> %s\n", strerror(errno));
     return -1;
   }
 
   for (;;){
     fd_arr[cur_fd_arr_index] = accept(listening_fd, (struct sockaddr *)&client_addr, &client_addr_len);
+    log_write(LOG_INFO, "from test_1: new client accepted");
     //epoll_wait(epoll_fd, event_queue, MAX_EPOLL_EVENTS, -1);
     pthread_create(&thread_id, NULL, cc_handle_client_connection, fd_arr+cur_fd_arr_index);
     cur_fd_arr_index++;

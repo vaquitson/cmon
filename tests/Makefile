@@ -95,51 +95,6 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-.PHONY : list_install_components/fast
-
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	/usr/local/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	/usr/local/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	/usr/local/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	/usr/local/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	/usr/local/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	/usr/local/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip/fast
-
 # The main all target
 all: cmake_check_build_system
 	cd /home/narval/programing/proyects/cmon && $(CMAKE_COMMAND) -E cmake_progress_start /home/narval/programing/proyects/cmon/CMakeFiles /home/narval/programing/proyects/cmon/tests//CMakeFiles/progress.marks
@@ -237,6 +192,54 @@ __/src/cmon_proxy/cmon_http.c.s:
 	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_http.c.s
 .PHONY : __/src/cmon_proxy/cmon_http.c.s
 
+__/src/cmon_proxy/cmon_sockets.o: __/src/cmon_proxy/cmon_sockets.c.o
+.PHONY : __/src/cmon_proxy/cmon_sockets.o
+
+# target to build an object file
+__/src/cmon_proxy/cmon_sockets.c.o:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_sockets.c.o
+.PHONY : __/src/cmon_proxy/cmon_sockets.c.o
+
+__/src/cmon_proxy/cmon_sockets.i: __/src/cmon_proxy/cmon_sockets.c.i
+.PHONY : __/src/cmon_proxy/cmon_sockets.i
+
+# target to preprocess a source file
+__/src/cmon_proxy/cmon_sockets.c.i:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_sockets.c.i
+.PHONY : __/src/cmon_proxy/cmon_sockets.c.i
+
+__/src/cmon_proxy/cmon_sockets.s: __/src/cmon_proxy/cmon_sockets.c.s
+.PHONY : __/src/cmon_proxy/cmon_sockets.s
+
+# target to generate assembly for a file
+__/src/cmon_proxy/cmon_sockets.c.s:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_sockets.c.s
+.PHONY : __/src/cmon_proxy/cmon_sockets.c.s
+
+__/src/cmon_proxy/cmon_sse.o: __/src/cmon_proxy/cmon_sse.c.o
+.PHONY : __/src/cmon_proxy/cmon_sse.o
+
+# target to build an object file
+__/src/cmon_proxy/cmon_sse.c.o:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_sse.c.o
+.PHONY : __/src/cmon_proxy/cmon_sse.c.o
+
+__/src/cmon_proxy/cmon_sse.i: __/src/cmon_proxy/cmon_sse.c.i
+.PHONY : __/src/cmon_proxy/cmon_sse.i
+
+# target to preprocess a source file
+__/src/cmon_proxy/cmon_sse.c.i:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_sse.c.i
+.PHONY : __/src/cmon_proxy/cmon_sse.c.i
+
+__/src/cmon_proxy/cmon_sse.s: __/src/cmon_proxy/cmon_sse.c.s
+.PHONY : __/src/cmon_proxy/cmon_sse.s
+
+# target to generate assembly for a file
+__/src/cmon_proxy/cmon_sse.c.s:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_sse.c.s
+.PHONY : __/src/cmon_proxy/cmon_sse.c.s
+
 __/src/cmon_proxy/s_client_connection.o: __/src/cmon_proxy/s_client_connection.c.o
 .PHONY : __/src/cmon_proxy/s_client_connection.o
 
@@ -260,30 +263,6 @@ __/src/cmon_proxy/s_client_connection.s: __/src/cmon_proxy/s_client_connection.c
 __/src/cmon_proxy/s_client_connection.c.s:
 	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/s_client_connection.c.s
 .PHONY : __/src/cmon_proxy/s_client_connection.c.s
-
-__/src/cmon_proxy/sse.o: __/src/cmon_proxy/sse.c.o
-.PHONY : __/src/cmon_proxy/sse.o
-
-# target to build an object file
-__/src/cmon_proxy/sse.c.o:
-	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.o
-.PHONY : __/src/cmon_proxy/sse.c.o
-
-__/src/cmon_proxy/sse.i: __/src/cmon_proxy/sse.c.i
-.PHONY : __/src/cmon_proxy/sse.i
-
-# target to preprocess a source file
-__/src/cmon_proxy/sse.c.i:
-	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.i
-.PHONY : __/src/cmon_proxy/sse.c.i
-
-__/src/cmon_proxy/sse.s: __/src/cmon_proxy/sse.c.s
-.PHONY : __/src/cmon_proxy/sse.s
-
-# target to generate assembly for a file
-__/src/cmon_proxy/sse.c.s:
-	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/sse.c.s
-.PHONY : __/src/cmon_proxy/sse.c.s
 
 __/src/lib/logger/logger.o: __/src/lib/logger/logger.c.o
 .PHONY : __/src/lib/logger/logger.o
@@ -610,10 +589,6 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
-	@echo "... install"
-	@echo "... install/local"
-	@echo "... install/strip"
-	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... test_cmon_path"
@@ -622,12 +597,15 @@ help:
 	@echo "... __/src/cmon_proxy/cmon_http.o"
 	@echo "... __/src/cmon_proxy/cmon_http.i"
 	@echo "... __/src/cmon_proxy/cmon_http.s"
+	@echo "... __/src/cmon_proxy/cmon_sockets.o"
+	@echo "... __/src/cmon_proxy/cmon_sockets.i"
+	@echo "... __/src/cmon_proxy/cmon_sockets.s"
+	@echo "... __/src/cmon_proxy/cmon_sse.o"
+	@echo "... __/src/cmon_proxy/cmon_sse.i"
+	@echo "... __/src/cmon_proxy/cmon_sse.s"
 	@echo "... __/src/cmon_proxy/s_client_connection.o"
 	@echo "... __/src/cmon_proxy/s_client_connection.i"
 	@echo "... __/src/cmon_proxy/s_client_connection.s"
-	@echo "... __/src/cmon_proxy/sse.o"
-	@echo "... __/src/cmon_proxy/sse.i"
-	@echo "... __/src/cmon_proxy/sse.s"
 	@echo "... __/src/lib/logger/logger.o"
 	@echo "... __/src/lib/logger/logger.i"
 	@echo "... __/src/lib/logger/logger.s"
