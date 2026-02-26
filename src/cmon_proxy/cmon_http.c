@@ -244,7 +244,6 @@ ssize_t _http_get_content_length_headder(const char *buff, const size_t length){
  * The caller owns the returned message and must free it when done.
  *
  */
-
 CmonHttpMessage *c_http_get_message(int fd){
   ssize_t total_read_size;
   ssize_t headders_size;
