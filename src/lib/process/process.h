@@ -1,6 +1,6 @@
 #pragma once
 
-#include "cmon_int_array.h"
+#include "c_int_array.h"
 #include "config.h"
 
 /* start the child procees */

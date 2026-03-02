@@ -13,11 +13,11 @@
  */
 int c_sockets_get_listening_socket(uint16_t port){
   static struct sockaddr_in listener_addr;
-  int sd;
+  int fd;
   int rc;
   
-  sd = socket(AF_INET, SOCK_STREAM, 0);
-  if (sd < 0){
+  fd = socket(AF_INET, SOCK_STREAM, 0);
+  if (fd < 0){
     log_write(LOG_ERROR,
         "from _get_listening_socket: could not open a socket -> %s", 
         strerror(errno));
@@ -29,7 +29,7 @@ int c_sockets_get_listening_socket(uint16_t port){
   listener_addr.sin_addr.s_addr = htonl(INADDR_ANY);
   listener_addr.sin_port = htons(port);
 
-  rc = bind(sd, 
+  rc = bind(fd, 
       (struct sockaddr *) &listener_addr, 
       sizeof(listener_addr));
 
@@ -40,7 +40,7 @@ int c_sockets_get_listening_socket(uint16_t port){
     return -1;
   }
 
-  if (listen(sd, 0) < 0){
+  if (listen(fd, 0) < 0){
     log_write(LOG_ERROR, 
         "from _get_listening_socket: could not start a listening socket -> %s",
        strerror(errno));
@@ -52,7 +52,7 @@ int c_sockets_get_listening_socket(uint16_t port){
       "from _get_listening_socket: sokcet listening on port %ld",
       port);
 
-  return sd;
+  return fd;
 }
 
 

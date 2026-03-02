@@ -6,7 +6,7 @@
 #include "process.h"
 #include "cmon_errors.h"
 #include "cmon_print.h"
-#include "cmon_int_array.h"
+#include "c_int_array.h"
 #include "logger.h"
 
 int process_start_child(CmonConfig *conf){

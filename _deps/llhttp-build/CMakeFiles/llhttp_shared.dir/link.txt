@@ -1,1 +1,0 @@
-/usr/bin/cc -fPIC -O2 -g -DNDEBUG -shared -Wl,-soname,libllhttp.so.8.1 -o libllhttp.so.8.1.0 CMakeFiles/llhttp_shared.dir/src/llhttp.c.o CMakeFiles/llhttp_shared.dir/src/http.c.o CMakeFiles/llhttp_shared.dir/src/api.c.o

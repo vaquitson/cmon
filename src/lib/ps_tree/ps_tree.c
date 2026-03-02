@@ -8,7 +8,7 @@
 
 #include "ps_tree.h"
 #include "cmon_errors.h"
-#include "cmon_int_array.h"
+#include "c_int_array.h"
 #include "text_utils.h"
 
 static pid_t ps_tree_exec(pid_t childPid, int pipeRead, int pipeWrite){

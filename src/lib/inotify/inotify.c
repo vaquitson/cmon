@@ -10,9 +10,8 @@
 
 #include "cmon_errors.h"
 #include "inotify.h"
-#include "cmon_int_array.h"
+#include "c_int_array.h"
 #include "cmon_string_array.h"
-#include "cmon_str_utils.h"
 #include "logger.h"
 #include "config.h"
 #include "ps_tree.h"

@@ -8,7 +8,7 @@ file(GLOB CONFIG_C_FILES        ${CMAKE_SOURCE_DIR}/src/lib/config/*.c)
 file(GLOB PS_TREE_C_FILES       ${CMAKE_SOURCE_DIR}/src/lib/ps_tree/*.c)
 file(GLOB PROCESS_C_FILES       ${CMAKE_SOURCE_DIR}/src/lib/process/*.c)
 file(GLOB INOTIFY_C_FILES       ${CMAKE_SOURCE_DIR}/src/lib/inotify/*.c)
-file(GLOB LOGGER_C_FILES        ${CMAKE_SOURCE_DIR}/src/lib/logger/*.c)
+file(GLOB LOGGER_C_FILES        ${CMAKE_SOURCE_DIR}/src/logger/*.c)
 file(GLOB CMON_PROXY_C_FILES    ${CMAKE_SOURCE_DIR}/src/cmon_proxy/*.c)
 file(GLOB GENERAL_UTILS_C_FILES ${CMAKE_SOURCE_DIR}/src/utils/*.c)
 
@@ -35,7 +35,7 @@ target_include_directories(cmon PRIVATE
   ${CMAKE_SOURCE_DIR}/src/lib/ps_tree
   ${CMAKE_SOURCE_DIR}/src/lib/process
   ${CMAKE_SOURCE_DIR}/src/lib/inotify
-  ${CMAKE_SOURCE_DIR}/src/lib/logger
+  ${CMAKE_SOURCE_DIR}/src/logger
   ${CMAKE_SOURCE_DIR}/src/cmon_proxy
   ${CMAKE_SOURCE_DIR}/src/utils
 )

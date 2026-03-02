@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <sys/inotify.h>
 #include "config.h"
-#include "cmon_int_array.h"
+#include "c_int_array.h"
 
 #define MAX_AMOUNT_OF_NESTED_DIRECTORIES 20
 

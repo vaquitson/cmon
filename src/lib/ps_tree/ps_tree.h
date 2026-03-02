@@ -8,7 +8,7 @@
 #pragma once
 
 #include <unistd.h>
-#include "cmon_int_array.h"
+#include "c_int_array.h"
 
 /*
  * this function gets a new heap allocated CmonIntArray with

@@ -1,9 +1,9 @@
-file(GLOB LOGGER_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/logger/*.c)
+file(GLOB LOGGER_C_FILES ${CMAKE_SOURCE_DIR}/src/logger/*.c)
 file(GLOB UTILS_C_FILES ${CMAKE_SOURCE_DIR}/src/lib/utils/*.c)
 file(GLOB CMON_PROXY_C_FILES ${CMAKE_SOURCE_DIR}/src/cmon_proxy/*.c)
 file(GLOB GENERAL_UTILS_C_FILES ${CMAKE_SOURCE_DIR}/src/utils/*.c)
 
-include_directories(${CMAKE_SOURCE_DIR}/src/lib/logger)
+include_directories(${CMAKE_SOURCE_DIR}/src/logger)
 include_directories(${CMAKE_SOURCE_DIR}/src/lib/utils)
 include_directories(${CMAKE_SOURCE_DIR}/src/cmon_proxy)
 include_directories(${CMAKE_SOURCE_DIR}/src/utils)

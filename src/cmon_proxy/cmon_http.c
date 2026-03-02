@@ -358,7 +358,6 @@ ssize_t c_http_send_body_chunk(CmonHttpMessage *msg, int recever, int op) {
 }
 
 
-
 /*
  * Blocks until a new body chunk is available and stores it in `msg->body_chunk`.
  *
@@ -369,7 +368,7 @@ ssize_t c_http_send_body_chunk(CmonHttpMessage *msg, int recever, int op) {
  *
  * On error, logs the failure and returns -1.
  */
-int c_http_recv_http_body_chunk(CmonHttpMessage *msg){
+int c_http_recv_body_chunk(CmonHttpMessage *msg){
   ssize_t read_size;
 
   if (msg == NULL){
@@ -408,72 +407,4 @@ int c_http_recv_http_body_chunk(CmonHttpMessage *msg){
   msg->cur_body_size += read_size;
 
   return read_size;
-}
-
-
-/*
- * Sends `http_msg` from `sender` to `receiver`.
- *
- * Forwards the full HTTP message (header section and body). This call blocks as
- * needed to read the complete message from `sender` and write it to `receiver`.
- *
- * Returns the total number of bytes forwarded (headers + body) on success.
- * Returns 0 if the connection was closed by the peer, or -1 on error.
- */
-int c_http_send_message(CmonHttpMessage *http_msg, int recever, size_t *send_size){
-  ssize_t write_size;
-  int read_size;
-
-  size_t total_sended_size = 0;
-
-  if (http_msg == NULL){
-    log_write(LOG_ERROR, "from c_http_send_message: the http message is null");
-    *send_size = total_sended_size;
-    return -1;
-  }
-
-  if (recever < 0){
-    log_write(LOG_ERROR, "from c_http_send_message: the fd are not valid");
-    *send_size = total_sended_size;
-    return -1;
-  }
-
-  write_size = c_http_send_headers(http_msg, recever);
-  if (write_size == -1){
-    *send_size = total_sended_size;
-    return -1;
-  } 
-  total_sended_size += write_size;
-  
-  while(total_sended_size < http_msg->total_msg_size){
-    read_size = c_http_recv_http_body_chunk(http_msg);
-    if (read_size == -1){
-      log_write(LOG_ERROR ,"from c_http_send_message: something went wrong while reding");
-      *send_size = total_sended_size;
-      return -1;
-    }
-
-    if (read_size == C_HTTP_CONNECTION_CLOSED){
-      log_write(LOG_WARNING, "from c_http_send_message: the connection was closed unexpectedly");
-      *send_size = total_sended_size;
-      return C_HTTP_CONNECTION_CLOSED;
-    }
-
-    write_size = c_http_send_body_chunk(http_msg, recever, C_HTTP_FLUSH_BODY_BUF);
-    if (write_size == -1){
-      return -1;
-    }
-    total_sended_size += write_size;
-  }
-
-  if (total_sended_size == http_msg->total_msg_size){
-    *send_size = total_sended_size;
-    return total_sended_size;
-
-  } else {
-    log_write(LOG_ERROR, "from c_http_send_message: expect to send %ld but send %ld",
-        http_msg->total_msg_size,
-        total_sended_size);
-    return -1;
-  }
 }

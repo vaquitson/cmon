@@ -16,6 +16,11 @@
 #define C_HTTP_BAD_MESSAGE -3
 
 typedef struct {
+  char *buf;
+  size_t size;
+} CmonHttpChunk;
+
+typedef struct {
   char headders_buff[HTTP_MAX_HEADDER_SIZE];
   char body_chunk[C_HTTP_MAX_BODY_CHUNK];
 
@@ -24,9 +29,9 @@ typedef struct {
   ssize_t headders_size;
   ssize_t cur_body_size;
   
-  ssize_t content_length;
-  size_t total_msg_size;
-  
+  size_t content_length;
+
+  size_t total_msg_size; 
   size_t remaining_data;
 
 } CmonHttpMessage;
@@ -35,5 +40,6 @@ ssize_t _http_get_headders(int fd, char *buff, size_t buff_len, ssize_t *read_le
 ssize_t _http_get_content_length_headder(const char *buff, const size_t length);
 
 CmonHttpMessage *c_http_get_message(int fd);
-int c_http_send_message(CmonHttpMessage *http_msg, int recever, size_t *send_size);
-
+ssize_t c_http_send_headers(CmonHttpMessage *msg, int fd);
+int c_http_recv_body_chunk(CmonHttpMessage *msg);
+ssize_t c_http_send_body_chunk(CmonHttpMessage *msg, int recever, int op);
