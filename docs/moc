@@ -1,0 +1,18 @@
+
+#
+problema bastante fuerte, dado que buff es solamente un buffer
+no tenemos forma a priori de saber que hay espacio disponible
+Para ls string que vamos a insertar.
+Una solucion que me parece aceptable
+
+
+La funcion trata de insertar el paylode en la posicion
+index del buff. Es muy importante que se inserte dentro de buff
+y que no se cree un buffer nuevo con esta data.
+
+def u_str_insert_at(paylode, 
+                    paylode_size, 
+                    buff, 
+                    used_space, 
+                    buff_size, 
+                    index)

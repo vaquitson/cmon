@@ -70,4 +70,8 @@ tests/CMakeFiles/test_cmon_sse.dir/test_cmon_sse.c.o: \
  /usr/include/bits/struct_stat.h \
  /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_sockets.h \
  /home/narval/programing/proyects/cmon/src/cmon_proxy/s_client_connection.h \
- /home/narval/programing/proyects/cmon/src/lib/logger/logger.h
+ /home/narval/programing/proyects/cmon/src/lib/logger/logger.h \
+ /home/narval/programing/proyects/cmon/src/utils/utils_str.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-bsearch.h /usr/include/bits/stdlib-float.h

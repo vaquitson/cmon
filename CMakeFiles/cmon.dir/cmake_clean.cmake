@@ -39,6 +39,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/cmon.dir/src/lib/utils/text_utils.c.o.d"
   "CMakeFiles/cmon.dir/src/main.c.o"
   "CMakeFiles/cmon.dir/src/main.c.o.d"
+  "CMakeFiles/cmon.dir/src/utils/utils_str.c.o"
+  "CMakeFiles/cmon.dir/src/utils/utils_str.c.o.d"
   "cmon"
   "cmon.pdb"
 )

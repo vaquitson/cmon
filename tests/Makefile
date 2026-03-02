@@ -510,6 +510,30 @@ __/src/lib/utils/text_utils.c.s:
 	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_path.dir/build.make tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/text_utils.c.s
 .PHONY : __/src/lib/utils/text_utils.c.s
 
+__/src/utils/utils_str.o: __/src/utils/utils_str.c.o
+.PHONY : __/src/utils/utils_str.o
+
+# target to build an object file
+__/src/utils/utils_str.c.o:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/utils/utils_str.c.o
+.PHONY : __/src/utils/utils_str.c.o
+
+__/src/utils/utils_str.i: __/src/utils/utils_str.c.i
+.PHONY : __/src/utils/utils_str.i
+
+# target to preprocess a source file
+__/src/utils/utils_str.c.i:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/utils/utils_str.c.i
+.PHONY : __/src/utils/utils_str.c.i
+
+__/src/utils/utils_str.s: __/src/utils/utils_str.c.s
+.PHONY : __/src/utils/utils_str.s
+
+# target to generate assembly for a file
+__/src/utils/utils_str.c.s:
+	cd /home/narval/programing/proyects/cmon && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_cmon_sse.dir/build.make tests/CMakeFiles/test_cmon_sse.dir/__/src/utils/utils_str.c.s
+.PHONY : __/src/utils/utils_str.c.s
+
 test_cmon_path.o: test_cmon_path.c.o
 .PHONY : test_cmon_path.o
 
@@ -636,6 +660,9 @@ help:
 	@echo "... __/src/lib/utils/text_utils.o"
 	@echo "... __/src/lib/utils/text_utils.i"
 	@echo "... __/src/lib/utils/text_utils.s"
+	@echo "... __/src/utils/utils_str.o"
+	@echo "... __/src/utils/utils_str.i"
+	@echo "... __/src/utils/utils_str.s"
 	@echo "... test_cmon_path.o"
 	@echo "... test_cmon_path.i"
 	@echo "... test_cmon_path.s"

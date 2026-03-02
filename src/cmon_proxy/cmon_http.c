@@ -162,7 +162,6 @@ ssize_t c_http_send_headers(CmonHttpMessage *msg, int fd){
 }
 
 
-
 /*
  * This function gets a buffer with an http headders of a (req,res) and
  * return the value of the Content-Length headder.
@@ -322,7 +321,7 @@ CmonHttpMessage *c_http_get_message(int fd){
  * `msg->cur_body_size` before any reset). On error, logs the failure and
  * returns -1.
  */
-ssize_t c_http_send_body(CmonHttpMessage *msg, int recever, int op) {
+ssize_t c_http_send_body_chunk(CmonHttpMessage *msg, int recever, int op) {
   if (msg == NULL){
     log_write(LOG_ERROR, "from c_http_send_body: the CmonHttpMessage is NULL");
     return -1;
@@ -370,7 +369,7 @@ ssize_t c_http_send_body(CmonHttpMessage *msg, int recever, int op) {
  *
  * On error, logs the failure and returns -1.
  */
-int c_http_recev_http_body_chunk(CmonHttpMessage *msg){
+int c_http_recv_http_body_chunk(CmonHttpMessage *msg){
   ssize_t read_size;
 
   if (msg == NULL){
@@ -447,7 +446,7 @@ int c_http_send_message(CmonHttpMessage *http_msg, int recever, size_t *send_siz
   total_sended_size += write_size;
   
   while(total_sended_size < http_msg->total_msg_size){
-    read_size = c_http_recev_http_body_chunk(http_msg);
+    read_size = c_http_recv_http_body_chunk(http_msg);
     if (read_size == -1){
       log_write(LOG_ERROR ,"from c_http_send_message: something went wrong while reding");
       *send_size = total_sended_size;
@@ -458,9 +457,9 @@ int c_http_send_message(CmonHttpMessage *http_msg, int recever, size_t *send_siz
       log_write(LOG_WARNING, "from c_http_send_message: the connection was closed unexpectedly");
       *send_size = total_sended_size;
       return C_HTTP_CONNECTION_CLOSED;
-    } 
+    }
 
-    write_size = c_http_send_body(http_msg, recever, C_HTTP_FLUSH_BODY_BUF);
+    write_size = c_http_send_body_chunk(http_msg, recever, C_HTTP_FLUSH_BODY_BUF);
     if (write_size == -1){
       return -1;
     }

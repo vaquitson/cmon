@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = -I/home/narval/programing/proyects/cmon/src/lib/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy
+C_INCLUDES = -I/home/narval/programing/proyects/cmon/src/lib/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils
 
 C_FLAGS = -O2 -g -DNDEBUG
 
