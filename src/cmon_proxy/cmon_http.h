@@ -15,14 +15,32 @@
 #define C_HTTP_COULD_NOT_ALLOC_MEMORY -2
 #define C_HTTP_BAD_MESSAGE -3
 
+/* structure representing a resisable chunk of
+ * http message body 
+ * this chunk is compatible with casting with 
+ * CmonString
+*/
 typedef struct {
-  char *buf;
   size_t size;
+  char *buf;
+  size_t length;
 } CmonHttpChunk;
+
+
+/* structure representing a resisable headder section of
+ * http message 
+ * this chunk is compatible with casting with 
+ * CmonString
+*/
+typedef struct {
+  size_t size;
+  char *buf;
+  size_t length;
+} CmonHttpHeadder;
 
 typedef struct {
   char headders_buff[HTTP_MAX_HEADDER_SIZE];
-  char body_chunk[C_HTTP_MAX_BODY_CHUNK];
+  char *body_chunk;
 
   int fd;
 
@@ -43,3 +61,4 @@ CmonHttpMessage *c_http_get_message(int fd);
 ssize_t c_http_send_headers(CmonHttpMessage *msg, int fd);
 int c_http_recv_body_chunk(CmonHttpMessage *msg);
 ssize_t c_http_send_body_chunk(CmonHttpMessage *msg, int recever, int op);
+void c_http_free_message(CmonHttpMessage *msg);

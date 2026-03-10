@@ -3,15 +3,15 @@
 #include <string.h>
 
 #include "cmon_str_utils.h"
-#include "cmon_string.h"
+#include "c_utils_string.h"
 
 /*
  * Get the extname as a substring of the file_name char arr
  */
 char *get_ext_name_from_cmon_string(CmonString *file_name){
-  for (int i = 0; i < file_name->len; i++){
+  for (int i = 0; i < file_name->size; i++){
     if (file_name->string[i] == '.'){
-      if (i+1 < file_name->len){
+      if (i+1 < file_name->size){
         return (file_name->string)+i+1;
       }
     } 

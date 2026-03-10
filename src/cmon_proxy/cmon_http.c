@@ -6,6 +6,7 @@
 
 #include "logger.h"
 #include "cmon_http.h"
+#include "c_utils_str.h"
 
 #define MAX_ITERATIONS 20
 #define MAX_LENGTH_OF_CONTEMT_LENGTH_CHARS 9
@@ -39,39 +40,6 @@ ssize_t _parse_str_to_int(char *str, size_t size){
   }
   return value;
 }
-
-
-/*
- * Searches for the pattern `p` in the text `t`.
- *
- * Returns the zero-based index (as `ssize_t`) of the first occurrence of `p` in `t`,
- * or -1 if no match is found.
-*/
-ssize_t _find_patern(const char *p, const char *t, const size_t t_len){
-  if (p == NULL){
-    log_write(LOG_ERROR, "from _find_patern: the pattern is NULL");
-    return -1;
-  }
-
-  if (t == NULL){
-    log_write(LOG_ERROR, "from _find_patern: the text is NULL");
-    return -1;
-  }
-
-  size_t p_len = strlen(p);
-  
-  for (size_t s=0; s <= t_len - p_len; s++){
-    for (size_t i=0; i < p_len; i++){
-      if (t[s+i] != p[i]){
-        break; 
-      } else if (i == p_len - 1){
-        return s;
-      }
-    }
-  }
-  return -1;
-}
-
 
 /*
  * Reads from `fd` until a complete HTTP header block is available (terminated
@@ -119,11 +87,11 @@ ssize_t _http_get_headders(int fd, char *buff, size_t buff_len, ssize_t *read_le
 
     tot_size += read_size;
     
-    if ((p_offset = _find_patern("\r\n\r\n", buff, tot_size)) != -1){
+    if ((p_offset = c_utils_find_pattern("\r\n\r\n", buff, tot_size)) != -1){
       *read_len = tot_size;
       return p_offset + 4;
 
-    } else if ((p_offset = _find_patern("\n\n", buff, tot_size)) != -1) {
+    } else if ((p_offset = c_utils_find_pattern("\n\n", buff, tot_size)) != -1) {
       *read_len = tot_size;
       return p_offset + 4;
     }
@@ -178,7 +146,7 @@ ssize_t _http_get_content_length_headder(const char *buff, const size_t length){
   char number_buf[MAX_LENGTH_OF_CONTEMT_LENGTH_CHARS] = {'\0'};
   const char *p_c;
 
-  heaader_index = _find_patern("Content-Length:", buff, length);
+  heaader_index = c_utils_find_pattern("Content-Length:", buff, length);
   if (heaader_index == -1){
     return 0;
   } 
@@ -258,6 +226,12 @@ CmonHttpMessage *c_http_get_message(int fd){
     log_write(LOG_ERROR, 
         "from c_http_get_message: coudl not allocate memory for the http_message -> %s",
         strerror(errno));
+    return NULL;
+  }
+
+  http_message->body_chunk = malloc(C_HTTP_MAX_BODY_CHUNK);
+  if (http_message->body_chunk == NULL){
+    free(http_message);
     return NULL;
   }
 
@@ -407,4 +381,29 @@ int c_http_recv_body_chunk(CmonHttpMessage *msg){
   msg->cur_body_size += read_size;
 
   return read_size;
+}
+
+
+/*
+ * Frees a CmonHttpMessage.
+ *
+ * If `msg` is NULL, this function does nothing.
+ */
+void c_http_free_message(CmonHttpMessage *msg){
+  if (msg == NULL){
+    return;
+  }
+
+  if (msg->body_chunk != NULL){
+    free(msg->body_chunk);
+  }
+  free(msg);
+}
+
+/*
+ * This function set the value of the "headder" parameter to "val"
+ * the buff parameter cotains the buffer with the headder part of the 
+ * http message wich have size size
+*/
+void c_http_set_headder(char *headder, char *val, char *buf, size_t size){ 
 }

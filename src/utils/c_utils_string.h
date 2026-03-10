@@ -3,12 +3,14 @@
 #define MAX_STRING_LEN 250
 #define MAX_AMOUNT_OF_STRINGS 50
 
+#define C_UTILS_STRING_INITIAL_EXTRA_SPACE 20
+
 #include <stdlib.h>
 #include <stdbool.h>
 
 // this strings are inmutable
 typedef struct{
-  size_t len; // without NULL char
+  size_t size; // without NULL char
   char *string;
 } CmonString;
 

@@ -22,6 +22,7 @@ target_sources(test_cmon_path
   ./test_cmon_path.c
   ./test_macros.h
   ${LOGGER_C_FILES}
+  ${GENERAL_UTILS_C_FILES}
   ${UTILS_C_FILES})
 
 
@@ -34,5 +35,13 @@ target_sources(test_cmon_sse
   ${CMON_PROXY_C_FILES}
   ${GENERAL_UTILS_C_FILES})
 
+
+add_executable(test_cmon_utils)
+target_sources(test_cmon_utils
+  PRIVATE
+  ./test_cmon_utils.c
+  ${LOGGER_C_FILES}
+  ${CMON_PROXY_C_FILES}
+  ${GENERAL_UTILS_C_FILES})
 
 

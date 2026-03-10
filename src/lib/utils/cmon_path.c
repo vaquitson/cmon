@@ -1,5 +1,5 @@
 #include <string.h>
-#include <cmon_string.h>
+#include "c_utils_string.h"
 #include <unistd.h>
 
 #include "cmon_path.h"

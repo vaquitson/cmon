@@ -1,20 +1,19 @@
 #include <stdlib.h>
 #include <sys/socket.h>
 #include <pthread.h>
+#include <string.h>
 
 #include "cmon_proxy.h"
 #include "cmon_sockets.h"
 #include "logger.h"
-#include "s_client_connection.h"
 #include "cmon_sockets.h"
+#include "c_utils_str.h"
 #include "cmon_http.h"
 
 #define PROXY_PORT 7000
 #define SERVER_PORT 3000
 
-int c_proxy_process_chunk(CmonHttpMessage *msg){
-   
-}
+#define CMON_SSE_PAYLOAD "<script>\n  const es = new EventSource(\"/events\");\n  es.onmessage = () => location.reload();\n</script>\n"
 
 /*
  * Sends `http_msg` from `sender` to `receiver`.
@@ -26,8 +25,18 @@ int c_proxy_process_chunk(CmonHttpMessage *msg){
  * Returns 0 if the connection was closed by the peer, or -1 on error.
  */
 int c_proxy_send_message(CmonHttpMessage *http_msg, int recever, size_t *send_size){
+  static char *serch_tag = "</body>";
+  size_t serch_tag_size = strnlen(serch_tag, 10);
+
+  char buff_len = 2*(serch_tag_size-1);
+  char *buff = malloc(sizeof(char)*buff_len); 
+  char *inyected_body_chunk;
+  size_t payload_size = strnlen(CMON_SSE_PAYLOAD, 100);
+
   ssize_t write_size;
   int read_size;
+  int payload_inyect = 0;
+  int rc;
 
   size_t total_sended_size = 0;
 
@@ -47,7 +56,7 @@ int c_proxy_send_message(CmonHttpMessage *http_msg, int recever, size_t *send_si
   if (write_size == -1){
     *send_size = total_sended_size;
     return -1;
-  } 
+  }
   total_sended_size += write_size;
   
   while(total_sended_size < http_msg->total_msg_size){
@@ -62,8 +71,44 @@ int c_proxy_send_message(CmonHttpMessage *http_msg, int recever, size_t *send_si
       log_write(LOG_WARNING, "from c_http_send_message: the connection was closed unexpectedly");
       *send_size = total_sended_size;
       return C_HTTP_CONNECTION_CLOSED;
-    }
+    } 
 
+    if (payload_inyect == 0){  
+
+      rc = c_utils_find_pattern(serch_tag, http_msg->body_chunk, http_msg->cur_body_size);
+      if (rc == -1){
+        strncpy(buff + serch_tag_size, http_msg->body_chunk, serch_tag_size-1); 
+        rc = c_utils_find_pattern(serch_tag, buff, buff_len);
+        if (rc > 0){
+          printf("hello\n");
+
+          inyected_body_chunk = malloc(http_msg->cur_body_size + payload_size);
+          strncpy(inyected_body_chunk, http_msg->body_chunk, rc-1);
+          strncpy(inyected_body_chunk + rc, CMON_SSE_PAYLOAD, payload_size);
+          strncpy(inyected_body_chunk + rc+1 + payload_size, http_msg->body_chunk+rc, http_msg->cur_body_size - rc);
+
+          free(http_msg->body_chunk);
+          http_msg->body_chunk = inyected_body_chunk;
+          
+          payload_inyect = 1;
+        }
+      } else {
+        printf("hello\n");
+
+        inyected_body_chunk = malloc(http_msg->cur_body_size + payload_size);
+        strncpy(inyected_body_chunk, http_msg->body_chunk, rc-1);
+        strncpy(inyected_body_chunk + rc, CMON_SSE_PAYLOAD, payload_size);
+        strncpy(inyected_body_chunk + rc+1 + payload_size, http_msg->body_chunk + rc, http_msg->cur_body_size - rc);
+        
+        free(http_msg->body_chunk);
+        http_msg->body_chunk = inyected_body_chunk;
+
+        payload_inyect = 1;
+      }
+      strncpy(buff, http_msg->body_chunk + (http_msg->cur_body_size - serch_tag_size -1), serch_tag_size -1);
+    }
+    http_msg->body_chunk[http_msg->cur_body_size] = '\0';
+    printf("\n%s\n", http_msg->body_chunk);
     write_size = c_http_send_body_chunk(http_msg, recever, C_HTTP_FLUSH_BODY_BUF);
     if (write_size == -1){
       return -1;
@@ -151,7 +196,7 @@ int c_proxy_start(void){
   socklen_t client_addr_len;
   struct sockaddr_in client_addr;
 
-  listening_fd = c_sockets_get_listening_socket(PROXY_PORT); 
+  listening_fd = c_sockets_get_listening_socket(PROXY_PORT);
   if (listening_fd < 0){
     log_write(LOG_ERROR, "from c_proxy_start: an unexpected error happen geting the listening fd");
     return -1;
@@ -161,9 +206,8 @@ int c_proxy_start(void){
     rc = accept(listening_fd, (struct sockaddr *)&client_addr, &client_addr_len);
     if (rc == -1){
       log_write(LOG_ERROR, "from c_proxy_start: an erro ocurre while accepting a connection");
-    } else {  
+    } else {
       pthread_create(&thread_id, NULL, c_proxy_handle_client, &rc);
     }
   }
-
 }

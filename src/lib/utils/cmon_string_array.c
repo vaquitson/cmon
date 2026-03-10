@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "cmon_string.h"
+#include "c_utils_string.h"
 #include "cmon_string_array.h"
 #include "cmon_errors.h"
 #include "logger.h"

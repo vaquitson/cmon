@@ -1,6 +1,6 @@
 #pragma once
 
-#include "cmon_string.h"
+#include "c_utils_string.h"
 
 #define INITIAL_ARRAY_SIZE 50
 

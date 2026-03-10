@@ -1,8 +1,0 @@
-#pragma once
-
-#include <netinet/in.h>
-
-int c_sockets_get_listening_socket(uint16_t port);
-int c_sockets_get_server_connection(const uint16_t port, const char *addr);
-ssize_t _find_patern(char *p, char *t, size_t t_len);
-void * cc_handle_client_connection(void *fd);
