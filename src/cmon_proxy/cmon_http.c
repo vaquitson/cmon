@@ -12,6 +12,8 @@
 #define MAX_LENGTH_OF_CONTEMT_LENGTH_CHARS 9
 #define MAX_LENGTH_OF_PARSEABLE_STRING 9
 
+#define CRLF "\r\n"
+#define CRLF_S 2
 
 /*
  * Parses the string `str` as a non-negative decimal integer.
@@ -58,17 +60,16 @@ ssize_t _parse_str_to_int(char *str, size_t size){
  *
  * On faild -1 is return
 */
-ssize_t _http_get_headders(int fd, char *buff, size_t buff_len, ssize_t *read_len){
+ssize_t c_http_recv_header(int fd, char *buff, size_t buff_len, ssize_t *read_len){
   ssize_t read_size;
   ssize_t p_offset;
   ssize_t tot_size = 0;
-  size_t initial_buf_length = buff_len;
 
   for (;;){
     if (buff_len <= 0){
       log_write(LOG_ERROR,
           "from _get_http_headders: the length of the hedders is to large for the buffer of size %ld",
-          initial_buf_length);
+          buff_len);
       return -1;
     }
 
@@ -87,11 +88,11 @@ ssize_t _http_get_headders(int fd, char *buff, size_t buff_len, ssize_t *read_le
 
     tot_size += read_size;
     
-    if ((p_offset = c_utils_find_pattern("\r\n\r\n", buff, tot_size)) != -1){
+    if ((p_offset = c_u_str_find_pattern("\r\n\r\n", strlen("\r\n\r\n"), buff, tot_size)) != -1){
       *read_len = tot_size;
       return p_offset + 4;
 
-    } else if ((p_offset = c_utils_find_pattern("\n\n", buff, tot_size)) != -1) {
+    } else if ((p_offset = c_u_str_find_pattern("\n\n", strlen("\n\n"), buff, tot_size)) != -1) {
       *read_len = tot_size;
       return p_offset + 4;
     }
@@ -146,7 +147,7 @@ ssize_t _http_get_content_length_headder(const char *buff, const size_t length){
   char number_buf[MAX_LENGTH_OF_CONTEMT_LENGTH_CHARS] = {'\0'};
   const char *p_c;
 
-  heaader_index = c_utils_find_pattern("Content-Length:", buff, length);
+  heaader_index = c_u_str_find_pattern("Content-Length:", strlen("Content-Length:"), buff, length);
   if (heaader_index == -1){
     return 0;
   } 
@@ -187,6 +188,77 @@ ssize_t _http_get_content_length_headder(const char *buff, const size_t length){
   }
 
   return parse_val;
+}
+
+/*
+ * Copies the value of the header field `key` from `header` into `buf`.
+ *
+ * Searches within the `header` buffer (length `header_size`) for the field name
+ * `key` followed by ':' (i.e., "key:"). If found, copies the bytes after the
+ * colon up to the next CRLF into `buf`.
+ *
+ * The copied value is NOT NUL-terminated.
+ *
+ * Returns the number of bytes copied on success.
+ * Returns -1 on NULL arguments, -2 on zero sizes, -3 if `key:`/CRLF is not found,
+ * and -4 if the value does not fit in `buf` or is too large to return as `int`.
+ */
+int c_http_get_header(const char *header, 
+                      size_t header_size, 
+                      const char *key,
+                      size_t key_size,
+                      char *buf, 
+                      size_t buf_size){
+  
+  size_t doted_key_size = key_size + 1;
+  char doted_key[doted_key_size];
+
+  ssize_t offset;
+  ssize_t start_index;
+  ssize_t header_value_size;
+
+  if (header == NULL || buf == NULL ||  key == NULL){
+    return -1;
+  }
+
+  if (header_size == 0 || buf_size == 0 || key_size == 0){
+    return -2;
+  }
+  
+  memcpy(doted_key, key, key_size); 
+  doted_key[key_size] = ':';
+
+  offset = c_u_str_find_pattern(doted_key,
+                                doted_key_size,
+                                header,
+                                header_size);
+
+
+  if (offset == -1){
+    return -3;
+  }
+
+  start_index = offset + key_size + 1; 
+  header_value_size = c_u_str_find_pattern(CRLF, 
+                                   CRLF_S,
+                                   header + start_index,
+                                   header_size - start_index);
+
+  if (header_value_size == -1){
+    return -3;
+  }
+
+  if (header_value_size > INT_MAX){
+    return -4;
+  }
+
+  if (buf_size < (size_t)header_value_size){
+    return -4;
+  }
+
+  memcpy(buf, header + start_index, header_value_size);
+  
+  return (int)header_value_size; 
 }
 
 
@@ -239,7 +311,7 @@ CmonHttpMessage *c_http_get_message(int fd){
   http_message->headders_size = 0;
   http_message->remaining_data = 0;
   
-  headders_size = _http_get_headders(fd, 
+  headders_size = c_http_recv_header(fd, 
       http_message->headders_buff, 
       HTTP_MAX_HEADDER_SIZE, 
       &total_read_size);

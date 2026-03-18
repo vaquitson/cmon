@@ -15,6 +15,8 @@
 
 #include "cmon_proxy.h"
 #include "c_utils_str.h"
+#include "logger.h"
+#include "cmon_sockets.h"
 
 
 #define PROXY_PORT 7000
@@ -29,7 +31,7 @@ int test_1(){
 
 int test_2(){
   char text[17] = "hello i am \r\n\r\n";
-  printf("%ld\n", c_utils_find_pattern("\r\n\r\n", text, 15));
+  printf("%ld\n", c_u_str_find_pattern("\r\n\r\n", strlen("\r\n\r\n"), text, 15));
   return 0;
 }
 
@@ -53,7 +55,32 @@ int test_3(){
   return 0;
 }
 
+int test_4(){
+  int rc;
+  int listening_fd; 
+  pthread_t thread_id;
+  
+  socklen_t client_addr_len;
+  struct sockaddr_in client_addr;
+
+  listening_fd = c_sockets_get_listening_socket(PROXY_PORT);
+  if (listening_fd < 0){
+    log_write(LOG_ERROR, "from c_proxy_start: an unexpected error happen geting the listening fd");
+    return -1;
+  }
+  
+  for (;;){
+    rc = accept(listening_fd, (struct sockaddr *)&client_addr, &client_addr_len);
+    if (rc == -1){
+      log_write(LOG_ERROR, "from c_proxy_start: an erro ocurre while accepting a connection");
+    } else {
+      pthread_create(&thread_id, NULL, c_proxy_handle_client_2, &rc);
+    }
+  }
+
+}
+
 int main(void){
-  test_1();
+  test_4();
   return 0;
 }

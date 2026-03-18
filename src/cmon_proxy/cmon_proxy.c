@@ -9,9 +9,25 @@
 #include "cmon_sockets.h"
 #include "c_utils_str.h"
 #include "cmon_http.h"
+#include "c_utils_buffer.h"
 
 #define PROXY_PORT 7000
 #define SERVER_PORT 3000
+
+#define C_PROXY_MAX_BODY_CHUNK_SIZE 8192
+#define C_PROXY_MAX_HEADER_SIZE 8192
+
+enum COMM_STATE {
+  CONNECTING,
+  END,
+  WAITING_HEADER,
+  PROCESING_HEADER,
+};
+
+enum SIDE_STATE {
+  REQ,
+  RES
+};
 
 #define CMON_SSE_PAYLOAD "<script>\n  const es = new EventSource(\"/events\");\n  es.onmessage = () => location.reload();\n</script>\n"
 
@@ -75,10 +91,10 @@ int c_proxy_send_message(CmonHttpMessage *http_msg, int recever, size_t *send_si
 
     if (payload_inyect == 0){  
 
-      rc = c_utils_find_pattern(serch_tag, http_msg->body_chunk, http_msg->cur_body_size);
+      rc = c_u_str_find_pattern(serch_tag, strlen(serch_tag), http_msg->body_chunk, http_msg->cur_body_size);
       if (rc == -1){
         strncpy(buff + serch_tag_size, http_msg->body_chunk, serch_tag_size-1); 
-        rc = c_utils_find_pattern(serch_tag, buff, buff_len);
+        rc = c_u_str_find_pattern(serch_tag, strlen(serch_tag), buff, buff_len);
         if (rc > 0){
           printf("hello\n");
 
@@ -129,6 +145,7 @@ int c_proxy_send_message(CmonHttpMessage *http_msg, int recever, size_t *send_si
 }
 
 void *c_proxy_handle_client(void *fd){
+  int state = CONNECTING; 
   int data_send;
   int client_fd;
   int server_fd;
@@ -185,6 +202,54 @@ void *c_proxy_handle_client(void *fd){
       return NULL;
     } 
     free(res_msg); 
+  }
+}
+
+
+void *c_proxy_handle_client_2(void *fd){
+  int comm_state = WAITING_HEADER; 
+  int side_state = REQ;
+
+  CmonBuffer *stash[2];
+  stash[0] = c_u_buffer_empty(C_PROXY_MAX_BODY_CHUNK_SIZE);
+  stash[1] = c_u_buffer_empty(C_PROXY_MAX_BODY_CHUNK_SIZE);
+
+  CmonBuffer *headder = c_u_buffer_empty(C_PROXY_MAX_HEADER_SIZE);
+
+  int data_send;
+  int headder_size;
+
+  int client_fd;
+  int server_fd;
+  ssize_t read_size;
+  size_t content_length;
+
+  client_fd = *(int *)fd;
+  server_fd = c_sockets_get_server_connection(SERVER_PORT, NULL);
+
+  for(;;) {
+    switch (comm_state) {
+      case WAITING_HEADER:
+        if (stash[0]->len == 0 && headder->len == 0){
+          headder_size = c_http_recv_header(client_fd, headder->buf, headder->avl, &read_size);
+          c_u_buffer_set_len(headder, headder_size);
+          c_u_buffer_insert_at(stash[0], headder->buf + headder_size, read_size - headder_size, 0);
+
+          printf("headder\n");
+          c_u_buffer_print(headder);
+          printf("\n\nstash\n");
+          c_u_buffer_print(stash[0]);
+
+        } else {
+          log_write(LOG_ERROR, "from c_proxy_handle_client_2: the stash is expected to be empty but has values");
+          return NULL;
+        }
+        break;
+
+      case PROCESING_HEADER:
+        
+
+    }
   }
 }
 

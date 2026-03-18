@@ -33,13 +33,14 @@ int c_u_str_copy_n(char *src, size_t n, char *dst, size_t buf_size){
   return 0; 
 }
 
+
 /*
  * Searches for the pattern `p` in the text `t`.
  *
  * Returns the zero-based index (as `ssize_t`) of the first character of the first
  * occurrence of `p` within `t`, or -1 if no match is found.
  */
-ssize_t c_utils_find_pattern(const char *p, const char *t, const size_t t_len){
+ssize_t c_u_str_find_pattern(const char *p, size_t p_len, const char *t, size_t t_len){
   if (p == NULL){
     log_write(LOG_ERROR, "from _find_patern: the pattern is NULL");
     return -1;
@@ -49,9 +50,7 @@ ssize_t c_utils_find_pattern(const char *p, const char *t, const size_t t_len){
     log_write(LOG_ERROR, "from _find_patern: the text is NULL");
     return -1;
   }
-
-  size_t p_len = strlen(p);
-  
+ 
   for (size_t s=0; s <= t_len - p_len; s++){
     for (size_t i=0; i < p_len; i++){
       if (t[s+i] != p[i]){

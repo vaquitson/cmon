@@ -25,6 +25,16 @@ target_sources(test_cmon_path
   ${GENERAL_UTILS_C_FILES}
   ${UTILS_C_FILES})
 
+add_executable(test_cmon_http)
+target_sources(test_cmon_http
+  PRIVATE
+  ./test_cmon_http.c
+  ${LOGGER_C_FILES}
+  ${GENERAL_UTILS_C_FILES}
+  ${CMON_PROXY_C_FILES}
+  ${UTILS_C_FILES})
+
+
 
 add_executable(test_cmon_sse)
 target_sources(test_cmon_sse

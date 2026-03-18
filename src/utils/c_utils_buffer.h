@@ -5,9 +5,21 @@
 #define C_U_BUFFER_INITIAL_EXTRA_SPACE 20
 #define C_U_BUFFER_VIEW_END -1
 
+/* this struct represent a resizable buffer
+ * cap is the total capacity of the buffer 
+ *
+ * len is the current len of the buffer or in other
+ * words, the space ocupy
+ *
+ * avl is the ramaining sapce in the buffer 
+ * 
+ * buf is a pointer to the buffer memory
+*/
+
 typedef struct {
   size_t cap;
   size_t len;
+  size_t avl;
   char *buf;
 } CmonBuffer;
 
@@ -41,3 +53,4 @@ int c_u_buffer_insert_at(CmonBuffer *buf,
 
 
 void c_u_buffer_print(CmonBuffer *buf);
+ssize_t c_u_buffer_set_len(CmonBuffer *buf, size_t new_len);

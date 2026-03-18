@@ -30,6 +30,7 @@ CmonBuffer *c_u_buffer_empty(size_t cap){
   c_buf->buf = buf;
   c_buf->cap = cap;
   c_buf->len = 0;
+  c_buf->avl = cap;
 
   return c_buf;
 }
@@ -53,9 +54,11 @@ CmonBuffer *c_u_buffer_new(char *src, size_t len){
  
   strncpy(c_buf->buf, src, len);
   c_buf->len= len;
+  c_buf->avl -= len;
   
   return c_buf;
 }
+
 
 /* 
  * this function prints the provided buffer 
@@ -72,7 +75,6 @@ void c_u_buffer_print(CmonBuffer *buf){
 }
 
 
-
 /*
  * Frees a `CmonBuffer`, including the underlying data buffer it owns.
  *
@@ -86,7 +88,6 @@ void c_u_buffer_free(CmonBuffer *buf){
     free(buf);
   }
 }
-
 
 
 /*
@@ -221,3 +222,32 @@ int c_u_buffer_insert_at(CmonBuffer *buf,
   return 2;
 }
 
+
+/*
+ * Sets the logical length (`len`) of a `CmonBuffer`.
+ *
+ * This is useful after manually modifying the underlying buffer contents and
+ * needing to update the recorded length (e.g., after inserting or removing
+ * bytes directly).
+ *
+ * Returns the previous length on success.
+ * Returns -1 if `new_len` exceeds the buffer capacity or on any other error.
+ */
+ssize_t c_u_buffer_set_len(CmonBuffer *buf, size_t new_len){
+  ssize_t old_len;
+
+  if (buf == NULL){
+    return -1;
+  }
+
+  if (buf->cap < new_len){
+    return -1;
+  }
+
+  old_len = buf->len; 
+
+  buf->len = new_len;
+  buf->avl = buf->cap - buf->len;
+
+  return old_len;
+}

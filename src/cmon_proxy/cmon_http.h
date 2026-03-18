@@ -26,7 +26,6 @@ typedef struct {
   size_t length;
 } CmonHttpChunk;
 
-
 /* structure representing a resisable headder section of
  * http message 
  * this chunk is compatible with casting with 
@@ -54,7 +53,7 @@ typedef struct {
 
 } CmonHttpMessage;
 
-ssize_t _http_get_headders(int fd, char *buff, size_t buff_len, ssize_t *read_len);
+ssize_t c_http_recv_header(int fd, char *buff, size_t buff_len, ssize_t *read_len);
 ssize_t _http_get_content_length_headder(const char *buff, const size_t length);
 
 CmonHttpMessage *c_http_get_message(int fd);
@@ -62,3 +61,11 @@ ssize_t c_http_send_headers(CmonHttpMessage *msg, int fd);
 int c_http_recv_body_chunk(CmonHttpMessage *msg);
 ssize_t c_http_send_body_chunk(CmonHttpMessage *msg, int recever, int op);
 void c_http_free_message(CmonHttpMessage *msg);
+ssize_t c_http_recv_header(const int fd, char *buff, const size_t buff_len, ssize_t *read_len);
+int c_http_get_header(const char *header, 
+                      size_t header_size, 
+                      const char *key,
+                      size_t key_size,
+                      char *buf, size_t buf_size);
+
+
