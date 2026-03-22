@@ -128,6 +128,90 @@ int test_2(){
   return 0;
 }
 
+int test_3(){
+  CmonBuffer *buf = c_u_buffer_new("abcdeabcde", strlen("abcdeabcde"));
+  c_u_buffer_shift_from(buf, 5, 4);
+  if (memcmp(buf->buf, "abcdeabcdabcde", 14) != 0){
+    printf("test_3: the shift dosent have the write values\n");
+    return -1;
+  }
+
+  if (buf->len != 14){
+    printf("test_3: the shift dosent have the write length\n");
+    return -1;
+  }
+  c_u_buffer_free(buf);
+
+  buf = c_u_buffer_new("abcdeabcde", strlen("abcdeabcde"));
+  c_u_buffer_shift_from(buf, 0, 4);
+
+  if (memcmp(buf->buf, "abcdabcdeabcde", 14) != 0){
+    printf("test_3: the shift at 0 dosent have the write values\n");
+    return -1;
+  }
+
+  if (buf->len != 14){
+    printf("test_3: the shift at 0 dosent have the write length\n");
+    return -1;
+  }
+
+  c_u_buffer_free(buf);
+
+  buf = c_u_buffer_new("1234ab", strlen("1234ab"));
+  c_u_buffer_shift_from(buf, 4, 4);
+
+  // be carefule here with the null bytes that could be in empty spaces, 
+  // because they dosen't print
+  if (memcmp(buf->buf, "1234ab\0\0ab", 10) != 0){
+    printf("test_3: the shift at n dosent have the write values\n");
+    return -1;
+  }
+
+  if (buf->len != 10){
+    printf("test_3: the shift at n dosent have the write length\n");
+    return -1;
+  }
+
+  c_u_buffer_free(buf);
+
+  buf = c_u_buffer_new("1234ab", strlen("1234ab"));
+  c_u_buffer_shift_from(buf, 4, 30);
+
+  // be carefule here with the null bytes that could be in empty spaces, 
+  // because they dosen't print
+  if (memcmp(buf->buf, "1234\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0ab", 37) != 0){
+    printf("test_3: the shift at n with new memory dosent have the write values\n");
+    return -1;
+  }
+
+  if (buf->len != 36){
+    printf("test_3: the shift at n with new memory dosent have the write length\n");
+    return -1;
+  }
+
+  c_u_buffer_free(buf);
+
+  buf = c_u_buffer_new("_234ab", strlen("_234ab"));
+  c_u_buffer_shift_from(buf, 0, 30);
+
+  // be carefule here with the null bytes that could be in empty spaces, 
+  // because they dosen't print
+  if (memcmp(buf->buf, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0_234ab", 37) != 0){
+    printf("test_3: the shift at 0 with new memory dosent have the write values\n");
+    return -1;
+  }
+
+  if (buf->len != 36){
+    printf("test_3: the shift at 0 with new memory dosent have the write length\n");
+    return -1;
+  }
+
+
+
+
+  return 0;
+}
+
 
 int main(void){
   if (test1() != 0){
@@ -138,6 +222,11 @@ int main(void){
   if (test_2() != 0){
     printf("\ntest_2: Faild\n");
     return -2;
+  }
+  
+  if (test_3() != 0){
+    printf("\ntest_3: Faild\n");
+    return -3;
   }
   
   printf("\nSuccess\n");

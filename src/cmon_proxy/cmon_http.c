@@ -7,13 +7,21 @@
 #include "logger.h"
 #include "cmon_http.h"
 #include "c_utils_str.h"
+#include "c_utils_buffer.h"
 
 #define MAX_ITERATIONS 20
 #define MAX_LENGTH_OF_CONTEMT_LENGTH_CHARS 9
 #define MAX_LENGTH_OF_PARSEABLE_STRING 9
 
+#define KEY_NOT_FOUND -3
+
 #define CRLF "\r\n"
 #define CRLF_S 2
+
+struct CmonUtilRange{
+  size_t start;
+  size_t end;
+};
 
 /*
  * Parses the string `str` as a non-negative decimal integer.
@@ -190,6 +198,55 @@ ssize_t _http_get_content_length_headder(const char *buff, const size_t length){
   return parse_val;
 }
 
+int _c_http_get_key_value_range(
+    const char *header, size_t header_size,
+    const char *key   , size_t key_size,
+    struct CmonUtilRange *range)
+{     
+  size_t doted_key_size = key_size + 1;
+  char doted_key[doted_key_size];
+
+  ssize_t offset;
+  ssize_t start_index;
+  ssize_t header_value_size;
+
+  if (header == NULL || key == NULL){
+    return -1;
+  }
+
+  if (header_size == 0 || key_size == 0){
+    return -2;
+  }
+  
+  memcpy(doted_key, key, key_size); 
+  doted_key[key_size] = ':';
+
+  offset = c_u_str_find_pattern(doted_key,
+                                doted_key_size,
+                                header,
+                                header_size);
+
+
+  if (offset == -1){
+    return KEY_NOT_FOUND;
+  }
+
+  start_index = offset + key_size + 1; 
+  header_value_size = c_u_str_find_pattern(CRLF, 
+                                   CRLF_S,
+                                   header + start_index,
+                                   header_size - start_index);
+
+  if (header_value_size == -1){
+    return -4;
+  }
+
+  range->start = start_index;
+  range->end = header_value_size;
+
+  return 0;
+}
+
 /*
  * Copies the value of the header field `key` from `header` into `buf`.
  *
@@ -200,16 +257,16 @@ ssize_t _http_get_content_length_headder(const char *buff, const size_t length){
  * The copied value is NOT NUL-terminated.
  *
  * Returns the number of bytes copied on success.
+ * returns 0 if the key dosent exist
  * Returns -1 on NULL arguments, -2 on zero sizes, -3 if `key:`/CRLF is not found,
  * and -4 if the value does not fit in `buf` or is too large to return as `int`.
  */
-int c_http_get_header(const char *header, 
-                      size_t header_size, 
-                      const char *key,
-                      size_t key_size,
-                      char *buf, 
-                      size_t buf_size){
+int c_http_get_header(
+    const char *header, size_t header_size, 
+    const char *key   , size_t key_size,
+          char *buf   , size_t buf_size){
   
+
   size_t doted_key_size = key_size + 1;
   char doted_key[doted_key_size];
 
@@ -235,7 +292,7 @@ int c_http_get_header(const char *header,
 
 
   if (offset == -1){
-    return -3;
+    return 0;
   }
 
   start_index = offset + key_size + 1; 
@@ -259,6 +316,36 @@ int c_http_get_header(const char *header,
   memcpy(buf, header + start_index, header_value_size);
   
   return (int)header_value_size; 
+}
+
+
+
+/*
+ * This function set the value of the "headder" parameter to "val"
+ * the buff parameter cotains the buffer with the headder part of the 
+ * http message wich have size size
+*/
+int c_http_set_headder(CmonBuffer *header,
+    const char *key    , size_t key_size,
+    const char *content, size_t content_size){
+  
+  struct CmonUtilRange range;
+  int rc;
+  size_t cur_header_value_len;
+
+  rc = _c_http_get_key_value_range(
+      header->buf, header->len,
+      key, key_size,
+      &range);
+
+  if (rc == 0){
+    cur_header_value_len = range.end - range.start - 1;
+    if (cur_header_value_len < content_size) { 
+    }
+
+  } 
+
+  return 0;
 }
 
 
@@ -472,10 +559,3 @@ void c_http_free_message(CmonHttpMessage *msg){
   free(msg);
 }
 
-/*
- * This function set the value of the "headder" parameter to "val"
- * the buff parameter cotains the buffer with the headder part of the 
- * http message wich have size size
-*/
-void c_http_set_headder(char *headder, char *val, char *buf, size_t size){ 
-}

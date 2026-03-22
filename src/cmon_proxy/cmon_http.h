@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdlib.h>
+#include "c_utils_buffer.h"
 
 #define HTTP_MAX_HEADDER_SIZE 8192
 #define C_HTTP_MAX_BODY_CHUNK 8192
@@ -53,19 +54,24 @@ typedef struct {
 
 } CmonHttpMessage;
 
-ssize_t c_http_recv_header(int fd, char *buff, size_t buff_len, ssize_t *read_len);
 ssize_t _http_get_content_length_headder(const char *buff, const size_t length);
 
 CmonHttpMessage *c_http_get_message(int fd);
-ssize_t c_http_send_headers(CmonHttpMessage *msg, int fd);
-int c_http_recv_body_chunk(CmonHttpMessage *msg);
-ssize_t c_http_send_body_chunk(CmonHttpMessage *msg, int recever, int op);
+
 void c_http_free_message(CmonHttpMessage *msg);
-ssize_t c_http_recv_header(const int fd, char *buff, const size_t buff_len, ssize_t *read_len);
-int c_http_get_header(const char *header, 
-                      size_t header_size, 
-                      const char *key,
-                      size_t key_size,
-                      char *buf, size_t buf_size);
 
+ssize_t c_http_recv_header(int fd, char *buff, size_t buff_len, ssize_t *read_len);
+int c_http_recv_body_chunk(CmonHttpMessage *msg);
 
+ssize_t c_http_send_headers(CmonHttpMessage *msg, int fd);
+ssize_t c_http_send_body_chunk(CmonHttpMessage *msg, int recever, int op);
+
+int c_http_get_header(
+    const char *header, size_t header_size, 
+    const char *key   , size_t key_size,
+          char *buf   , size_t buf_size);
+
+int c_http_set_headder(
+    CmonBuffer *header,
+    const char *key    , size_t key_size,
+    const char *content, size_t content_size);

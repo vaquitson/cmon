@@ -70,7 +70,11 @@ void c_u_buffer_print(CmonBuffer *buf){
   }
 
   for (size_t i = 0; i < buf->len; i++){
-    putchar(buf->buf[i]);
+    if (buf->buf[i] == '\0'){
+      putchar('|');
+    } else {
+      putchar(buf->buf[i]);
+    }
   }
 }
 
@@ -138,6 +142,88 @@ CmonBufferView *c_u_view_buffer_new(
 
 
 /*
+ * Shifts the contents of `buf` to the right by `n` positions,
+ * starting at `index`.
+ *
+ * The byte at `index` and all subsequent bytes are moved `n`
+ * positions forward, preserving the existing contents while
+ * creating free space inside the buffer.
+ *
+ * This function is mainly intended for insertion-like operations
+ * where space must be created without overwriting data.
+ *
+ * Shifting from the last valid position is not meaningful, since
+ * there is no trailing data to move.
+ *
+ * Returns:
+ *   0  on success.
+ *  -1  if `buf` is NULL.
+ *  -2  if `index` refers to the last valid position.
+ *  -3  if a memory allocation error occurs.
+ */
+int c_u_buffer_shift_from(CmonBuffer *buf,
+    size_t index, size_t n)
+{
+  size_t new_buf_cap;
+  char *new_buf;
+  char *new_buf_p;
+
+  size_t components_len = 2;
+  CmonBufferView components[components_len];
+
+
+  if (buf == NULL){
+    return -1;
+  }
+
+  if (index >= buf->len){
+    return -2;
+  } 
+
+  if (buf->cap - buf->len < n){
+    components[0].buf = buf->buf;
+    components[0].len = index;
+
+    components[1].buf = buf->buf + index;
+    components[1].len = buf->len - index;
+
+    new_buf_cap = buf->len + n + C_U_BUFFER_INITIAL_EXTRA_SPACE;
+    new_buf = calloc(new_buf_cap, sizeof(char));
+    if (new_buf == NULL){
+      return -3;
+    }
+
+    buf->cap = new_buf_cap;
+    buf->len = 0;
+    new_buf_p = new_buf;
+
+    for (size_t i = 0; i < components_len; i++){
+      c_u_str_copy_n(
+          components[i].buf,
+          components[i].len,
+          new_buf_p + n*i,
+          buf->cap - buf->len);
+
+      buf->len += components[i].len + n*i;
+      new_buf_p += components[i].len + n*i;
+
+      buf->avl = buf->cap - buf->len;
+    }
+    free(buf->buf);
+    buf->buf = new_buf;
+
+  } else {
+    for (size_t i = 1; i <= buf->len - index; i++){
+      buf->buf[buf->len - i + n] = buf->buf[buf->len - i];
+    }
+
+    buf->len += n;
+    buf->avl = buf->cap - buf->len;
+  }
+  return 0;
+}
+
+/*
  * Inserts `src` into a CmonBuffer `buf` at the given zero-based byte offset `index`.
  *
  * Return values:
@@ -151,9 +237,9 @@ CmonBufferView *c_u_view_buffer_new(
  * Note: `index` is an offset into the current contents of `buf` (0..length).
  */
 int c_u_buffer_insert_at(CmonBuffer *buf,
-                                 char *src, 
-                                 size_t src_len, 
-                                 size_t index){
+                               char *src, 
+                              size_t src_len, 
+                              size_t index){
 
   char *new_buffer;
   char *new_buffer_p;

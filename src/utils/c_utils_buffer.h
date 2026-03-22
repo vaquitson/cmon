@@ -52,5 +52,8 @@ int c_u_buffer_insert_at(CmonBuffer *buf,
                                  size_t index);
 
 
+int c_u_buffer_shift_from(CmonBuffer *buf,
+    size_t index, size_t n);
+
 void c_u_buffer_print(CmonBuffer *buf);
 ssize_t c_u_buffer_set_len(CmonBuffer *buf, size_t new_len);

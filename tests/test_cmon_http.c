@@ -5,6 +5,8 @@
 #include "cmon_http.h"
 
 int test_1(){
+  char *expected_header_value = " text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+
   const char *req =
     "GET / HTTP/1.1\r\n"
     "Host: localhost:7000\r\n"
@@ -36,13 +38,20 @@ int test_1(){
     printf("test_1: the c_http_get_header function retunr an unexpected rc: expect 0 get: %d\n", rc);
     return -1;
   }
+
+  buf[rc] = '\0';
+  if (memcmp(buf, expected_header_value, rc) != 0){
+    printf("test_1: the c_http_get_header function dosen't have the write data, expect ' text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', but get '%s'\n", buf);
+    return -2;
+  }
                          
-  c_u_str_print_n(buf, rc);
   return 0;
 }
 
 
 int main(){
-  test_1();
+  if (test_1() == 0){
+    printf("Sucesse\n");
+  }
   return 0;
 }
