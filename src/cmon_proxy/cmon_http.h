@@ -54,13 +54,44 @@ typedef struct {
 
 } CmonHttpMessage;
 
+
+typedef struct {
+  int sender;
+  int receiver; 
+
+  size_t data_send_size;
+  size_t content_length;
+
+  CmonBuffer *header;
+
+} CmonHttpConnection;
+
+enum CmonHttpErrCodes {
+  C_HTTP_SUCESS,
+  C_HTTP_HEADER_PARSING_ERR,
+  C_HTTP_RECV_ERR,
+  C_HTTP_BUFFER_ERR,
+  C_HTTP_SOCKET_FD_ERR,
+  C_HTTP_SOCKET_CLOSE,
+};
+
+#define c_http_conn_get_sender(conn) (con)->sender
+#define c_http_conn_get_receiver(conn) (con)->receiver
+
 ssize_t _http_get_content_length_headder(const char *buff, const size_t length);
 
 CmonHttpMessage *c_http_get_message(int fd);
 
 void c_http_free_message(CmonHttpMessage *msg);
 
-ssize_t c_http_recv_header(int fd, char *buff, size_t buff_len, ssize_t *read_len);
+
+ssize_t c_http_recv_header(int fd,
+                           char *buff, size_t buff_len, 
+                           ssize_t *read_len);
+
+int c_http_recv_header1(int fd, CmonBuffer *buf);
+
+
 int c_http_recv_body_chunk(CmonHttpMessage *msg);
 
 ssize_t c_http_send_headers(CmonHttpMessage *msg, int fd);

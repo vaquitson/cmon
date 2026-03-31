@@ -1,0 +1,428 @@
+[
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/main.c.o -c /home/narval/programing/proyects/cmon/src/main.c",
+  "file": "/home/narval/programing/proyects/cmon/src/main.c",
+  "output": "CMakeFiles/cmon.dir/src/main.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/lib/utils/cmon_errors.c.o -c /home/narval/programing/proyects/cmon/src/lib/utils/cmon_errors.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/utils/cmon_errors.c",
+  "output": "CMakeFiles/cmon.dir/src/lib/utils/cmon_errors.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/lib/utils/cmon_path.c.o -c /home/narval/programing/proyects/cmon/src/lib/utils/cmon_path.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/utils/cmon_path.c",
+  "output": "CMakeFiles/cmon.dir/src/lib/utils/cmon_path.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/lib/utils/cmon_print.c.o -c /home/narval/programing/proyects/cmon/src/lib/utils/cmon_print.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/utils/cmon_print.c",
+  "output": "CMakeFiles/cmon.dir/src/lib/utils/cmon_print.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/lib/utils/cmon_str_utils.c.o -c /home/narval/programing/proyects/cmon/src/lib/utils/cmon_str_utils.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/utils/cmon_str_utils.c",
+  "output": "CMakeFiles/cmon.dir/src/lib/utils/cmon_str_utils.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/lib/utils/cmon_string_array.c.o -c /home/narval/programing/proyects/cmon/src/lib/utils/cmon_string_array.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/utils/cmon_string_array.c",
+  "output": "CMakeFiles/cmon.dir/src/lib/utils/cmon_string_array.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/lib/utils/text_utils.c.o -c /home/narval/programing/proyects/cmon/src/lib/utils/text_utils.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/utils/text_utils.c",
+  "output": "CMakeFiles/cmon.dir/src/lib/utils/text_utils.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/lib/parser/tokenizer.c.o -c /home/narval/programing/proyects/cmon/src/lib/parser/tokenizer.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/parser/tokenizer.c",
+  "output": "CMakeFiles/cmon.dir/src/lib/parser/tokenizer.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/lib/config/config.c.o -c /home/narval/programing/proyects/cmon/src/lib/config/config.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/config/config.c",
+  "output": "CMakeFiles/cmon.dir/src/lib/config/config.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/lib/ps_tree/ps_tree.c.o -c /home/narval/programing/proyects/cmon/src/lib/ps_tree/ps_tree.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/ps_tree/ps_tree.c",
+  "output": "CMakeFiles/cmon.dir/src/lib/ps_tree/ps_tree.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/lib/process/process.c.o -c /home/narval/programing/proyects/cmon/src/lib/process/process.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/process/process.c",
+  "output": "CMakeFiles/cmon.dir/src/lib/process/process.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.o -c /home/narval/programing/proyects/cmon/src/lib/inotify/inotify.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/inotify/inotify.c",
+  "output": "CMakeFiles/cmon.dir/src/lib/inotify/inotify.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/logger/logger.c.o -c /home/narval/programing/proyects/cmon/src/logger/logger.c",
+  "file": "/home/narval/programing/proyects/cmon/src/logger/logger.c",
+  "output": "CMakeFiles/cmon.dir/src/logger/logger.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/cmon_proxy/cmon_http.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_http.c",
+  "file": "/home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_http.c",
+  "output": "CMakeFiles/cmon.dir/src/cmon_proxy/cmon_http.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/cmon_proxy/cmon_proxy.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_proxy.c",
+  "file": "/home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_proxy.c",
+  "output": "CMakeFiles/cmon.dir/src/cmon_proxy/cmon_proxy.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/cmon_proxy/cmon_sockets.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_sockets.c",
+  "file": "/home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_sockets.c",
+  "output": "CMakeFiles/cmon.dir/src/cmon_proxy/cmon_sockets.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/cmon_proxy/cmon_sse.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_sse.c",
+  "file": "/home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_sse.c",
+  "output": "CMakeFiles/cmon.dir/src/cmon_proxy/cmon_sse.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/utils/c_int_array.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_int_array.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_int_array.c",
+  "output": "CMakeFiles/cmon.dir/src/utils/c_int_array.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/utils/c_utils_buffer.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_utils_buffer.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_utils_buffer.c",
+  "output": "CMakeFiles/cmon.dir/src/utils/c_utils_buffer.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/utils/c_utils_str.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_utils_str.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_utils_str.c",
+  "output": "CMakeFiles/cmon.dir/src/utils/c_utils_str.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build",
+  "command": "/usr/bin/cc  -I/include -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/lib/parser -I/home/narval/programing/proyects/cmon/src/lib/config -I/home/narval/programing/proyects/cmon/src/lib/ps_tree -I/home/narval/programing/proyects/cmon/src/lib/process -I/home/narval/programing/proyects/cmon/src/lib/inotify -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils -Wall -Wextra -Wpedantic -o CMakeFiles/cmon.dir/src/utils/c_utils_string.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_utils_string.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_utils_string.c",
+  "output": "CMakeFiles/cmon.dir/src/utils/c_utils_string.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_logger.dir/test_logger.c.o -c /home/narval/programing/proyects/cmon/tests/test_logger.c",
+  "file": "/home/narval/programing/proyects/cmon/tests/test_logger.c",
+  "output": "tests/CMakeFiles/test_logger.dir/test_logger.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_logger.dir/__/src/logger/logger.c.o -c /home/narval/programing/proyects/cmon/src/logger/logger.c",
+  "file": "/home/narval/programing/proyects/cmon/src/logger/logger.c",
+  "output": "tests/CMakeFiles/test_logger.dir/__/src/logger/logger.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_path.dir/test_cmon_path.c.o -c /home/narval/programing/proyects/cmon/tests/test_cmon_path.c",
+  "file": "/home/narval/programing/proyects/cmon/tests/test_cmon_path.c",
+  "output": "tests/CMakeFiles/test_cmon_path.dir/test_cmon_path.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_path.dir/__/src/logger/logger.c.o -c /home/narval/programing/proyects/cmon/src/logger/logger.c",
+  "file": "/home/narval/programing/proyects/cmon/src/logger/logger.c",
+  "output": "tests/CMakeFiles/test_cmon_path.dir/__/src/logger/logger.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_path.dir/__/src/utils/c_int_array.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_int_array.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_int_array.c",
+  "output": "tests/CMakeFiles/test_cmon_path.dir/__/src/utils/c_int_array.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_path.dir/__/src/utils/c_utils_buffer.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_utils_buffer.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_utils_buffer.c",
+  "output": "tests/CMakeFiles/test_cmon_path.dir/__/src/utils/c_utils_buffer.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_path.dir/__/src/utils/c_utils_str.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_utils_str.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_utils_str.c",
+  "output": "tests/CMakeFiles/test_cmon_path.dir/__/src/utils/c_utils_str.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_path.dir/__/src/utils/c_utils_string.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_utils_string.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_utils_string.c",
+  "output": "tests/CMakeFiles/test_cmon_path.dir/__/src/utils/c_utils_string.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_errors.c.o -c /home/narval/programing/proyects/cmon/src/lib/utils/cmon_errors.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/utils/cmon_errors.c",
+  "output": "tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_errors.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_path.c.o -c /home/narval/programing/proyects/cmon/src/lib/utils/cmon_path.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/utils/cmon_path.c",
+  "output": "tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_path.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_print.c.o -c /home/narval/programing/proyects/cmon/src/lib/utils/cmon_print.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/utils/cmon_print.c",
+  "output": "tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_print.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_str_utils.c.o -c /home/narval/programing/proyects/cmon/src/lib/utils/cmon_str_utils.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/utils/cmon_str_utils.c",
+  "output": "tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_str_utils.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_string_array.c.o -c /home/narval/programing/proyects/cmon/src/lib/utils/cmon_string_array.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/utils/cmon_string_array.c",
+  "output": "tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/cmon_string_array.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_path.dir/__/src/lib/utils/text_utils.c.o -c /home/narval/programing/proyects/cmon/src/lib/utils/text_utils.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/utils/text_utils.c",
+  "output": "tests/CMakeFiles/test_cmon_path.dir/__/src/lib/utils/text_utils.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_http.dir/test_cmon_http.c.o -c /home/narval/programing/proyects/cmon/tests/test_cmon_http.c",
+  "file": "/home/narval/programing/proyects/cmon/tests/test_cmon_http.c",
+  "output": "tests/CMakeFiles/test_cmon_http.dir/test_cmon_http.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_http.dir/__/src/logger/logger.c.o -c /home/narval/programing/proyects/cmon/src/logger/logger.c",
+  "file": "/home/narval/programing/proyects/cmon/src/logger/logger.c",
+  "output": "tests/CMakeFiles/test_cmon_http.dir/__/src/logger/logger.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_http.dir/__/src/utils/c_int_array.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_int_array.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_int_array.c",
+  "output": "tests/CMakeFiles/test_cmon_http.dir/__/src/utils/c_int_array.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_http.dir/__/src/utils/c_utils_buffer.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_utils_buffer.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_utils_buffer.c",
+  "output": "tests/CMakeFiles/test_cmon_http.dir/__/src/utils/c_utils_buffer.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_http.dir/__/src/utils/c_utils_str.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_utils_str.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_utils_str.c",
+  "output": "tests/CMakeFiles/test_cmon_http.dir/__/src/utils/c_utils_str.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_http.dir/__/src/utils/c_utils_string.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_utils_string.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_utils_string.c",
+  "output": "tests/CMakeFiles/test_cmon_http.dir/__/src/utils/c_utils_string.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_http.dir/__/src/cmon_proxy/cmon_http.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_http.c",
+  "file": "/home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_http.c",
+  "output": "tests/CMakeFiles/test_cmon_http.dir/__/src/cmon_proxy/cmon_http.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_http.dir/__/src/cmon_proxy/cmon_proxy.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_proxy.c",
+  "file": "/home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_proxy.c",
+  "output": "tests/CMakeFiles/test_cmon_http.dir/__/src/cmon_proxy/cmon_proxy.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_http.dir/__/src/cmon_proxy/cmon_sockets.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_sockets.c",
+  "file": "/home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_sockets.c",
+  "output": "tests/CMakeFiles/test_cmon_http.dir/__/src/cmon_proxy/cmon_sockets.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_http.dir/__/src/cmon_proxy/cmon_sse.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_sse.c",
+  "file": "/home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_sse.c",
+  "output": "tests/CMakeFiles/test_cmon_http.dir/__/src/cmon_proxy/cmon_sse.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_http.dir/__/src/lib/utils/cmon_errors.c.o -c /home/narval/programing/proyects/cmon/src/lib/utils/cmon_errors.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/utils/cmon_errors.c",
+  "output": "tests/CMakeFiles/test_cmon_http.dir/__/src/lib/utils/cmon_errors.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_http.dir/__/src/lib/utils/cmon_path.c.o -c /home/narval/programing/proyects/cmon/src/lib/utils/cmon_path.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/utils/cmon_path.c",
+  "output": "tests/CMakeFiles/test_cmon_http.dir/__/src/lib/utils/cmon_path.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_http.dir/__/src/lib/utils/cmon_print.c.o -c /home/narval/programing/proyects/cmon/src/lib/utils/cmon_print.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/utils/cmon_print.c",
+  "output": "tests/CMakeFiles/test_cmon_http.dir/__/src/lib/utils/cmon_print.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_http.dir/__/src/lib/utils/cmon_str_utils.c.o -c /home/narval/programing/proyects/cmon/src/lib/utils/cmon_str_utils.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/utils/cmon_str_utils.c",
+  "output": "tests/CMakeFiles/test_cmon_http.dir/__/src/lib/utils/cmon_str_utils.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_http.dir/__/src/lib/utils/cmon_string_array.c.o -c /home/narval/programing/proyects/cmon/src/lib/utils/cmon_string_array.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/utils/cmon_string_array.c",
+  "output": "tests/CMakeFiles/test_cmon_http.dir/__/src/lib/utils/cmon_string_array.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_http.dir/__/src/lib/utils/text_utils.c.o -c /home/narval/programing/proyects/cmon/src/lib/utils/text_utils.c",
+  "file": "/home/narval/programing/proyects/cmon/src/lib/utils/text_utils.c",
+  "output": "tests/CMakeFiles/test_cmon_http.dir/__/src/lib/utils/text_utils.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_sse.dir/test_cmon_sse.c.o -c /home/narval/programing/proyects/cmon/tests/test_cmon_sse.c",
+  "file": "/home/narval/programing/proyects/cmon/tests/test_cmon_sse.c",
+  "output": "tests/CMakeFiles/test_cmon_sse.dir/test_cmon_sse.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_sse.dir/__/src/logger/logger.c.o -c /home/narval/programing/proyects/cmon/src/logger/logger.c",
+  "file": "/home/narval/programing/proyects/cmon/src/logger/logger.c",
+  "output": "tests/CMakeFiles/test_cmon_sse.dir/__/src/logger/logger.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_http.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_http.c",
+  "file": "/home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_http.c",
+  "output": "tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_http.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_proxy.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_proxy.c",
+  "file": "/home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_proxy.c",
+  "output": "tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_proxy.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_sockets.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_sockets.c",
+  "file": "/home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_sockets.c",
+  "output": "tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_sockets.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_sse.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_sse.c",
+  "file": "/home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_sse.c",
+  "output": "tests/CMakeFiles/test_cmon_sse.dir/__/src/cmon_proxy/cmon_sse.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_sse.dir/__/src/utils/c_int_array.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_int_array.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_int_array.c",
+  "output": "tests/CMakeFiles/test_cmon_sse.dir/__/src/utils/c_int_array.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_sse.dir/__/src/utils/c_utils_buffer.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_utils_buffer.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_utils_buffer.c",
+  "output": "tests/CMakeFiles/test_cmon_sse.dir/__/src/utils/c_utils_buffer.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_sse.dir/__/src/utils/c_utils_str.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_utils_str.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_utils_str.c",
+  "output": "tests/CMakeFiles/test_cmon_sse.dir/__/src/utils/c_utils_str.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_sse.dir/__/src/utils/c_utils_string.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_utils_string.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_utils_string.c",
+  "output": "tests/CMakeFiles/test_cmon_sse.dir/__/src/utils/c_utils_string.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_utils.dir/test_cmon_utils.c.o -c /home/narval/programing/proyects/cmon/tests/test_cmon_utils.c",
+  "file": "/home/narval/programing/proyects/cmon/tests/test_cmon_utils.c",
+  "output": "tests/CMakeFiles/test_cmon_utils.dir/test_cmon_utils.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_utils.dir/__/src/logger/logger.c.o -c /home/narval/programing/proyects/cmon/src/logger/logger.c",
+  "file": "/home/narval/programing/proyects/cmon/src/logger/logger.c",
+  "output": "tests/CMakeFiles/test_cmon_utils.dir/__/src/logger/logger.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_utils.dir/__/src/cmon_proxy/cmon_http.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_http.c",
+  "file": "/home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_http.c",
+  "output": "tests/CMakeFiles/test_cmon_utils.dir/__/src/cmon_proxy/cmon_http.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_utils.dir/__/src/cmon_proxy/cmon_proxy.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_proxy.c",
+  "file": "/home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_proxy.c",
+  "output": "tests/CMakeFiles/test_cmon_utils.dir/__/src/cmon_proxy/cmon_proxy.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_utils.dir/__/src/cmon_proxy/cmon_sockets.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_sockets.c",
+  "file": "/home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_sockets.c",
+  "output": "tests/CMakeFiles/test_cmon_utils.dir/__/src/cmon_proxy/cmon_sockets.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_utils.dir/__/src/cmon_proxy/cmon_sse.c.o -c /home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_sse.c",
+  "file": "/home/narval/programing/proyects/cmon/src/cmon_proxy/cmon_sse.c",
+  "output": "tests/CMakeFiles/test_cmon_utils.dir/__/src/cmon_proxy/cmon_sse.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_utils.dir/__/src/utils/c_int_array.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_int_array.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_int_array.c",
+  "output": "tests/CMakeFiles/test_cmon_utils.dir/__/src/utils/c_int_array.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_utils.dir/__/src/utils/c_utils_buffer.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_utils_buffer.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_utils_buffer.c",
+  "output": "tests/CMakeFiles/test_cmon_utils.dir/__/src/utils/c_utils_buffer.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_utils.dir/__/src/utils/c_utils_str.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_utils_str.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_utils_str.c",
+  "output": "tests/CMakeFiles/test_cmon_utils.dir/__/src/utils/c_utils_str.c.o"
+},
+{
+  "directory": "/home/narval/programing/proyects/cmon/build/tests",
+  "command": "/usr/bin/cc  -I/home/narval/programing/proyects/cmon/src/logger -I/home/narval/programing/proyects/cmon/src/lib/utils -I/home/narval/programing/proyects/cmon/src/cmon_proxy -I/home/narval/programing/proyects/cmon/src/utils  -o CMakeFiles/test_cmon_utils.dir/__/src/utils/c_utils_string.c.o -c /home/narval/programing/proyects/cmon/src/utils/c_utils_string.c",
+  "file": "/home/narval/programing/proyects/cmon/src/utils/c_utils_string.c",
+  "output": "tests/CMakeFiles/test_cmon_utils.dir/__/src/utils/c_utils_string.c.o"
+}
+]

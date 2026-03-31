@@ -161,7 +161,7 @@ CmonBufferView *c_u_view_buffer_new(
  *  -2  if `index` refers to the last valid position.
  *  -3  if a memory allocation error occurs.
  */
-int c_u_buffer_shift_from(CmonBuffer *buf,
+int c_u_buffer_shift_from_1(CmonBuffer *buf,
     size_t index, size_t n)
 {
   size_t new_buf_cap;
@@ -170,7 +170,6 @@ int c_u_buffer_shift_from(CmonBuffer *buf,
 
   size_t components_len = 2;
   CmonBufferView components[components_len];
-
 
   if (buf == NULL){
     return -1;
@@ -222,6 +221,71 @@ int c_u_buffer_shift_from(CmonBuffer *buf,
   }
   return 0;
 }
+
+
+int c_u_buffer_shift_from(CmonBuffer *buf, size_t index, size_t n) {
+  size_t bytes_to_move;
+  size_t new_cap;
+  char *new_mem;
+
+  if (buf == NULL) {
+    return -1;
+  }
+
+  if (n == 0) {
+    return 0;
+  }
+
+  /*
+   * According to the contract, shifting from the last valid position
+   * is not meaningful.
+   */
+  if (buf->len == 0 || index >= buf->len - 1) {
+    return -2;
+  }
+
+  bytes_to_move = buf->len - index;
+
+  /*
+   * Fast path: enough available space already exists.
+   * Shift in place. The gap is not explicitly zeroed.
+   */
+  if (buf->avl >= n) {
+    memmove(buf->buf + index + n, buf->buf + index, bytes_to_move);
+    buf->len += n;
+    buf->avl -= n;
+    return 0;
+  }
+
+  /*
+   * Slow path: not enough space.
+   * Allocate a new zero-initialized buffer so the newly created region
+   * is guaranteed to contain zeros.
+   */
+  new_cap = buf->len + n;
+  new_mem = calloc(new_cap, sizeof(char));
+  if (new_mem == NULL) {
+    return -3;
+  }
+
+  /* Copy prefix [0, index) unchanged. */
+  if (index > 0) {
+    memcpy(new_mem, buf->buf, index);
+  }
+
+  /* Copy suffix [index, len) shifted by n positions. */
+  memcpy(new_mem + index + n, buf->buf + index, bytes_to_move);
+
+  free(buf->buf);
+  buf->buf = new_mem;
+  buf->cap = new_cap;
+  buf->len += n;
+  buf->avl = buf->cap - buf->len;
+
+  return 0;
+}
+
+
 
 /*
  * Inserts `src` into a CmonBuffer `buf` at the given zero-based byte offset `index`.
@@ -333,7 +397,34 @@ ssize_t c_u_buffer_set_len(CmonBuffer *buf, size_t new_len){
   old_len = buf->len; 
 
   buf->len = new_len;
-  buf->avl = buf->cap - buf->len;
 
   return old_len;
+}
+
+
+/*
+ * Grows the CmonBuffer capacity to at least `amount`.
+ * If `amount` is less than or equal to the current capacity,
+ * the buffer is left unchanged.
+ */
+int c_u_buffer_set_capacity(CmonBuffer *buf, size_t min_cap)
+{
+  char *new_buf;
+
+  if (!buf){
+    return -1; 
+  }
+
+  if (min_cap <= c_u_buffer_get_cap(buf))
+    return 0;
+
+  new_buf = realloc(c_u_buffer_get_buf(buf), min_cap);
+  if (!new_buf)
+    return -2;
+
+  free(c_u_buffer_get_buf(buf));
+  c_u_buffer_get_buf(buf) = new_buf;
+  c_u_buffer_get_cap(buf) = min_cap; 
+
+  return 0;
 }

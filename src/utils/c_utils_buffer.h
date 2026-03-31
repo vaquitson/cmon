@@ -38,6 +38,10 @@ typedef struct {
 } CmonBufferView;
 
 
+#define c_u_buffer_get_cap(buf) buf->cap
+#define c_u_buffer_get_buf(buf) buf->buf
+#define c_u_buffer_get_len(buf) buf->len
+
 CmonBuffer *c_u_buffer_empty(size_t cap);
 
 CmonBuffer *c_u_buffer_new(char *src, size_t len);
@@ -56,4 +60,7 @@ int c_u_buffer_shift_from(CmonBuffer *buf,
     size_t index, size_t n);
 
 void c_u_buffer_print(CmonBuffer *buf);
+
 ssize_t c_u_buffer_set_len(CmonBuffer *buf, size_t new_len);
+
+int c_u_buffer_set_capacity(CmonBuffer *buf, size_t min_cap);

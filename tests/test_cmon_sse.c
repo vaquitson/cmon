@@ -74,10 +74,9 @@ int test_4(){
     if (rc == -1){
       log_write(LOG_ERROR, "from c_proxy_start: an erro ocurre while accepting a connection");
     } else {
-      pthread_create(&thread_id, NULL, c_proxy_handle_client_2, &rc);
+      pthread_create(&thread_id, NULL, c_proxy_communication_manager, &rc);
     }
   }
-
 }
 
 int main(void){

@@ -8,6 +8,7 @@
 #include "cmon_http.h"
 #include "c_utils_str.h"
 #include "c_utils_buffer.h"
+#include "cmon_sockets.h"
 
 #define MAX_ITERATIONS 20
 #define MAX_LENGTH_OF_CONTEMT_LENGTH_CHARS 9
@@ -17,6 +18,11 @@
 
 #define CRLF "\r\n"
 #define CRLF_S 2
+
+#define C_HTTP_HEADER_DELIM "\r\n\r\n"
+#define C_HTTP_HEADER_DELIM_SIZE 4
+
+#define _c_http_try_find_end_of_header(buf, buff_len) c_u_str_find_pattern(C_HTTP_HEADER_DELIM, C_HTTP_HEADER_DELIM_SIZE, buf, buff_len)
 
 struct CmonUtilRange{
   size_t start;
@@ -95,7 +101,7 @@ ssize_t c_http_recv_header(int fd, char *buff, size_t buff_len, ssize_t *read_le
     }
 
     tot_size += read_size;
-    
+
     if ((p_offset = c_u_str_find_pattern("\r\n\r\n", strlen("\r\n\r\n"), buff, tot_size)) != -1){
       *read_len = tot_size;
       return p_offset + 4;
@@ -107,6 +113,64 @@ ssize_t c_http_recv_header(int fd, char *buff, size_t buff_len, ssize_t *read_le
 
     buff_len -= read_size;
   }
+}
+
+
+/*
+ * Reads from `fd` until a complete HTTP header block is available (terminated
+ * by the "\r\n\r\n" sequence) and stores the bytes into `buff`.
+ *
+ * On Succes fill the CmonBuffer with the content of the Header including the end 
+ * sequence
+ *
+ * On error retrun a code from CmonHttpErrCodes
+ *
+*/
+int c_http_recv_header1(int fd, CmonBuffer *buf)
+{
+  int rc;
+  ssize_t peek_size; 
+
+  ssize_t recv_expect_size;
+  ssize_t recv_size;
+
+  ssize_t p_offset;
+
+  char peek_buf[HTTP_MAX_HEADDER_SIZE] = {0};
+
+  if (!buf || c_u_buffer_get_cap(buf) == 0 || c_u_buffer_get_len(buf) != 0)
+    return C_HTTP_BUFFER_ERR;
+
+  if (fd < 0)
+    return C_HTTP_SOCKET_FD_ERR;
+
+  peek_size = c_sockets_peek(fd, peek_buf, HTTP_MAX_HEADDER_SIZE);
+  if (peek_size == -1)
+    return C_HTTP_RECV_ERR;
+  if (peek_size == 0)
+    return C_HTTP_SOCKET_CLOSE;
+
+  p_offset = _c_http_try_find_end_of_header(peek_buf, peek_size);
+  if (p_offset == -1)
+    return C_HTTP_HEADER_PARSING_ERR;
+
+  recv_expect_size = p_offset + C_HTTP_HEADER_DELIM_SIZE;
+
+  if (c_u_buffer_get_cap(buf) < (size_t)recv_expect_size){
+    if (c_u_buffer_set_capacity(buf, recv_expect_size) != 0)
+      return C_HTTP_BUFFER_ERR;
+  }
+
+  recv_size = recv(fd, c_u_buffer_get_buf(buf), recv_expect_size, 0);
+  if (recv_size == -1 || recv_size != recv_expect_size)
+    return C_HTTP_RECV_ERR;
+  if (recv_size == 0)
+    return C_HTTP_SOCKET_CLOSE;
+
+  if (c_u_buffer_set_len(buf, recv_size) == -1)
+    return C_HTTP_BUFFER_ERR;
+
+  return C_HTTP_SUCESS;
 }
 
 

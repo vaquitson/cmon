@@ -15,7 +15,6 @@
 #define SERVER_PORT 3000
 
 #define C_PROXY_MAX_BODY_CHUNK_SIZE 8192
-#define C_PROXY_MAX_HEADER_SIZE 8192
 
 enum COMM_STATE {
   CONNECTING,
@@ -206,7 +205,13 @@ void *c_proxy_handle_client(void *fd){
 }
 
 
-void *c_proxy_handle_client_2(void *fd){
+void _c_proxy_handle_waiting_header_state(CmonHttpConnection *con)
+{
+  int fd = c_http_conn_get_sender(con);
+}
+
+
+void *c_proxy_communication_manager(void *fd){
   int comm_state = WAITING_HEADER; 
   int side_state = REQ;
 
@@ -214,7 +219,7 @@ void *c_proxy_handle_client_2(void *fd){
   stash[0] = c_u_buffer_empty(C_PROXY_MAX_BODY_CHUNK_SIZE);
   stash[1] = c_u_buffer_empty(C_PROXY_MAX_BODY_CHUNK_SIZE);
 
-  CmonBuffer *headder = c_u_buffer_empty(C_PROXY_MAX_HEADER_SIZE);
+  CmonBuffer *headder = c_u_buffer_empty(HTTP_MAX_HEADDER_SIZE);
 
   int data_send;
   int headder_size;

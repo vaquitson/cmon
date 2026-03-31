@@ -1,7 +1,8 @@
 #include <string.h>
 #include <stdio.h>
 
-#include "c_utils_str.h"
+#include "cmon_sockets.h"
+#include "c_utils_buffer.h"
 #include "cmon_http.h"
 
 int test_1(){
@@ -48,9 +49,50 @@ int test_1(){
   return 0;
 }
 
+int test_2()
+{
+  int rc;
+  int listening_fd; 
+
+  CmonBuffer *header_buf;
+ 
+  socklen_t client_addr_len;
+  struct sockaddr_in client_addr;
+
+  header_buf = c_u_buffer_empty(300);
+  // test with enought space
+  // header_buf = c_u_buffer_empty(1000);
+
+  listening_fd = c_sockets_get_listening_socket(9000);
+  if (listening_fd < 0){
+    return -1;
+  }
+  
+  printf("listening on 9000\n");
+  rc = accept(listening_fd, (struct sockaddr *)&client_addr, &client_addr_len);
+  if (rc == -1){
+    return -1;
+  }
+  
+  rc = c_http_recv_header1(rc, header_buf);
+  if (rc != C_HTTP_SUCESS){
+    printf("%d\n", rc);
+    return -1;
+  }
+
+  c_u_buffer_print(header_buf);
+  printf("len: %ld\n", header_buf->len);
+  printf("cap: %ld\n", header_buf->cap);
+
+  return 0;
+}
+
 
 int main(){
   if (test_1() == 0){
+    printf("Sucesse\n");
+  }
+  if (test_2() == 0){
     printf("Sucesse\n");
   }
   return 0;

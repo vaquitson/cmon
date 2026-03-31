@@ -194,6 +194,7 @@ int test_3(){
   buf = c_u_buffer_new("_234ab", strlen("_234ab"));
   c_u_buffer_shift_from(buf, 0, 30);
 
+
   // be carefule here with the null bytes that could be in empty spaces, 
   // because they dosen't print
   if (memcmp(buf->buf, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0_234ab", 37) != 0){
