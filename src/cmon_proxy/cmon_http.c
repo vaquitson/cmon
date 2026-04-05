@@ -1,3 +1,4 @@
+#include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
@@ -23,6 +24,7 @@
 #define C_HTTP_HEADER_DELIM_SIZE 4
 
 #define _c_http_try_find_end_of_header(buf, buff_len) c_u_str_find_pattern(C_HTTP_HEADER_DELIM, C_HTTP_HEADER_DELIM_SIZE, buf, buff_len)
+#define _c_http_header_field_value_length(header, header_size, key_index, key_size) c_u_str_find_pattern(CRLF, CRLF_S, (header) + (key_index) + (key_size) + 1, (header_size) - (key_index))
 
 struct CmonUtilRange{
   size_t start;
@@ -126,15 +128,14 @@ ssize_t c_http_recv_header(int fd, char *buff, size_t buff_len, ssize_t *read_le
  * On error retrun a code from CmonHttpErrCodes
  *
 */
-int c_http_recv_header1(int fd, CmonBuffer *buf)
+int c_http_c_buf_recv_header(int fd, CmonBuffer *buf)
 {
-  int rc;
   ssize_t peek_size; 
 
-  ssize_t recv_expect_size;
+  size_t recv_expect_size;
   ssize_t recv_size;
 
-  ssize_t p_offset;
+  ssize_t end_of_header_offset;
 
   char peek_buf[HTTP_MAX_HEADDER_SIZE] = {0};
 
@@ -150,19 +151,19 @@ int c_http_recv_header1(int fd, CmonBuffer *buf)
   if (peek_size == 0)
     return C_HTTP_SOCKET_CLOSE;
 
-  p_offset = _c_http_try_find_end_of_header(peek_buf, peek_size);
-  if (p_offset == -1)
+  end_of_header_offset = _c_http_try_find_end_of_header(peek_buf, peek_size);
+  if (end_of_header_offset == -1)
     return C_HTTP_HEADER_PARSING_ERR;
 
-  recv_expect_size = p_offset + C_HTTP_HEADER_DELIM_SIZE;
+  recv_expect_size = (size_t)end_of_header_offset + C_HTTP_HEADER_DELIM_SIZE;
 
-  if (c_u_buffer_get_cap(buf) < (size_t)recv_expect_size){
+  if (c_u_buffer_get_cap(buf) < recv_expect_size){
     if (c_u_buffer_set_capacity(buf, recv_expect_size) != 0)
       return C_HTTP_BUFFER_ERR;
   }
 
   recv_size = recv(fd, c_u_buffer_get_buf(buf), recv_expect_size, 0);
-  if (recv_size == -1 || recv_size != recv_expect_size)
+  if (recv_size == -1 || (size_t)recv_size != recv_expect_size)
     return C_HTTP_RECV_ERR;
   if (recv_size == 0)
     return C_HTTP_SOCKET_CLOSE;
@@ -311,6 +312,7 @@ int _c_http_get_key_value_range(
   return 0;
 }
 
+
 /*
  * Copies the value of the header field `key` from `header` into `buf`.
  *
@@ -325,12 +327,11 @@ int _c_http_get_key_value_range(
  * Returns -1 on NULL arguments, -2 on zero sizes, -3 if `key:`/CRLF is not found,
  * and -4 if the value does not fit in `buf` or is too large to return as `int`.
  */
-int c_http_get_header(
+int c_http_get_header_field(
     const char *header, size_t header_size, 
     const char *key   , size_t key_size,
-          char *buf   , size_t buf_size){
-  
-
+          char *buf   , size_t buf_size)
+{
   size_t doted_key_size = key_size + 1;
   char doted_key[doted_key_size];
 
@@ -338,13 +339,11 @@ int c_http_get_header(
   ssize_t start_index;
   ssize_t header_value_size;
 
-  if (header == NULL || buf == NULL ||  key == NULL){
+  if (header == NULL || buf == NULL ||  key == NULL)
     return -1;
-  }
 
-  if (header_size == 0 || buf_size == 0 || key_size == 0){
+  if (header_size == 0 || buf_size == 0 || key_size == 0)
     return -2;
-  }
   
   memcpy(doted_key, key, key_size); 
   doted_key[key_size] = ':';
@@ -380,6 +379,92 @@ int c_http_get_header(
   memcpy(buf, header + start_index, header_value_size);
   
   return (int)header_value_size; 
+}
+
+
+/*
+ * This function give the position in the header buffer of the provided key.
+ * If an error ocurre or the key is not found -1 is return.
+ * ON succes the 0 base index of the key in the header is retruned
+*/
+ssize_t _c_http_find_header_field_key(char *header, size_t size, char *key, size_t key_size)
+{
+  size_t doted_key_size = key_size + 1;
+  char doted_key[doted_key_size];
+
+  if (!header || !key)
+    return -1;
+
+  memcpy(doted_key, key, key_size);
+  doted_key[key_size] = ':';
+
+  return c_u_str_find_pattern(doted_key,
+                                doted_key_size,
+                                header,
+                                size);
+}
+
+
+/* get a view of the value of the header value
+*/
+int _c_http_buf_get_header_value_view(CmonBuffer *header, char *key, size_t key_size, CmonBufferView *view) 
+{
+  
+  ssize_t offset;
+  ssize_t header_value_size;
+  size_t header_value_start;
+
+  if (!header || !view)
+    return C_HTTP_NULL_ARG;
+
+  offset = _c_http_find_header_field_key(c_u_buffer_get_buf(header), c_u_buffer_get_len(header), key, key_size);
+  if (offset == -1)
+    return C_HTTP_KEY_NOT_FOUND;
+ 
+  header_value_start = offset + key_size + 1;
+
+  header_value_size = _c_http_header_field_value_length(c_u_buffer_get_buf(header), c_u_buffer_get_len(header), offset, key_size);
+  if (header_value_size == -1)
+    return C_HTTP_HEADER_PARSING_ERR;
+ 
+  view->buf = c_u_buffer_get_buf(header) + header_value_start;
+  view->len = header_value_size;
+
+  return C_HTTP_SUCESS;
+}
+
+
+/*
+ * Copies the value of the header field `key` from `header` into cmon buffer `buf`.
+ *
+ * Searches within the `header` buffer (length `header_size`) for the field name
+ * `key` followed by ':' (i.e., "key:"). If found, copies the bytes after the
+ * colon up to the next CRLF into `buf`.
+ *
+ * The copied value is NOT NUL-terminated.
+ *
+ * Returns C_HTTP_SUCESS on suscces.
+ * ERROR: return a CMON_HTTP_ERROR
+ */
+int c_http_buf_get_header_field(CmonBuffer *header, char *key, size_t key_size, CmonBuffer *buf)
+{  
+  int rc = 0;
+  CmonBufferView view;
+  if (header == NULL || buf == NULL ||  key == NULL)
+    return C_HTTP_NULL_ARG;
+
+  if (c_u_buffer_get_len(buf) != 0)
+    return C_HTTP_BUFFER_ERR;
+
+  rc = _c_http_buf_get_header_value_view(header, key, key_size, &view);
+  if (rc != C_HTTP_SUCESS)
+    return rc;
+
+  rc = c_u_buffer_append(buf, view.buf, view.len);
+  if (rc != 0)
+    return C_HTTP_BUFFER_ERR;
+
+  return C_HTTP_SUCESS;
 }
 
 
@@ -564,7 +649,7 @@ ssize_t c_http_send_body_chunk(CmonHttpMessage *msg, int recever, int op) {
  * consumed before reading more.
  *
  * On error, logs the failure and returns -1.
- */
+*/
 int c_http_recv_body_chunk(CmonHttpMessage *msg){
   ssize_t read_size;
 

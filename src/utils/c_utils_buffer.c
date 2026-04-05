@@ -42,7 +42,7 @@ CmonBuffer *c_u_buffer_empty(size_t cap){
  * On success, returns a newly allocated (owned) `CmonBuffer *`.
  * On failure, returns NULL.
  */
-CmonBuffer *c_u_buffer_new(char *src, size_t len){
+CmonBuffer *c_u_buffer_new(const char *src, size_t len){
   CmonBuffer *c_buf;
 
   if (src == NULL){
@@ -161,7 +161,7 @@ CmonBufferView *c_u_view_buffer_new(
  *  -2  if `index` refers to the last valid position.
  *  -3  if a memory allocation error occurs.
  */
-int c_u_buffer_shift_from_1(CmonBuffer *buf,
+int c_u_buffer_shift_from(CmonBuffer *buf,
     size_t index, size_t n)
 {
   size_t new_buf_cap;
@@ -223,77 +223,13 @@ int c_u_buffer_shift_from_1(CmonBuffer *buf,
 }
 
 
-int c_u_buffer_shift_from(CmonBuffer *buf, size_t index, size_t n) {
-  size_t bytes_to_move;
-  size_t new_cap;
-  char *new_mem;
-
-  if (buf == NULL) {
-    return -1;
-  }
-
-  if (n == 0) {
-    return 0;
-  }
-
-  /*
-   * According to the contract, shifting from the last valid position
-   * is not meaningful.
-   */
-  if (buf->len == 0 || index >= buf->len - 1) {
-    return -2;
-  }
-
-  bytes_to_move = buf->len - index;
-
-  /*
-   * Fast path: enough available space already exists.
-   * Shift in place. The gap is not explicitly zeroed.
-   */
-  if (buf->avl >= n) {
-    memmove(buf->buf + index + n, buf->buf + index, bytes_to_move);
-    buf->len += n;
-    buf->avl -= n;
-    return 0;
-  }
-
-  /*
-   * Slow path: not enough space.
-   * Allocate a new zero-initialized buffer so the newly created region
-   * is guaranteed to contain zeros.
-   */
-  new_cap = buf->len + n;
-  new_mem = calloc(new_cap, sizeof(char));
-  if (new_mem == NULL) {
-    return -3;
-  }
-
-  /* Copy prefix [0, index) unchanged. */
-  if (index > 0) {
-    memcpy(new_mem, buf->buf, index);
-  }
-
-  /* Copy suffix [index, len) shifted by n positions. */
-  memcpy(new_mem + index + n, buf->buf + index, bytes_to_move);
-
-  free(buf->buf);
-  buf->buf = new_mem;
-  buf->cap = new_cap;
-  buf->len += n;
-  buf->avl = buf->cap - buf->len;
-
-  return 0;
-}
-
-
-
 /*
  * Inserts `src` into a CmonBuffer `buf` at the given zero-based byte offset `index`.
  *
  * Return values:
  *   1   The insertion would exceed the current capacity; the caller must
  *       allocate/grow the buffer and retry.
- *   2   The insertion succeeded and the buffer still fits within its capacity.
+ *   0   The insertion succeeded and the buffer still fits within its capacity.
  *  -1   `buf` or `src` is NULL.
  *  -2   `index` is out of range for the current buffer length.
  *  <0   Other error.
@@ -301,9 +237,10 @@ int c_u_buffer_shift_from(CmonBuffer *buf, size_t index, size_t n) {
  * Note: `index` is an offset into the current contents of `buf` (0..length).
  */
 int c_u_buffer_insert_at(CmonBuffer *buf,
-                               char *src, 
+                              const char *src, 
                               size_t src_len, 
-                              size_t index){
+                              size_t index)
+{
 
   char *new_buffer;
   char *new_buffer_p;
@@ -353,7 +290,6 @@ int c_u_buffer_insert_at(CmonBuffer *buf,
 
     free(buf->buf);
     buf->buf = new_buffer;
-    return 1;
 
   } else {
     for(size_t i = 1; i <= buf->len - index; i++){
@@ -369,7 +305,21 @@ int c_u_buffer_insert_at(CmonBuffer *buf,
         buf->len);
 
   }
-  return 2;
+  return 0;
+}
+
+
+int c_u_buffer_copy(CmonBuffer   *buf,
+                          char   *payload,
+                          size_t  p_len)
+{
+  if (!buf || !payload)
+    return -1;
+
+  if (p_len == 0)
+    return -2;
+
+
 }
 
 

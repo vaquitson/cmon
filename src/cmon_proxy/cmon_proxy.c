@@ -20,7 +20,7 @@ enum COMM_STATE {
   CONNECTING,
   END,
   WAITING_HEADER,
-  PROCESING_HEADER,
+  PROCESING_HEADER
 };
 
 enum SIDE_STATE {
@@ -29,6 +29,16 @@ enum SIDE_STATE {
 };
 
 #define CMON_SSE_PAYLOAD "<script>\n  const es = new EventSource(\"/events\");\n  es.onmessage = () => location.reload();\n</script>\n"
+
+#define _c_proxy_comm_change_state(con, new_state) (con)->state = (new_state)
+#define _c_proxy_comm_get_state(con) (con)->state
+
+int c_proxy_injection_manager_add(CmonProxyCommManager *inj,
+                                                  char *payload, size_t payload_size, 
+                                                  char *key,     size_t key_size)
+{
+  return 0;
+}
 
 /*
  * Sends `http_msg` from `sender` to `receiver`.
@@ -204,58 +214,70 @@ void *c_proxy_handle_client(void *fd){
   }
 }
 
+int _c_proxy_might_inject(CmonProxyCommManager *com)
+{ 
+  char key[] = "Content-Type";
+  size_t key_size =  strlen(key);
+  CmonBuffer *header = c_proxy_comm_get_header(com);
+  CmonBuffer cbuf = {0};
 
-void _c_proxy_handle_waiting_header_state(CmonHttpConnection *con)
-{
-  int fd = c_http_conn_get_sender(con);
+  c_http_buf_get_header_field(header, key, key_size, &cbuf);    
+  
 }
 
 
-void *c_proxy_communication_manager(void *fd){
-  int comm_state = WAITING_HEADER; 
-  int side_state = REQ;
+int _c_proxy_handle_waiting_header_state(CmonProxyCommManager *com)
+{
+  int rc;
+  int fd; 
+  CmonBuffer *header = c_u_buffer_empty(500);
 
-  CmonBuffer *stash[2];
-  stash[0] = c_u_buffer_empty(C_PROXY_MAX_BODY_CHUNK_SIZE);
-  stash[1] = c_u_buffer_empty(C_PROXY_MAX_BODY_CHUNK_SIZE);
+  fd = c_proxy_comm_get_sender(com);
 
-  CmonBuffer *headder = c_u_buffer_empty(HTTP_MAX_HEADDER_SIZE);
+  rc = c_http_c_buf_recv_header(fd, header);
+  if (rc != C_HTTP_SUCESS)
+    return -1;
 
-  int data_send;
-  int headder_size;
+  c_proxy_comm_set_header(com, header);
+
+  _c_proxy_comm_change_state(com, PROCESING_HEADER);
+
+  return 0;
+}
+
+
+int _c_proxy_handle_proecessing_header(CmonProxyCommManager *com)
+{
+  return 0;
+}
+
+
+void *c_proxy_communication_manager(void *fd)
+{
+  CmonProxyCommManager comm;
+  comm.content_length = 0;
+  comm.state = WAITING_HEADER;
 
   int client_fd;
   int server_fd;
-  ssize_t read_size;
-  size_t content_length;
 
   client_fd = *(int *)fd;
   server_fd = c_sockets_get_server_connection(SERVER_PORT, NULL);
 
+  c_proxy_comm_get_sender(&comm) = client_fd;
+  c_proxy_comm_get_receiver(&comm) = server_fd;
+
   for(;;) {
-    switch (comm_state) {
+    switch (_c_proxy_comm_get_state(&comm)) {
       case WAITING_HEADER:
-        if (stash[0]->len == 0 && headder->len == 0){
-          headder_size = c_http_recv_header(client_fd, headder->buf, headder->avl, &read_size);
-          c_u_buffer_set_len(headder, headder_size);
-          c_u_buffer_insert_at(stash[0], headder->buf + headder_size, read_size - headder_size, 0);
-
-          printf("headder\n");
-          c_u_buffer_print(headder);
-          printf("\n\nstash\n");
-          c_u_buffer_print(stash[0]);
-
-        } else {
-          log_write(LOG_ERROR, "from c_proxy_handle_client_2: the stash is expected to be empty but has values");
-          return NULL;
-        }
+        _c_proxy_handle_waiting_header_state(&comm);
         break;
-
       case PROCESING_HEADER:
-        
-
+        exit(0);
+        break;
     }
   }
+  return NULL;
 }
 
 int c_proxy_start(void){
@@ -277,7 +299,7 @@ int c_proxy_start(void){
     if (rc == -1){
       log_write(LOG_ERROR, "from c_proxy_start: an erro ocurre while accepting a connection");
     } else {
-      pthread_create(&thread_id, NULL, c_proxy_handle_client, &rc);
+      pthread_create(&thread_id, NULL, c_proxy_communication_manager, &rc);
     }
   }
 }

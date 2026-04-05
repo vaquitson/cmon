@@ -1,9 +1,10 @@
 #include "cmon_sockets.h"
 
 #include <arpa/inet.h>
-#include "logger.h"
 #include <string.h>
 #include <errno.h>
+
+#include "logger.h"
 
 /*
  * Attempts to open a listening socket on the specified port.

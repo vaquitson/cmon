@@ -38,26 +38,30 @@ typedef struct {
 } CmonBufferView;
 
 
-#define c_u_buffer_get_cap(buf) buf->cap
-#define c_u_buffer_get_buf(buf) buf->buf
-#define c_u_buffer_get_len(buf) buf->len
+#define c_u_buffer_get_cap(buffer) (buffer)->cap
+#define c_u_buffer_get_buf(buffer) (buffer)->buf
+#define c_u_buffer_get_len(buffer) (buffer)->len
+
+#define c_u_buffer_append(buffer, payload, payload_len) c_u_buffer_insert_at((buffer), (payload), (payload_len), c_u_buffer_get_len((buffer)))
 
 CmonBuffer *c_u_buffer_empty(size_t cap);
 
-CmonBuffer *c_u_buffer_new(char *src, size_t len);
+CmonBuffer *c_u_buffer_new(const char *src, size_t len);
 
 void c_u_buffer_free(CmonBuffer *buf);
 
 CmonBufferView *c_u_view_buffer_new(const char *buf, const size_t size, size_t start, ssize_t len);
 
 int c_u_buffer_insert_at(CmonBuffer *buf,
-                                 char *payload, 
-                                 size_t p_len, 
-                                 size_t index);
+                             const char *payload, 
+                             size_t  p_len, 
+                             size_t  index);
 
+int c_u_buffer_copy(CmonBuffer   *buf,
+                          char   *payload,
+                          size_t  p_len);
 
-int c_u_buffer_shift_from(CmonBuffer *buf,
-    size_t index, size_t n);
+int c_u_buffer_shift_from(CmonBuffer *buf, size_t index, size_t n);
 
 void c_u_buffer_print(CmonBuffer *buf);
 

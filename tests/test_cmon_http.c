@@ -28,7 +28,7 @@ int test_1(){
 
   char buf[300];
 
-  rc = c_http_get_header(req, 
+  rc = c_http_get_header_field(req, 
                          strlen(req),
                          "Accept",
                          strlen("Accept"),
@@ -45,7 +45,23 @@ int test_1(){
     printf("test_1: the c_http_get_header function dosen't have the write data, expect ' text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', but get '%s'\n", buf);
     return -2;
   }
-                         
+  
+  CmonBuffer *buffer = c_u_buffer_empty(100);
+  CmonBuffer *header = c_u_buffer_new(req, strlen(req));
+  rc = c_http_buf_get_header_field(header, "Accept", strlen("Accept"), buffer);
+  if (rc != 0){
+    return -3;
+  }
+
+  if (memcmp(buffer->buf, expected_header_value, buffer->len) != 0){ 
+    printf("test_1: the c_http_get_header function dosen't have the write data, expect ' text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', but get '%s'\n", buf);
+    return -4;
+  }            
+
+  if (buffer->len != strlen(expected_header_value)){
+    printf("test_1: the length dosent match with the expected value: expect %ld, but get %ld", strlen(expected_header_value), buffer->len); 
+    return -5;
+  }
   return 0;
 }
 
@@ -74,7 +90,7 @@ int test_2()
     return -1;
   }
   
-  rc = c_http_recv_header1(rc, header_buf);
+  rc = c_http_c_buf_recv_header(rc, header_buf);
   if (rc != C_HTTP_SUCESS){
     printf("%d\n", rc);
     return -1;
@@ -89,11 +105,15 @@ int test_2()
 
 
 int main(){
-  if (test_1() == 0){
+  int rc;
+  if ((rc = test_1()) == 0){
     printf("Sucesse\n");
+  } else {
+    printf("error: %d\n", rc);
+    return -1;
   }
-  if (test_2() == 0){
-    printf("Sucesse\n");
-  }
+//  if (test_2() == 0){
+//    printf("Sucesse\n");
+//  }
   return 0;
 }

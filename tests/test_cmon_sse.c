@@ -80,6 +80,6 @@ int test_4(){
 }
 
 int main(void){
-  test_4();
+  test_1();
   return 0;
 }

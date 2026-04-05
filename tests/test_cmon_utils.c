@@ -207,9 +207,11 @@ int test_3(){
     return -1;
   }
 
+  return 0;
+}
 
-
-
+int test_4()
+{
   return 0;
 }
 
@@ -227,6 +229,11 @@ int main(void){
   
   if (test_3() != 0){
     printf("\ntest_3: Faild\n");
+    return -3;
+  }
+
+  if (test_4() != 0){
+    printf("\ntest_4: Faild\n");
     return -3;
   }
   
